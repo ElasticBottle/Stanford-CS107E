@@ -39,11 +39,11 @@ The amount of new code you will write for this final assignment is much less tha
 ## Looking ahead
 
 We also want you to start planning for your final project this week.  In particular, you will need to form your
-team (1-4 people) and fill out a [Google
-form](https://goo.gl/forms/UFs1MFB6ZPwXe21B3) with team member names by __11:59pm Sunday Nov 25__ so we can set up your team repository on GitHub.
+team (1-3 people) and fill out a [Google
+form](https://tinyurl.com/cs107e-project-fall) with team member names by __11:59pm Thursday Nov 15__ so we can set up your team repository on GitHub.
 
 Next week we will devote the lab to a working meeting with your team. You and your teammates should attend the same lab next week. During lab you should refine your project ideas and come up with a specific project and plan.
-After your lab you will need to submit a project proposal by __11:59pm Friday Nov 30__. Details about what is expected in the final project and
+After your lab you will need to submit a project proposal by __11:59pm Thursday Nov 29__. Details about what is expected in the final project and
 what should be included in the project proposal may be found in the
   [project assignment writeup](/assignments/project). We will include a template for the proposal in the starter repo for your team. The project proposal will be submitted by pushing it to your team repo.
 
