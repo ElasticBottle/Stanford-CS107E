@@ -1,7 +1,7 @@
 NAME = main
 MODULES = 
 
-CS107E= ../../../../cs107e
+#CS107E= ../../../../cs107e
 CFLAGS = -I$(CS107E)/include -g -Wall -Og -std=c99 -ffreestanding
 LDFLAGS = -nostdlib -T memmap -L$(CS107E)/lib
 LDLIBS = -lpiextra -lpi -lgcc
