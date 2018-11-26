@@ -66,7 +66,7 @@ There are a few important deliverables:
    You should be using the github repository for coordinating the
    work amongst your team.
    As such, you should be regularly checking in and out code.
-   The final commit of your code must be received by 8:30 am on Fri Dec 14.
+   The final commit of your code must be received by 11:59 pm on Wed June 13.
 
    Create a short writeup about your project
    and place it in README.md.
