@@ -29,4 +29,4 @@ menu_item: true
 5. [Automated checker](ci)
 
 ## Libraries
-1. [UART-WiFi-Bridge](UART-WiFi-Bridge to wirelessly connect two Raspberry Pis (requires two ESP32 Arduino devices))
+1. [UART-WiFi-Bridge to wirelessly connect two Raspberry Pis (requires two ESP32 Arduino devices)](UART-WiFi-Bridge)
