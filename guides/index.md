@@ -27,3 +27,6 @@ menu_item: true
 3. [Using Make for ARM cross-development](make)
 4. [Using gdb in simulation mode](gdb)
 5. [Automated checker](ci)
+
+## Libraries
+1. [UART-WiFi-Bridge](UART-WiFi-Bridge to wirelessly connect two Raspberry Pis (requires two ESP32 Arduino devices))
