@@ -1,4 +1,9 @@
-# Using an ESP-32 to create a web page
+---
+layout: page
+title: Using an ESP-32 to create a web page
+---
+
+*Written by Chris Gregg*
 
 This tutorial describes how to set up a rudimentary web page on an ESP-32.
 

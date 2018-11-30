@@ -1,4 +1,9 @@
-# UART->WiFi bridge for two Raspberry Pis
+---
+layout: page
+title: UART->WiFi bridge for two Raspberry Pis
+---
+
+*Written by Chris Gregg*
 
 This tutorial describes how to set up two Raspberry Pi devices to communicate wirelessly
 using two ESP32 devices. The Raspberry Pis will communicate over UART, and the ESP32s will

@@ -1,4 +1,9 @@
-# Using the SD Card library to read and write files
+---
+layout: page
+title: Using the SD Card library to read and write files
+---
+
+*Written by Chris Gregg*
 
 This tutorial describes how to read and write files from the internal SD card on the Raspberry Pi.
 
