@@ -34,7 +34,9 @@ Use the following steps to setup the Arduino development environment:
 
    `QueueList`
 
-5. Open up the Arduino application again. Follow the instructions at the following website to install the ESP32 library (under "Testing the Installation", choose the `Node32s` board).
+5. Open up the Arduino application again. Follow the instructions at the following website to install the ESP32 library (under "Testing the Installation", choose the `Node32s` board):
+
+<a href="https://randomnerdtutorials.com/installing-the-esp32-board-in-arduino-ide-mac-and-linux-instructions/">Install ESP32 on Arduino</a>
 
 6. In the Arduino application, open the `Websocket_server.ino` program from the zip folder. In the program, change the `ssid` variable near the top of the program to be your team name (or another unique WiFi name). You may also change the password for better security.
 
