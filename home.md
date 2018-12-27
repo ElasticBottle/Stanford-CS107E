@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Fall 2018
+title: Winter 2019
 permalink: index.html
 ---
 
@@ -46,11 +46,11 @@ All class announcements will be posted on
 
 ### Course Info
 
-  -   **Lectures:** Mon & Fri 11:30 AM-12:50 PM, Gates B12
-  -   **Labs**: Mon 1:00pm-3:00pm & Wed 11:30am-1:30pm, Gates B21 
-  -   **Lecturer**: Chris Gregg
+  -   **Lectures:** Mon & Fri 11:30 AM-12:50 PM, ART 350
+  -   **Labs**: Tue/Wed 6:30 PM-8:30 PM, Gates B21 
+  -   **Lecturers**: Pat Hanrahan, Julie Zelenski
   -   **CAs**: Jennifer Lin, Eric Yang
-  -   **Section Leaders**: Jane Lange, Matt Trost
+  -   **Section Leaders**: Natasha Goenawan, Ashwin Agarwal 
   -   **Office Hours**: [Google Calendar](https://calendar.google.com/calendar/embed?src=r5h192gc1brdgdsc6qponi76io%40group.calendar.google.com&ctz=America%2FLos_Angeles&mode=week)
 
 <!--
