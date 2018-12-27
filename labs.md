@@ -12,14 +12,10 @@ title: Labs
 {% endfor %}
 
 ### Lab schedule
-Labs meet in B21, our lab room in the basement of the Gates building.
+Labs meet in B21, our lab room in the basement of the Gates building on Tuesday/Wednesday 6:30-8:30 PM.
 
-- Monday, 1:00pm-3:00pm
-- Wednesday,11:30am-1:30pm
 
-Labs run in a Monday-Wednesday sequence, where Monday is exposed to the new lab first, and Wednesday does the same lab. Assignments will be assigned after Monday lab, and due before Wednesday lab of the next week.
-
-*NOTE: We changed the initial Friday-Monday labs to Monday-Wednesday labs. So the Friday lab has been converted to Wednesday.
+Labs run in a Tuesday-Wednesday sequence, where Tuesday is exposed to the new lab first, and Wednesday does the same lab. Assignments will be assigned after Wednesday lab, and due before Tuesday lab of the next week.
 
 ### Common questions about lab
 ---
