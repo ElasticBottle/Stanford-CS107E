@@ -4,7 +4,7 @@ title: Winter 2019
 permalink: index.html
 ---
 
-### Welcome to the Fall 2018 offering of CS107e!
+### Welcome to the Winter 2019 offering of CS107e!
 
 CS107 is the third course in Stanford's introductory programming sequence.
 CS106 provides students 
