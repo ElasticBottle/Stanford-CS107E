@@ -42,7 +42,7 @@ check out this [FAQ](https://web.stanford.edu/class/cs107e/).
 ### Announcements
 
 All class announcements will be posted on
-[Piazza](https://piazza.com/stanford/fall2018/cs107e).
+[Piazza](https://piazza.com/stanford/winter2019/cs107e).
 
 ### Course Info
 
