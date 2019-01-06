@@ -8,27 +8,27 @@ permalink,title,released
 "/labs/projectlab2/","Project Lab 2: How Are You Doing?",false
 "/labs/lab7/","Lab 7: Raspberry Pi, Interrupted",false
 "/labs/lab2/","Lab 2: Below C Level",false
-"","Modules and Libraries: Linking",false
-"","Keyboards and the PS/2 Protocol",false
-"","Wrap Up",false
-"","C2: Pointers and Arrays",false
-"","Computer Arithmetic: Signed and unsigned numbers",false
 "","Communication: The Serial Protocol and ASCII Character Codes",false
-"","Sensors",false
-"","Performance",false
 "","C1: C and Assembly Language",false
-"","",false
-"","Interrupts and Concurrency",false
-"","Sound",false
-"","Git Workflow",false
 "","Interrupts",false
-"","Memory Management",false
+"","Performance",false
 "","Functions",false
-"","C-mastery",false
+"","Computer Arithmetic: Signed and unsigned numbers",false
+"","Interrupts and Concurrency",false
 "","",false
 "","Floating Point",false
+"","C-mastery",false
+"","Modules and Libraries: Linking",false
+"","Sound",false
+"","C2: Pointers and Arrays",false
+"","Git Workflow",false
+"","Sensors",false
+"","",false
 "","ARM Processor and Memory Architecture Lecture",false
+"","Wrap Up",false
 "","ARM Processor and Memory Architecture Lecture",false
+"","Memory Management",false
+"","Keyboards and the PS/2 Protocol",false
 "/assignments/assign5/","Assignment 5: Keyboard and Simple Shell",false
 "/assignments/assign7/","Assignment 7: System Monitor with Interrupts",false
 "/assignments/assign2/","Assignment 2: Implement a Clock",false
