@@ -1,6 +1,6 @@
 permalink,title,released
 "/labs/lab4/","Lab 4: Linked and Loaded",false
-"/labs/lab1/","Lab 1: Setup the Raspberry Pi",false
+"/labs/lab1/","Lab 1: Setup your Raspberry Pi",false
 "/labs/lab5/","Lab 5: Keyboard Surfin",false
 "/labs/projectlab1/","Project Lab 1: What is Your Project?",false
 "/labs/lab3/","Lab 3: Debugging and Testing",false
@@ -32,7 +32,7 @@ permalink,title,released
 "/assignments/assign5/","Assignment 5: Keyboard and Simple Shell",false
 "/assignments/assign7/","Assignment 7: System Monitor with Interrupts",false
 "/assignments/assign2/","Assignment 2: Implement a Clock",false
-"/assignments/project/","Project Guide",false
+"/assignments/project/","Final Project",false
 "/assignments/assign4/","Assignment 4: Backtrace and Malloc",false
 "/assignments/assign0/","Assignment 0: Choose Lab Section, Learn Git",false
 "/assignments/assign6/","Assignment 6: Graphics Library and Console",false

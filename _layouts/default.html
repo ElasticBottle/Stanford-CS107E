@@ -17,14 +17,22 @@
 
   <div class="container">
 
-    <h1 class="title">{{ page.title }}</h1>
-    <hr>
+    {% if page.title %}
+      <h1 class="title">{{ page.title }}</h1>
+      <hr>
+    {% endif %}
 
     {% if page.toc == true %}
       {% include bodywithtoc.html %}
     {% else %}
       {{ content }}
     {% endif %}
+
+    <div class="footer navbar-default navbar-static-bottom">
+      <div class="small navbar-text text-center">
+          CS107e Winter 2019 &middot; {{ page.title }} 
+      </div>
+    </div> 
   
   </div>
 </body>
