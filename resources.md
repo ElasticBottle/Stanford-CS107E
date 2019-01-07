@@ -5,6 +5,8 @@ permalink: /resources/
 toc: true
 ---
 
+Here we have gathered links to various online demos and external articles that CS107E students have found useful in the past. Check them out!
+
 ## Demos
 
 * [Raspberry Pi GPIO Pinout](https://pinout.xyz/) website. Nice way to see alternate
@@ -25,14 +27,14 @@ Pat used this tool in lecture.
 
 * Matt Godbolt's [Compiler Explorer](http://gcc.godbolt.org/) lets you
   quickly see how C source code maps to compiled assembly. (Be sure to
-  choose the compiler "ARM gcc 4.8.2", which is close to what we use
-  for the course. Check out the colorize option, too.)
+  set the compiler "ARM gcc 4.8.2", which is close to what we use
+  for the course.)
 
-* [cdecl.org](http://cdecl.org/) converts "C gibberish" to and from
+* [cdecl.org](http://cdecl.org/) converts "C gibberish" declarations to and from
 English.
 
 * [Repl](https://repl.it/languages/c) can run C code for you.
-This can be handy when you need to test something brief or small!
+This can be handy when you need to quickly execute a small passage of C to see what it does.
 
 * This virtual [Seven Segment Display](http://www.uize.com/examples/seven-segment-display.html)
 will come in handy in a future lab. This demo teaches you to link bits to characters on a seven-segment-display.
@@ -105,11 +107,11 @@ in Chapter 4: ARM Organization and Implementation.
 
 ### C Programming Language
 
-* [EssentialC](http://cslibrary.stanford.edu/101)
+* Nick Parlante's [EssentialC](http://cslibrary.stanford.edu/101)
 
 * *The C Programming Language, 2nd Ed.*, B. Kernighan and D. Ritchie.
 A digital copy of K&R is available to Stanford students via 
-[Safari Books Online](http://proquest.safaribooksonline.com.ezproxy.stanford.edu/book/programming/c/9780133086249).
+[Safari Books Online](https://proquest-safaribooksonline-com.stanford.idm.oclc.org/9780133086249)
 
 * *The Definitive Guide to GCC, 2nd Ed.*, William von Hagen, Apress, 2006
 [pdf](http://sensperiodit.files.wordpress.com/2011/04/hagen-the-definitive-guide-to-gcc-2e-apress-2006.pdf)

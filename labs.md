@@ -12,10 +12,7 @@ title: Labs
 {% endfor %}
 
 ### Lab schedule
-Labs meet in B21, our lab room in the basement of the Gates building on Tuesday/Wednesday 6:30-8:30 PM.
-
-
-Labs run in a Tuesday-Wednesday sequence, where Tuesday is exposed to the new lab first, and Wednesday does the same lab. Assignments will be assigned after Wednesday lab, and due before Tuesday lab of the next week.
+Labs meet {{ site.data.quarter.labs }}. You will be assigned to one of the two labs for your regular section. Both labs cover the same content. The lab explores the material introduced in the preceding two lectures and prepares you for the upcoming assignment. The week's assignment is released after Wednesday lab and due before Tuesday lab of the next week.
 
 ### Common questions about lab
 ---
@@ -24,12 +21,9 @@ Labs run in a Tuesday-Wednesday sequence, where Tuesday is exposed to the new la
 
 **What is a lab?**
 
-Each student **must** participate in a weekly 2-hour lab section 
-that focuses on active hands-on experimentation and practical skill-building.
-In lab, you will work on a set of exercises/tasks that reinforce 
-the week's material.
-When you leave the lab, you should be well-prepared
-to do the assignment for that week.
+The weekly 2-hour lab section focuses on active experimentation and practical skill-building. 
+The lab content consists of a set of exercises/tasks that reinforce the week's lecture content.
+After finishing the lab, you will be well-prepared to do the assignment for that week.
 Instructors and CAs will be available during the labs.
 
 The labs will often involve hardware.
@@ -40,8 +34,7 @@ We will bring tools and supplies to the labs.
 **How is lab credit awarded?**
 
 Labs are graded for participation on a credit/no-credit basis.
-To earn credit,
-you need to arrive on-time and actively participate for the full lab period.
+You earn credit by actively participating for the full lab period.
 We are hopeful the lab period will be enough time to work through all exercises,
 but what you don't finish, we encourage you to complete on your own.
 
@@ -53,7 +46,7 @@ During the lab, we ask that you periodically check-in with the course staff, so 
 More heads are better than one for this kind of experimenting,
 so you will work in **pairs.** 
 You are also encouraged to discuss the work 
-and share ideas with others in your lab room.
+and share ideas with everyone in your lab room.
 Lab time is for active, hands-on, collaborative learning 
 -- please offer your help to your peers 
 and seek advice from your peers and the staff.
@@ -65,18 +58,11 @@ and be prepared to go on to complete the assignments
 **Is it okay to arrive to lab late or leave early?**
 
 We award credit for labs based on participation and effort.
-We expect you to arrive on-time and participate for the full lab period 
-(or until satisfactorily completing all lab exercises).
-We won't quibble about few minutes here or there but beyond that,
-arriving late or skipping out early will result in not receiving lab credit.
+We won't quibble about a few lost minutes here or there, but we do generally expect you to arrive on-time and participate for the full lab period  (or until satisfactorily completing all lab exercises).
 
 **What happens if I miss my lab?**
 
-If you do have to miss attending your lab session one week, 
+If you have to miss your lab session one week, 
 please come to the other session if possible. If you 
-miss a lab entirely,
-you must still complete the exercises on your own.
-
-Many of the labs go over material for that week's assignment. 
-If you skip a lab, you may have trouble doing the assignment.
+miss a lab entirely, we recommend that you work through the exercises on your own. Please come to office hours if you get stuck. If you skip a lab, you may have trouble doing the week's assignment.
 

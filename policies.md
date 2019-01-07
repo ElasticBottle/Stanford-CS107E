@@ -14,9 +14,9 @@ Hofstadter's Law into account."
 
 The rules:
 
-1.  The cutoff for on-time submission is **6:30 PM** of the due date. Late
-    days are counted in 24-hour periods. Submitting anytime between 6:30 PM
-    and 6:30 PM of the next day is one day late, and so on. We use the
+1.  The cutoff for on-time submission is typically **5 PM** of the due date. Late
+    days are counted in 24-hour periods. Submitting anytime between 5 PM
+    and 5 PM of the next day is one day late, and so on. We use the
     timestamp of your final git commit as the the time you submitted
     your assignment.
 
@@ -146,10 +146,8 @@ must be cited.
 **Sharing specific test inputs or strategy**
 
 You may exchange strategies for testing (e.g. "here's my approach
-to using custom sanity check"), brainstorm together about test
-cases (e.g. "be sure to verify handling when file can't be
-opened"), and share text inputs (fragment files, corpus files,
-and so on) but this collaboration must be cited. Sharing actual
+for testing code") and brainstorm together about test
+cases (e.g. "be sure to verify handling when index is out of range") but this collaboration must be cited. Sharing actual
 code used for testing is off-limits.
 
 **Re-using your own work from a previous quarter**
@@ -294,41 +292,6 @@ improper, take reasonable action to rectify the problem: draw
 attention to it, ask the student to stop, remove the temptation,
 or alert the course staff.  
 
-**It's been said that "you're only cheating
-yourself". I do honest work; why do I care if another student
-doesn't?**
-
-It is sad that a student with the wherewithal to be granted the
-privilege of a Stanford education would disrespect it in this way,
-and it is certainly true that they are the one who stands to lose
-the most by their actions. You can feel secure that your hard work
-earns you knowledge, skills, and pride that they will never have.
-If even one acts in violation, it undermines the integrity of the
-system and the fairness by which we all treat one another. When
-dishonest dealings are rewarded with course grades as good or better
-than those given for sincere achievement, it diminishes us all. We
-demonstrate our respect for those who do right but holding accountable
-those who do not. We ask you to do your part by not providing
-unpermitted assistance nor giving tacit approval to dishonorable
-actions.  
-
-**I'm nervous about adding a citation, as I'm concerned it
-will cause my work to be scrutinized and suffer repercussions. What
-would you advise?**
-
-If you fear that citing your collaboration will invite trouble,
-your dilemma is not in whether to admit to it, but in reconciling
-that you are engaging in activities that you are not comfortable
-openly acknowledging. The choice to not cite your sources can be
-seen as trying to avoid drawing attention to actions you knew were
-dubious. You should only be engaging in collaboration that you are
-confident is appropriate, for which you have no qualms about openly
-citing. A citation that gives proper credit is not only welcome,
-but necessary. Citing appropriate help never causes a problem and
-often avoids them. Even in the case where the collaboration was
-inappropriate, a proper citation can downgrade the severity of the
-response (see below in "I messed up").  
-
 **Can you further clarify
 appropriate and inappropriate use of external resources?**
 
@@ -351,22 +314,6 @@ Appropriate use of external resources does not generally require
 citation, but if your code/design was materially influenced by what
 you viewed, it is appropriate to cite that resource and indicate
 the affected passage.
-
-**I have stumbled across what appears to be a
-full/partial solution that is public or otherwise unprotected. What
-should I do?**
-
-Your primary obligation is to make an immediate about-face and
-follow up with us so we can arrange for its removal. If you peruse
-the code just "to see how they did it", you are headed down a
-slippery slope of being inappropriately influenced by its ideas and
-can easily lead to adoption of its approach and copying of code.
-Even if you manage to avert your eyes at first glance, knowing of
-an available solution can be a powerful siren song that calls you
-back if you get stuck or want a hint. Contact us immediately so we
-can take action to remove the temptation. In this way, it will no
-longer entice you and any other student who might use it in a moment
-of weakness.  
 
 **I'm in a tough situation (out of time, behind on
 material, stressed) and my panic has me considering less-than-honorable
@@ -391,24 +338,4 @@ compromising your character and facing judicial charges. Please
 come to me and I promise to support you in finding a way through
 your situation that will maintain your integrity.
 
-**I messed up. I
-took actions that I suspect/know were in violation of the Honor
-Code. What do I do now?**
 
-Acknowledging responsibility to yourself is a hugely difficult but
-very important first step. Your next step is to reach out to me. I
-am more than willing to work constructively with a forthright student
-who owns their behavior and seeks to make things right. Within a
-limited time frame, we can accept a request to retract the compromised
-work or allow an amended citation that properly credits its authorship.
-Acknowledgment of diminished self-contribution may result in
-discounted/zero credit for the work, but an accurate explanation
-rectifies the mis-representation that would have otherwise been the
-basis for a formal judicial charge. No matter what the violation
-or your follow up actions, it is never too late to change course
-and commit yourself to acting with integrity going forward. Even
-in the situation where a formal case is being pursued with the
-Office of Community Standards, a student's efforts to be upfront
-and cooperate in the process are considered favorably. In contrast,
-false denials and further prevarication will be treated as aggravating
-factors.

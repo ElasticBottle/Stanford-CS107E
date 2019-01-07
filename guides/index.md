@@ -4,6 +4,8 @@ title: Course Guides
 menu_item: true
 ---
 
+We prepared these guides on various topics relevant to CS107E students. Hope you find them useful!
+
 ## Review
 
 1. [Basic electricity](electricity)
