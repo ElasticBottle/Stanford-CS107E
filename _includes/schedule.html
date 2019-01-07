@@ -1,7 +1,7 @@
-<!-- populated from data in _data/syllabus.yml -->
+<!-- populated from data in _data/quarter.yml -->
 {% assign all_pages = site.pages | concat: site.labs | concat: site.assignments %}
 
-<div class="syllabus">
+<div class="schedule">
 <table class="table table-condensed">
   <colgroup>
     <col width="12%" />
@@ -34,7 +34,6 @@
         {% assign i_weeks = i | minus: 1 | times: one_week %}
         {% assign ith_monday = first_monday | plus: i_weeks %}
         {% assign ith_friday = ith_monday | plus: four_days %}
-
 
     <TR>
         <TD colspan="3" style="background-color:#cccccc; font-size:75%; font-style:italic; padding: 2px 12px 2px 12px;"

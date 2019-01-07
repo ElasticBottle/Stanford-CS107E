@@ -5,10 +5,9 @@ title: Labs
 
 ### List of labs
 
-{% for lab in site.labs %}
-{% unless lab.path contains 'checklist' or lab.path contains 'checkin' %}
-- {% include link.html target=lab %}
-{% endunless %}
+{% assign selected = site.labs | where_exp:"f","f.path contains 'README.md'"  %}
+{% for item in selected %}
+-  <a href="{{ item.permalink }}">{{ item.title }}</a>
 {% endfor %}
 
 ### Lab schedule

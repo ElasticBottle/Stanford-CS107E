@@ -5,10 +5,9 @@ title: Assignments
 
 ### List of assignments
 
-{% for assign in site.assignments %}
-{% unless assign.path contains 'images' %}
-- {% include link.html target=assign %}
-{% endunless %}
+{% assign selected = site.assignments | where_exp:"f","f.path contains 'README.md'"  %}
+{% for item in selected %}
+-  <a href="{{ item.permalink }}">{{ item.title }}</a>
 {% endfor %}
 
 ### Assignment schedule
