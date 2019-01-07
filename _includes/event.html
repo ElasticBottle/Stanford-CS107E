@@ -3,7 +3,17 @@
 <!-- look up by permalink if possible -->
 {% if include.plink != null %}
 {% assign front_matter = all_pages | where:"permalink",include.plink | first %}
-{% unless front_matter %} ERROR! No such permalink/path {{ include.plink }} {% endunless %}
+
+<!-- Public site won't have unreleased assign/lab, read title from _data/unreleased.csv -->
+{% if front_matter == null %}
+{% assign unreleased = site.data.unreleased | where:"permalink",include.plink | first %}
+{% if unreleased %}
+{{ unreleased.title }}
+{% else %}
+ERROR! No such permalink {{ include.plink }}
+{% endif %}
+
+{% else %}
 
 <B>{{ front_matter.title }}</B>
 
@@ -26,4 +36,6 @@
 
 <div style="font-size: 80%; margin: 1em;"> {{ front_matter.readings || markdownify }} </div>
 {% endif %}
+{% endif %}
+
 
