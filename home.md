@@ -1,6 +1,7 @@
 ---
 layout: page
 permalink: index.html
+title: CS107E Home 
 ---
 
 ### Welcome to the {{ site.data.quarter.name }} offering of CS107e!
