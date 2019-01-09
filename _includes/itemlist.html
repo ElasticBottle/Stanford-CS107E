@@ -11,17 +11,17 @@
 {% assign found = all_pages | where:"permalink",plink | first %}
 <!-- Public site won't have unreleased assign/lab, read title from _data/unreleased.csv -->
 {% if found == null %}
-{% assign found = site.data.unreleased | where:"permalink",plink | first %}
-{% if found == null %}
+{% assign unreleased = site.data.unreleased | where:"permalink",plink | first %}
+{% if unreleased == null %}
 {% continue %}
 {% endif %}
 {% endif %}
 
 <div class="list-group-item" style="padding: 3px 15px;">
-{% if found.released %}
+{% if found %}
 <a href="{{ found.permalink }}">{{ found.title }}</a>
 {% else %}
-<i>{{ found.title }}</i>
+<i>{{ unreleased.title }}</i>
 {% endif %}
 </div>
 {% endfor %}
