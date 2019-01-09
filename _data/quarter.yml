@@ -21,8 +21,10 @@ lectures: Mon and Fri 11:30am-12:50pm in McMurtry Art Building, Room 350
 labs: Tue or Wed 6:30-8:30pm in Gates B21
 forum: 'https://piazza.com/stanford/winter2019/cs107e'
 weeks:
-    # set start date to date of first lecture (a Monday)
+    # start is date of first lecture (a Monday)
+    # due date-time is for assign1 (will assume weekly repeat thereafter)
   - start_date: "2019-01-07"
+    assign1_duedate: "2019-01-22 6:00 PM"
     mon: /lectures/Intro/
     lab: No lab in first week
     assign: /assignments/assign0/
