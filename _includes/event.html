@@ -2,7 +2,7 @@
 
 <!-- look up by permalink if possible -->
 {% if include.plink != null %}
-{% assign front_matter = all_pages | where:"permalink",include.plink | first %}
+{% assign front_matter = site.pages | where:"permalink",include.plink | first %}
 
 <!-- Public site won't have unreleased assign/lab, read title from _data/unreleased.csv -->
 {% if front_matter == null %}

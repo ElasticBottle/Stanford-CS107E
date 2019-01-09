@@ -1,14 +1,11 @@
 <!-- This partial used like a function to harvest list from schedule, include.type is either "lab" or "assign"  -->
 
-{% assign all_pages = site.pages | concat: site.labs | concat: site.assignments %}
-
-
 <div class="list-group">
 {% for week in site.data.quarter.weeks %}
 
 {% assign plink = week[include.type] %}
 <!-- look up by permalink if possible -->
-{% assign found = all_pages | where:"permalink",plink | first %}
+{% assign found = site.pages | where:"permalink",plink | first %}
 <!-- Public site won't have unreleased assign/lab, read title from _data/unreleased.csv -->
 {% if found == null %}
 {% assign unreleased = site.data.unreleased | where:"permalink",plink | first %}
