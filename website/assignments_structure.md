@@ -1,7 +1,6 @@
 ---
-layout: page
-title: 'Assignment Directory Structure'
 permalink: /assignments/dir_structure/
+title: 'Assignment Directory Structure'
 ---
 
 When you clone the Github branch for each assignment, you will have a top-level 

@@ -1,7 +1,6 @@
 ---
-layout: page
-title: Course Policies
 permalink: /policies/
+title: Course Policies
 toc: true
 ---
 

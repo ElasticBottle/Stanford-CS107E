@@ -1,5 +1,4 @@
 ---
-layout: page
 title: Using an ESP-32 to create a web page
 ---
 

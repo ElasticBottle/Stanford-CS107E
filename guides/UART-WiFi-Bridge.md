@@ -1,5 +1,4 @@
 ---
-layout: page
 title: UART->WiFi bridge for two Raspberry Pis
 ---
 

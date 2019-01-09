@@ -1,5 +1,4 @@
 ---
-layout: page
 title: Guide to Make for ARM cross-development
 ---
 

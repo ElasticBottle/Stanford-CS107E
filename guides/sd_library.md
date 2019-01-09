@@ -1,5 +1,4 @@
 ---
-layout: page
 title: Using the SD Card library to read and write files
 ---
 

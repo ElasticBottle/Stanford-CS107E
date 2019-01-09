@@ -1,5 +1,4 @@
 ---
-layout: page
 title: Guide to using GDB in simulation mode
 ---
 

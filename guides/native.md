@@ -1,5 +1,4 @@
 ---
-layout: page
 title: Guide to compiling for your native environment
 ---
 

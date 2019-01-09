@@ -1,7 +1,6 @@
 ---
-layout: page
-permalink: index.html
-title: Home 
+permalink: /
+title: Home
 ---
 
 ### Welcome to the {{ site.data.quarter.name }} offering of CS107e!

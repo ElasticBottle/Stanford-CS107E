@@ -1,5 +1,4 @@
 ---
-layout: page
 title: Mac Installation Guide
 ---
 

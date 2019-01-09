@@ -1,7 +1,6 @@
 ---
-layout: page
-title: Other resources
 permalink: /resources/
+title: Other resources
 toc: true
 ---
 

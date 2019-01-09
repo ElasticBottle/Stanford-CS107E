@@ -1,5 +1,4 @@
 ---
-layout: page
 title: Updating rpi-install on Ubuntu
 ---
 

@@ -1,14 +1,9 @@
 ---
-layout: page
+permalink: /assignments/
 title: Assignments
 ---
-
 ### List of assignments
-
-{% assign selected = site.assignments | where_exp:"f","f.path contains 'README.md'"  %}
-{% for item in selected %}
--  <a href="{{ item.permalink }}">{{ item.title }}</a>
-{% endfor %}
+{% include itemlist.html type="assign" %}
 
 ### Assignment schedule
 The quarter starts with a set of 7 weekly assignments. Each week's assignment is released after Wednesday lab and due before Tuesday lab of the next week. These assignments fit together to construct a complete working computer system of your very own -- so cool! You will use the final weeks of the quarter to design and complete a final project of your own choosing.
@@ -104,6 +99,10 @@ many of the previous assignments.
 To encourage you to complete all assignments and fix any bugs within them,
 if you hand-in the last assignment using only your own code,
 we will award you bonus points for building a complete working system. 
+
+**How are course grades determined?**
+
+Your course grade is a combination of your participation in lab and your work on the assignments and final project. 
 
 If you have your sights set on earning an __A__ course grade, aim to:
 + Attend all labs 

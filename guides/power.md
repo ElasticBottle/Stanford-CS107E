@@ -1,6 +1,5 @@
 ---
-layout: page
-title: Powering the Raspberry Pi A+ and B+
+title: Powering the Raspberry Pi A+
 ---
 
 *Written by Pat Hanrahan*

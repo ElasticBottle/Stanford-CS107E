@@ -8,15 +8,15 @@ permalink,title,released
 "/labs/projectlab2/","Project Lab 2: How Are You Doing?",false
 "/labs/lab7/","Lab 7: Raspberry Pi, Interrupted",false
 "/labs/lab2/","Lab 2: Below C Level",false
-"/lectures/Serial/","Communication: The Serial Protocol and ASCII Character Codes",false
-"/lectures/C1/","C and Assembly Language",false
+"/lectures/Serial/","Communication and the Serial Protocol",false
+"/lectures/C1/","From Assembly to C",false
 "/lectures/Interrupts1/","Interrupts",false
 "/lectures/Performance/","Performance",false
-"/lectures/Functions/","Functions",false
-"/lectures/Arithmetic/","Computer Arithmetic, signed and unsigned numbers",false
-"/lectures/Interrupts2/","Interrupts and Concurrency",false
+"/lectures/Functions/","C Functions",false
+"/lectures/Arithmetic/","Computer Arithmetic, Signed and Unsigned",false
+"/lectures/Interrupts2/","Interrupts, cont'd",false
 "/lectures/FloatingPoint/","Floating Point",false
-"/lectures/C-mastery/","C-mastery",false
+"/lectures/C-mastery/","C Mastery",false
 "/lectures/Linking/","Modules, Libraries, and Linking",false
 "/lectures/Sound/","Sound",false
 "/lectures/C2/","C Pointers and Arrays",false
@@ -24,7 +24,7 @@ permalink,title,released
 "/lectures/Sensors/","Sensors",false
 "/lectures/Framebuffer/","Graphics and the framebuffer",false
 "/lectures/ARM/","ARM processor and architecture",false
-"/lectures/Wrap/","Wrap Up",false
+"/lectures/Wrap/","Wrap",false
 "/lectures/ASM/","ARM assembly and machine code",false
 "/lectures/Memory/","Memory Management",false
 "/lectures/Keyboard/","Keyboards and the PS/2 Protocol",false

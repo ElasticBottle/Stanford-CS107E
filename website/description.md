@@ -1,9 +1,8 @@
 ---
-layout: page
-title: Computer Systems from the Ground Up
-permalink: /about/
+permalink: /description/
 ---
 
+### Computer Systems from the Ground Up
 CS107 is the third course in Stanford's introductory programming sequence.
 CS106 provides students with a solid foundation in programming methodology and
 abstractions, and CS107 follows on to give you the skills needed to build

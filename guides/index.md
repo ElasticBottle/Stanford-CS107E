@@ -1,36 +1,34 @@
 ---
-layout: page
 title: Course Guides
-menu_item: true
 ---
 
 We prepared these guides on various topics relevant to CS107E students. Hope you find them useful!
 
 ## Review
 
-1. [Basic electricity](electricity)
-2. [Binary and hexadecimal number representations](numbers)
-3. [Unix command line](unix)
+- [Basic electricity](electricity)
+- [Binary and hexadecimal number representations](numbers)
+- [Unix command line](unix)
 
 ## Setup
 
-1. [Powering the Pi](power)
-2. [Working with SD cards](sd)
-3. [Installing the development tools on a Mac](mac_toolchain)
-4. [Installing a Ubuntu virtual machine on Windows](vmware)
-5. [Using the console cable and bootloader](bootloader)
-6. [Installing a reset button](reset-button)
-7. [Setting up the course directory structure](directory-structure)
+- [Powering the Pi](power)
+- [Working with SD cards](sd)
+- [Installing the development tools on a Mac](mac_toolchain)
+- [Installing a Ubuntu virtual machine on Windows](vmware)
+- [Using the console cable and bootloader](bootloader)
+- [Installing a reset button](reset-button)
+- [Setting up the course directory structure](directory-structure)
 
 ## Tools
 
-1. [binutils](binutils)
-2. [Bare metal programming using gcc](gcc) 
-3. [Using Make for ARM cross-development](make)
-4. [Using gdb in simulation mode](gdb)
-5. [Automated checker](ci)
+- [binutils](binutils)
+- [Bare metal programming using gcc](gcc) 
+- [Using Make for ARM cross-development](make)
+- [Using gdb in simulation mode](gdb)
+- [Automated checker](ci)
 
 ## Libraries
-1. [UART-WiFi-Bridge to wirelessly connect two Raspberry Pis (requires two ESP32 Arduino devices)](UART-WiFi-Bridge)
-1. [WiFi web page](WebPage)
-1. [SD Card Library for reading and writing files](sd_library)
+- [UART-WiFi-Bridge to wirelessly connect two Raspberry Pis (requires two ESP32 Arduino devices)](UART-WiFi-Bridge)
+- [WiFi web page](WebPage)
+- [SD Card Library for reading and writing files](sd_library)

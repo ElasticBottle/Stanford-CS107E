@@ -1,5 +1,4 @@
 ---
-layout: page
 title: Guide to Bare Metal Programming with GCC
 ---
 

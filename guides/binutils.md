@@ -1,5 +1,4 @@
 ---
-layout: page
 title: Binary Utilities (binutils)
 toc: true
 ---

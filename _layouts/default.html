@@ -6,34 +6,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link href="/assets/site.css" rel="stylesheet">
-    <link rel="shortcut icon" type="image/x-icon" href="{{ "/assets/favicon.ico"  | absolute_url }}">
-    <title>CS107E {{ page.title }} </title>
+    <link href="/_assets/site.css" rel="stylesheet">
+    <link rel="icon" type="image/png" href="{{ "/_assets/favicon.png" | absolute_url }}">
+    <title>CS107E {% if page.title %}{{ page.title }}{% endif %}</title>
   </head>
 
 <body>
   {% include navbar.html %}
-
   <div class="container">
-
-    {% if page.title %}
-      <h1 class="title">{{ page.title }}</h1>
-      <hr>
-    {% endif %}
-
-    {% if page.toc == true %}
-      {% include bodywithtoc.html %}
-    {% else %}
-      {{ content }}
-    {% endif %}
-
-    <div class="footer navbar-default navbar-static-bottom">
-      <div class="small navbar-text text-center">
-          CS107e Winter 2019 &middot; {{ page.title }} 
-      </div>
-    </div> 
-  
+    {% if page.title %}<h1 class="title">{{ page.title }}</h1><hr>{% endif %}
+    {% include body.html toc=page.toc %}
   </div>
+  {% include footer.html %}
 </body>
 
   <!-- jQuery library -->

@@ -1,5 +1,4 @@
 ---
-layout: page
 title: Guide to the Unix command line
 ---
 

@@ -5,8 +5,29 @@ kramdown:
 permalink: pretty
 exclude:
   - /cs107e/
+include:
+  - _assets
 collections:
   assignments:
     output: true
   labs:
     output: true
+defaults:
+  -
+    scope:
+      path: "" # an empty string here means all files in the project
+      type: "pages"
+    values:
+      layout: "default"
+  -
+    scope:
+      path: "" # an empty string here means all files in the project
+      type: "assignments"
+    values:
+      layout: "default"
+  -
+    scope:
+      path: "" # an empty string here means all files in the project
+      type: "labs"
+    values:
+      layout: "default"

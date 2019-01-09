@@ -1,5 +1,4 @@
 ---
-layout: page
 title: Binary and Hexadecimal Numbers
 ---
 

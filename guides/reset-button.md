@@ -1,6 +1,5 @@
 ---
-layout: page
-title: Creating a reset button on the Pi
+title: Creating a reset button on your Pi
 ---
 
 *Written by Anna Zeng*

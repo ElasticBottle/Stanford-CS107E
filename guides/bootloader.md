@@ -1,5 +1,4 @@
 ---
-layout: page
 title: Using the console cable and bootloader
 ---
 
