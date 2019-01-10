@@ -176,9 +176,11 @@ initialized, visit:
 
 <img title="Sample assignment repo page" src="images/01-assignment-repo.png" height="200">
 
-To begin, clone your personal repository.
+To begin, clone your personal repository under cs107e_home.
 
 ```
+$ pwd
+/Users/student/cs107e_home
 $ git clone https://github.com/cs107e/[YOUR-GITHUB-USERNAME]-assignments assignments
 remote: Counting objects: 3, done.
 remote: Total 3 (delta 0), reused 0 (delta 0), pack-reused 3
