@@ -381,7 +381,7 @@ and reasonably organized.
 
 3. Find a file in the directory /etc on your computer; send us the name of the
    file and the number of bytes contained in that file. How many files and
-   directories are contained in the entire directory '/etc'? Include the commands you used to
+   directories are contained in the first level of directory /etc (absolute path)? Include the commands you used to
    answer these questions.
 
 Use the `git` commands you learned in the previous steps to stage this file and
