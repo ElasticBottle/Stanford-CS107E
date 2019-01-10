@@ -18,7 +18,6 @@ We prepared these guides on various topics relevant to CS107E students. Hope you
 - [Installing a Ubuntu virtual machine on Windows](vmware)
 - [Using the console cable and bootloader](bootloader)
 - [Installing a reset button](reset-button)
-- [Setting up the course directory structure](directory-structure)
 
 ## Tools
 
