@@ -3,7 +3,7 @@ released: true
 permalink: /assignments/assign0/
 title: 'Assignment 0: Choose Lab Section, Learn Git'
 toc: true
-duedate: 2019-01-10 6:00 PM
+duedate: 2019-01-13 6:00 PM
 
 ---
 
@@ -11,9 +11,7 @@ duedate: 2019-01-10 6:00 PM
 
 {% include duedate.html n=1 %}
 
-**No late days can be used on this assignment.**
-
-*Welcome to CS107E!*
+<small>This assignment is not for a grade, but we do need you to complete it to get you registered and assigned to a lab section. If you run into troubles, please reach out on our [Piazza forum]({{ site.data.quarter.forum }}).</small>
 
 ## Goals
 
