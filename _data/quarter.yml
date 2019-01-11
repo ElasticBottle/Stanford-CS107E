@@ -4,19 +4,19 @@
 name: Winter 2019
 instructors: 
     - name: Pat Hanrahan
-      img: _assets/pat.png
+      img: /_assets/pat.png
     - name: Julie Zelenski
-      img: _assets/julie.jpg
+      img: /_assets/julie.jpg
 cas:
     - name: Jennifer Lin
-      img: _assets/jenn.png
+      img: /_assets/jenn.png
     - name: Eric Yang
-      img: _assets/eric.png
+      img: /_assets/eric.png
 sls: 
     - name: Ashwin Agarwal
-      img: _assets/ashwin.png
+      img: /_assets/ashwin.png
     - name: Natasha Goenawan
-      img: _assets/natasha.png
+      img: /_assets/natasha.png
 lectures: Mon and Fri 11:30am-12:50pm in McMurtry Art Building, Room 350
 labs: Tue or Wed 6:30-8:30pm in Gates B21
 forum: 'https://piazza.com/stanford/winter2019/cs107e'
