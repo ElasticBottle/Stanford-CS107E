@@ -219,7 +219,7 @@ put a local .gdbinit configuration file in the project directory:
 	load
 
 Whenever you start gdb in this directory, the commands from this
-.gdbinit file will set the the simulator target and load the program
+.gdbinit file will set the simulator target and load the program
 automatically.
 
 ### Commands

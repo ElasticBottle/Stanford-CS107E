@@ -13,11 +13,11 @@ Hofstadter's Law into account."
 
 The rules:
 
-1.  The cutoff for on-time submission is typically **6 PM** of the due date. Late
-    days are counted in 24-hour periods. Submitting anytime between 6 PM
-    and 6 PM of the next day is one day late, and so on. We use the
-    timestamp of your final git commit as the the time you submitted
-    your assignment.
+{% assign time = site.data.quarter.weeks[0].assign1_duedate | date: "%l:%M %P" %}
+1.  The cutoff for on-time submission is typically <B>{{ time }}</B> of the due date. Late
+    days are counted in 24-hour periods. Submitting anytime after {{ time }}
+    and before {{ time }} of the next day is one day late, and so on. We use the
+    timestamp of your final git commit as the time of submission.
 
 2.  You are given **4 "grace days"** (self-granted extensions) which you can
     use to give yourself extra time without penalty.
