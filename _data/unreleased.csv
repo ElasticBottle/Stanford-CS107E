@@ -23,7 +23,6 @@ permalink,title,released
 "/lectures/GitWorkflow/","Git Workflow",false
 "/lectures/Sensors/","Sensors",false
 "/lectures/Framebuffer/","Graphics and the framebuffer",false
-"/lectures/ARM/","ARM processor and architecture",false
 "/lectures/Wrap/","Wrap",false
 "/lectures/ASM/","ARM assembly and machine code",false
 "/lectures/Memory/","Memory Management",false
