@@ -52,7 +52,7 @@ one).
 
 See the [UNIX guide](/guides/unix) for more information about these topics.
 Those new to UNIX or wishing to brush up their skills may want to check out the
-library of [introductory unix videos/guides](http://cs107.stanford.edu/unixref)
+library of [introductory unix videos/guides](https://web.stanford.edu/class/archive/cs/cs107/cs107.1186/unixref/)
 maintained on the standard CS107 web site.
 
 Students are expected to be familiar with the material covered in the [course

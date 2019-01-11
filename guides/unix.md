@@ -36,7 +36,7 @@ Philip Guo, a former PhD student at Stanford. has produced some nice
 [videos](http://pgbovine.net/command-line-tutorial.htm) that introduce basic
 unix commands.
 
-CS107 also has maintains a nice library of [unix reference documents and videos](http://cs107.stanford.edu/unixref).
+CS107 also has maintains a nice library of [unix reference documents and videos](https://web.stanford.edu/class/archive/cs/cs107/cs107.1186/unixref/).
 
 ## Unix commands
 
