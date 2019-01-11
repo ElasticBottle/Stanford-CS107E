@@ -6,7 +6,7 @@ layout: dashboard
 
 ### Welcome to the {{ site.data.quarter.name }} offering of CS107E!
 
-CS107E is __Computer Systems from the Ground Up__. Read more about the course [here](/description/).
+CS107E is __Computer Systems from the Ground Up__. Read more about the course [here](/about/).
 
 <div class="row">
 <div class="col-xs-5" markdown="1">
