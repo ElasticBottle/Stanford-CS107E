@@ -14,7 +14,7 @@ for cross-development on the ARM architecture.
 We will briefly review makefile syntax and usage.
 For additional information about makefiles,
 check out the 
-[CS107 Guide to Makefiles](http://cs107.stanford.edu/guide/make.html)
+[CS107 Guide to Makefiles](https://web.stanford.edu/class/archive/cs/cs107/cs107.1186/guide/make.html)
 and other resources on the bottom of the page.
 
 Below is a simple makefile used
@@ -177,6 +177,6 @@ If you'd like to learn more, check out
 [a Makefile tutorial](http://www.opussoftware.com/tutorial/TutMakefile.htm),
 [another Makefile tutorial](http://www.delorie.com/djgpp/doc/ug/larger/makefiles.html),
 the
-[CS107 Guide to Makefiles](http://cs107.stanford.edu/guide/make.html),
+[CS107 Guide to Makefiles](https://web.stanford.edu/class/archive/cs/cs107/cs107.1186/guide/make.html),
 and the
 [GNU Documentation about Compiler Options](https://gcc.gnu.org/onlinedocs/gcc-4.2.2/gcc/C-Dialect-Options.html).

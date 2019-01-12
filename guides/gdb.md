@@ -300,10 +300,10 @@ The upper pane displays current values for all registers, the middle pane is my 
 To learn more about `tui` mode, check out this section in [an external GDB guide](https://beej.us/guide/bggdb/#regasm).
 
 ### More GDB resources
-CS107 has a nice introduction in their [GDB guide](http://cs107.stanford.edu/guide/gdb.html).
+CS107 has a nice introduction in their [GDB guide](https://web.stanford.edu/class/archive/cs/cs107/cs107.1186/guide/gdb.html).
 Looking to learn some fancier tricks? See these articles Julie wrote for a 
-programming journal: [Breakpoint Tricks](http://cs107.stanford.edu/resources/gdb_coredump1.pdf) 
-and [gdb's Greatest Hits](http://cs107.stanford.edu/resources/gdb_coredump2.pdf). 
+programming journal: [Breakpoint Tricks](https://web.stanford.edu/class/archive/cs/cs107/cs107.1186/resources/gdb_coredump1.pdf) 
+and [gdb's Greatest Hits](https://web.stanford.edu/class/archive/cs/cs107/cs107.1186/resources/gdb_coredump2.pdf). 
 There's also the full online gdb manual to learn all the ins and outs: 
 [http://sourceware.org/gdb/current/onlinedocs/gdb/index.html](http://sourceware.org/gdb/current/onlinedocs/gdb/index.html).
 
