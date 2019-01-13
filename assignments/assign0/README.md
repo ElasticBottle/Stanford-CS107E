@@ -4,8 +4,20 @@ permalink: /assignments/assign0/
 title: 'Assignment 0: Choose Lab Section, Learn Git'
 toc: true
 duedate: 2019-01-13 6:00 PM
-
 ---
+
+{% comment %}
+Task list to copy/paste when creating PR for this assign:
+
+__Before releasing assign0:__
+- [ ] Review writeup/starter code (instructor)
+- [ ] Consider changes for clarity of spec/ease of grading (TA)
+- [ ] Followup on any github issue from previous
+
+__To prep for assign0:__
+- [ ] 
+
+{% endcomment %}
 
 *Written by Omar Rizwan*
 
