@@ -24,7 +24,6 @@ permalink,title,released
 "/lectures/Sensors/","Sensors",false
 "/lectures/Framebuffer/","Graphics and the framebuffer",false
 "/lectures/Wrap/","Wrap",false
-"/lectures/ASM/","ARM assembly and machine code",false
 "/lectures/Memory/","Memory Management",false
 "/lectures/Keyboard/","Keyboards and the PS/2 Protocol",false
 "/assignments/assign5/","Assignment 5: Keyboard and Simple Shell",false
