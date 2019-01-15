@@ -19,10 +19,10 @@ Do you know the answers to the following questions?
   which is equal to x but with its least significant bit equal to 0?
 
 If you don't know the answers to these questions,
-we recommend that you review the following material.
+we recommend that you review the following materials:
 
-* [Number Systems](https://www.khanacademy.org/math/pre-algebra/applying-math-reasoning-topic/alternate-number-bases/v/number-systems-introduction)
-* [Binary Numbers](http://en.wikipedia.org/wiki/Binary_number)
-* [Hexadecimal Numbers](https://learn.sparkfun.com/tutorials/hexadecimal)
-* [Bitwise Operators](http://en.wikipedia.org/wiki/Bitwise_operations_in_C)
+* Khan Academy video on [Number Systems](https://www.khanacademy.org/math/pre-algebra/applying-math-reasoning-topic/alternate-number-bases/v/number-systems-introduction)
+* Wikipedia entry for [Binary Numbers](http://en.wikipedia.org/wiki/Binary_number)
+* Sparkfun tutorial on [Hexadecimal Numbers](https://learn.sparkfun.com/tutorials/hexadecimal)
+* Wikipedia entry for [Bitwise Operators](http://en.wikipedia.org/wiki/Bitwise_operations_in_C)
 

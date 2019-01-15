@@ -7,8 +7,8 @@ For this class, you will need to install the following software:
 1.  The `arm-none-eabi` toolchain, which includes a C x86 to ARM cross-compiler
     which compiles C code on your x86 machine to ARM machine code which can run
     on the Raspberry Pi.
-2.  The driver and script for the CP2102 console cable which connects your
-    computer and Pi, so you can load programs onto the Pi.
+2.  The driver for the USB-serial adapter which connects your
+    computer to the Pi. Our rpi-install script that sends programs to the bootloader.
 
 If you are on a Mac, follow all the instructions on this page.
 
@@ -65,9 +65,9 @@ running. If you are already using Homebrew, skip to the next section.
     warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
     ```
 
-### Console drivers and script installation
+### USB-serial adapter and script installation
 
-To use the console cable to send information from and to your Pi, you'll need
+To use the USB-serial adapter to send information from and to your Pi, you'll need
 to install a few things. These instructions will guide you through those steps.
 
 1.  Install the CP210x USB to UART Drivers
