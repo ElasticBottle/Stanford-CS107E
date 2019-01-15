@@ -421,7 +421,7 @@ We wrote the Python script `rpi-install.py` that runs on your computer and sends
     $ rpi-install.py -h
     usage: rpi-install.py [-h] [-v] [-q] [-t T] [-p | -s] [port] file
     
-    This script sends a binary file to the Raspberry Pi bootloader. Version 0.91.
+    This script sends a binary file to the Raspberry Pi bootloader. Version 1.0.
     ...
 
 **Note:** If you are on a Mac, make sure you installed the CP2102 and serial drivers as
