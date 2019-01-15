@@ -1,8 +1,12 @@
 #!/usr/bin/env python
 
-"""Julie Zelenski 2017.
-Based on earlier rpi-install.py by Pat Hanrahan.
-Edited by Omar Rizwan 2017-04-23.
+"""
+-------- VERSION numbering ----------
+        First rpi-install.py by Pat Hanrahan, 2015-16
+0.8     Edited by Omar Rizwan 2017-04-23.
+0.91    Updated by Julie Zelenski winter quarter 2017-18
+1.0     WSL support added Nov 2018 by mchang
+-----------------------------------
 
 This bootloader client is used to upload binary image to execute on
 Raspberry Pi.
@@ -26,9 +30,8 @@ import argparse, logging, os, platform, re, serial, subprocess, sys, time
 from serial.tools import list_ports
 from xmodem import XMODEM
 
-# Updated with WSL support, Nov 2018 by mchang
-# Updated during winter quarter 2017-18
-VERSION = "0.100"
+# See VERSION numbering above
+VERSION = "1.0"
 
 # Set the vender and product ID of the serial unit
 # The CP2102 units from winter 2014-15 and spring 2016-17 both have
