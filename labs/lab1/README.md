@@ -72,7 +72,7 @@ To prepare, please do the following before coming to lab:
 1. Install the necessary tools on your laptop:
   - If you are using a Windows laptop, install a virtual machine
   running Linux following our [VM install instructions](/guides/vmware/). This virtual machine will have the arm cross-development tools already installed.
-  - If you are using a Mac laptop, follow our [Mac install instructions](/guides/mac_toolchain/) to install the arm cross-development tools, console drivers, and uploader script.
+  - If you are using a Mac laptop, follow our [Mac install instructions](/guides/mac_toolchain/) to install the arm cross-development tools and console drivers.
   You do not have to install a virtual machine,
   since OS X is already based on UNIX.
 1. Make sure you have installed and learned how to use Git. (You should have
@@ -368,34 +368,28 @@ This quickly becomes tedious.
 Even worse, the SD connectors are only designed to withstand
 around 1000 insertions and deletions, after which they start to fail.
 
-There is a better way: use a bootloader.
-The bootloader avoids having 
-to repeatedly move your SD card back and forth.
-You will learn to love the bootloader!
+Instead, we will use a __bootloader__. The bootloader is a program
+that runs on the Pi and listens on the serial port for commands and data
+coming from a connected computer. On your laptop, you run a script
+to send your compiled program over the serial port to the waiting 
+bootloader. The bootloader receives the program and writes it to the
+memory of the Pi, a process called "loading" the program. After the
+program is loaded, the bootloader jumps to the start address of the program,
+and the program begins to run. To stop that program and start another,
+you will reset the Pi and use the bootloader again.  This is much more convenient way to run your newly compiled program than all that shuffling of SD cards. You will learn to love the bootloader!
 
-1. To install the bootloader, mount the SD card and copy
+First install the bootloader onto your SD card:
+
+1. Mount the SD card and copy
    `bootloader.bin` to the SD card and name it `kernel.img`, replacing the program
    you had there before.
 
-2. Eject the SD card and insert it into the Raspberry Pi. Now, when
-   the Raspberry Pi powers up, the bootloader is run.
+2. Eject the SD card and insert it into the Raspberry Pi. The next (and every subsequent) time that you reset the
+Pi with that micro-SD card installed, the bootloader will run.
 
-The bootloader sets up a communication channel with your laptop and waits for a command from your laptop. 
-A program on your laptop sends the bytes 
-contained in a binary (`.bin`) file to the bootloader 
-and the bootloader copies them into the correct memory location.
-After the program is loaded,
-the bootloader jumps to the start address of the program,
-and the program begins to run.
-Much, much simpler!
+3. When the bootloader is running, it signals that it is waiting to receive a program by repeatedly giving two short flashes of the ACT LED (the green LED on the Pi board). This "da-dum" is the heartbeat that tells you the bootloader is ready and listening. Reset your Pi now and observe this heartbeat. 
 
-In order to do this you need to establish a communication
-channel between the Raspberry Pi and your laptop,
-We will cover the details of serial communication 
-later in the course. For now let's just get everything set up.
-
-The USB-serial that you are using to power your Pi also contains pins
-that can be used to communicate with the Pi.
+The next step is to set up the communication channel between your computer and the Pi.  The USB-serial that you are using to power your Pi also contains pins that can be used as a serial communication line.
 
 The 6-pin header at the end of the USB-serial breakout board has two pins labeled for transmitting (TX) and receiving (RX).
 The Pi also has a TX and RX pin (GPIO pins 14 and 15, respectively). Use the Raspberry Pi pinout diagram to find these pins on the GPIO header.
@@ -403,7 +397,9 @@ The Pi also has a TX and RX pin (GPIO pins 14 and 15, respectively). Use the Ras
 Pick out two more female-female jumpers, one blue and one green. Use these jumpers to connect the TX and RX pins on your Pi 
 to the RX and TX pins on the USB-serial.
 
-**Note:** Take care to ensure one device's TX connects to the other's RX, and vice versa. Do **not** connect TX to TX and RX to RX!
+{% include callout.html type="warning" %}
+**Note:** Take care to connect one device's TX to the other's RX, and vice versa. Do **not** connect TX to TX and RX to RX!
+</div>
 
 The proper connections are shown below.
 Note that your USB-serial may have pins in different positions. Confirm that your connections match the labels on your USB-serial.
@@ -429,7 +425,7 @@ We wrote the Python script `rpi-install.py` that runs on your computer and sends
 described in the [Mac install instructions](/guides/mac_toolchain). On Windows or
 Linux, you don't need to do anything special here.
 
-Let's try the bootloader. In Terminal, change back to the `lab1/code/blink/`.
+Let's try bootloading a program. Confirm that your Pi is showing the ACT led "heartbeat" that indicates the bootloader is ready and waiting. On your computer, change back to the `lab1/code/blink/`.
 directory where you assembled `blink.bin` in step 1.
 
 To load and run `blink.bin`, simply type:
@@ -439,16 +435,16 @@ To load and run `blink.bin`, simply type:
     Sending `blink.bin` (72 bytes): .
     Successfully sent!
 
-After a brief pause, you should see the LED blinking.
+The ACT LED turns on steady on while loading the program, then goes off. At this point, the blink program takes over the Pi and will now blink the LED on your breadboard.
 
 If you change your program and wish to reload it onto the Pi, you must
 power cycle the Pi. Why can't you just run `rpi-install.py` again
-after the bootloader's already loaded a program?
+after the bootloader has already loaded a program?
 
 One way to power cycle the Pi is to unplug the USB-serial
 from the USB port on your laptop,
 and then plug it in again.
-The Pi will reboot into the bootloader, ready to receive the new version of the program.
+The Pi will reset into the bootloader, ready to receive the new version of the program.
 
 Retype the above `rpi-install.py` command, 
 and the new version will be sent to the Pi and run.
