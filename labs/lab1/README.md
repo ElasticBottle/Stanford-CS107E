@@ -304,20 +304,25 @@ Follow these steps in order:
 1. Copy the four files from the firmware folder onto the SD card. (You can use either the Terminal
 or the Finder for this.)    
 
-2. On the SD card, copy `blink-actled.bin` to `kernel.img`. 
+2. On the SD card, make a copy of  `blink-actled.bin` named  `kernel.img`.
 
-3. Confirm that your SD card has the required files.
+3. Confirm that your SD card has the following files:
 
         $ ls
-        bootcode.bin  blink-actled.bin kernel.img  start.elf
+        blink-actled.bin    bootloader.bin        start.elf
+        bootcode.bin        kernel.img
 
     `bootcode.bin` to boot the GPU
 
     `start.elf` to start up the GPU
 
+    `kernel.img` binary which the Pi runs once powered up
+
     `blink-actled.bin` the program to blink the activity led
 
-    `kernel.img` binary which the Pi runs once powered up
+    `bootloader.bin` the program you will use later in this lab
+
+    Note that only the first 3 files are required.  `blink-actled.bin` and `bootloader.bin` are ignored by the Pi.
 
 
 4. Eject the SD card. If the Terminal prevents you from ejecting, type in `cd ..` to move to the parent folder and try ejecting again.
@@ -380,8 +385,8 @@ you will reset the Pi and use the bootloader again.  This is much more convenien
 
 First install the bootloader onto your SD card:
 
-1. Mount the SD card and copy
-   `bootloader.bin` to the SD card and name it `kernel.img`, replacing the program
+1. Mount the SD card and make a copy of
+   `bootloader.bin` on the SD card. Name it `kernel.img`, replacing the program
    you had there before.
 
 2. Eject the SD card and insert it into the Raspberry Pi. The next (and every subsequent) time that you reset the
