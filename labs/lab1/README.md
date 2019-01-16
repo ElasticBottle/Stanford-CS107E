@@ -304,17 +304,18 @@ Follow these steps in order:
 1. Copy the four files from the firmware folder onto the SD card. (You can use either the Terminal
 or the Finder for this.)    
 
-2. On the SD card, rename the copy
-of `blink-actled.bin` to `kernel.img`. 
+2. On the SD card, copy `blink-actled.bin` to `kernel.img`. 
 
 3. Confirm that your SD card has the required files.
 
         $ ls
-        bootcode.bin  kernel.img  start.elf
+        bootcode.bin  blink-actled.bin kernel.img  start.elf
 
     `bootcode.bin` to boot the GPU
 
     `start.elf` to start up the GPU
+
+    `blink-actled.bin` the program to blink the activity led
 
     `kernel.img` binary which the Pi runs once powered up
 
