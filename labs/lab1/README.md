@@ -392,18 +392,15 @@ First install the bootloader onto your SD card:
 2. Eject the SD card and insert it into the Raspberry Pi. The next (and every subsequent) time that you reset the
 Pi with that micro-SD card installed, the bootloader will run.
 
-3. When the bootloader is running, it signals that it is waiting to receive a program by repeatedly giving two short flashes of the ACT LED (the green LED on the Pi board). This "da-dum" is the heartbeat that tells you the bootloader is ready and listening. Reset your Pi now and observe this heartbeat. 
-
-The next step is to set up the communication channel between your computer and the Pi.  The USB-serial that you are using to power your Pi also contains pins that can be used as a serial communication line.
+To use the bootloader, you must set up the communication channel between your computer and the Pi.  The USB-serial that you are using to power your Pi also contains pins that can be used as a serial communication line.
 
 The 6-pin header at the end of the USB-serial breakout board has two pins labeled for transmitting (TX) and receiving (RX).
 The Pi also has a TX and RX pin (GPIO pins 14 and 15, respectively). Use the Raspberry Pi pinout diagram to find these pins on the GPIO header.
 
-Pick out two more female-female jumpers, one blue and one green. Use these jumpers to connect the TX and RX pins on your Pi 
-to the RX and TX pins on the USB-serial.
+Pick out two more female-female jumpers, one blue and one green. Use the blue jumper to connect the TX on the USB-serial to the RX on the Pi, and the green jumper to connect RX on the USB-serial to the TX on the Pi. As always, first unplug the USB-serial from your computer before fiddling with your wiring.
 
 {% include callout.html type="warning" %}
-**Note:** Take care to connect one device's TX to the other's RX, and vice versa. Do **not** connect TX to TX and RX to RX!
+**Note:** The connections run from one device's TX to the other's RX, and vice versa. Do **not** connect TX to TX and RX to RX!
 </div>
 
 The proper connections are shown below.
@@ -418,6 +415,8 @@ to the Pi's TX pin (GPIO 14).
 The blue wire connects the TX header pin on the USB-serial
 to the Pi's RX pin (GPIO 15).
 
+Plug in your USB-serial to reset your Pi. The bootloader should run on reset. When the bootloader is running, it signals that it is waiting to receive a program by repeatedly giving two short flashes of the ACT LED (the green LED on the Pi board). This "da-dum" is the heartbeat that tells you the bootloader is ready and listening. Look at your Pi now and observe this rhythm. Breathe in sequence with it for a moment to celebrate having achieved bootloader enlightenment.
+
 We wrote the Python script `rpi-install.py` that runs on your computer and sends a program to the bootloader. Verify you have this script installed by typing the following command and confirm the expected output:
 
     $ rpi-install.py -h
@@ -431,10 +430,10 @@ We wrote the Python script `rpi-install.py` that runs on your computer and sends
 described in the [Mac install instructions](/guides/mac_toolchain). On Windows or
 Linux, you don't need to do anything special here.
 
-Let's try bootloading a program. Confirm that your Pi is showing the ACT led "heartbeat" that indicates the bootloader is ready and waiting. On your computer, change back to the `lab1/code/blink/`.
+Let's try bootloading a program. On your computer, change back to the `lab1/code/blink/`
 directory where you assembled `blink.bin` in step 1.
 
-To load and run `blink.bin`, simply type:
+Confirm that your Pi is showing the ACT LED heartbeat. To load and run `blink.bin`, simply type:
 
     $ rpi-install.py blink.bin
     Found serial port: /dev/cu.SLAB_USBtoUART

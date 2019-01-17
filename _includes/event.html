@@ -24,11 +24,11 @@
 {% capture output %}
 {% assign found = other_files | where:"name","slides.pdf" | first %}
 {% if found %} <a href="{{found.path}}">slides</a> 
-{% elsif front_matter.permalink %} <a href="{{front_matter.permalink}}">writeup</a> 
-{% endif %}
-{% assign found = other_files | where_exp:"file","file.path contains '/code/'" | first %}
+{% assign code_found = other_files | where_exp:"file","file.path contains '/code/'" | first %}
 {% assign code_path = "https://github.com/cs107e/cs107e.github.io/tree/master/" | append: resource_path | append: "/code/" %}
-{% if found %} <a href="{{code_path}}">code</a> {% endif %}
+{% if code_found %} <a href="{{code_path}}">code</a> {% endif %}
+{% elsif front_matter.permalink contains "labs" or front_matter.permalink contains "assignments" %} <a href="{{front_matter.permalink}}">writeup</a> 
+{% endif %}
 {% endcapture %}
 
 {% assign cleaned = output | newline_to_br | strip_newlines | split: "<br />" | where_exp:"l", "l contains 'href'" | join: ',' %}

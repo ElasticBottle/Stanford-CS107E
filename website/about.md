@@ -41,15 +41,20 @@ Topics covered include:
   -   controlling peripherals: GPIO, graphics, sound, and keyboards
 
 Students will receive a Raspberry Pi and a kit of parts,
-and all assignments will run on the Raspberry Pi.Assignments build upon each other by adding more and more functionality to a core library.
+and all assignments will run on the Raspberry Pi. Assignments build upon each other by adding more and more functionality to a core library.
 They culminate in a simple personal computer shell
 using a keyboard and display. Finally, students do a project of their choosing 
 where they build a complete hardware-software system.
 
-This class is organized by weeks. Each week consists of two lectures
+This class is organized by weeks. Each week consists of lectures
 on Fri and Mon, a lab offered on Tue or Wed evening, and a programming
 assignment which is due the following week. Lecture and lab attendance is mandatory. The final project is completed over the last two weeks of the quarter. There are no exams.
 
 For information about the differences between CS107 and CS107e,
 check out this [FAQ](https://web.stanford.edu/class/cs107e/).
+
+#### History
+CS107e is an experiment in creating a new approach to introducing students to computer systems. It is the brainchild of Pat Hanrahan; the course owes its very existence to Pat's inspiration and travail, along with the heroic contributions of the multi-talented Isabel Bush, the Lead TA in the first offerings of the course. Phil Levis, Dawson Engler, Julie Zelenski, and Chris Gregg have contributed to the cause as instructors and we've have enjoyed superb student collaborators: Anna, Ashwin, Eric, Jane, Jennifer, Lenny, Matt, Michelle, Natasha, Ngoc, Omar, Sergio, and Will. The tireless efforts of the TAs to support student learning have earned boundless praise from our students.
+
+As of Winter 2019, the course materials have evolved to a fairly solid and stable state. Instructors interested in adopting from our work are welcome to do so. Contact us at `cs107e@cs.stanford.edu` for more information and access to our private-facing material.
 
