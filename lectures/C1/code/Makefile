@@ -2,17 +2,11 @@
 # We will talk more about Makefiles soon!
 
 CFLAGS = -g -Wall -Og -std=c99 -ffreestanding 
-LDFLAGS = -nostdlib -T memmap
 
-all : blink.bin cblink.bin
+all : blink.bin cblink.bin 
 
-%.bin: %.elf
+%.bin: %.o
 	arm-none-eabi-objcopy $< -O binary $@
-
-# link, memmap needed for text/data to
-# be laid out as needed
-%.elf: %.o
-	arm-none-eabi-gcc $(LDFLAGS) $< -o $@
 
 %.o: %.c
 	arm-none-eabi-gcc $(CFLAGS) -c $< -o $@
@@ -21,8 +15,8 @@ all : blink.bin cblink.bin
 	arm-none-eabi-as $< -o $@
 
 clean:
-	rm -f *.o *.bin *.elf *.list *~
+	rm -f *.o *.bin *~
 
 .PHONY: all clean
 
-.PRECIOUS: %.o %.elf
+.PRECIOUS: %.o

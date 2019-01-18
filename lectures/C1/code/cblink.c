@@ -1,18 +1,18 @@
-unsigned int *FSEL2 =  (unsigned int *)0x20200008;
-unsigned int *SET0  =  (unsigned int *)0x2020001c;
-unsigned int *CLR0  =  (unsigned int *)0x20200028;
+static unsigned int *FSEL2 =  (unsigned int *)0x20200008;
+static unsigned int *SET0  =  (unsigned int *)0x2020001c;
+static unsigned int *CLR0  =  (unsigned int *)0x20200028;
 
 #define DELAY 0x3f0000
 
 void main(void)
 {
-   *FSEL2 = 1;
+   *FSEL2 = 1;  // configure GPIO 20 for output
 
    while (1) {
-        *SET0 = 1 << 20;
-        for (int c = DELAY; c != 0; c--) ;
-        *CLR0 = 1 << 20;
-        for (int c = DELAY; c != 0; c--) ;
+        *SET0 = 1 << 20;    // set GPIO 20
+        for (int c = DELAY; c != 0; c--) ;  // wait
+        *CLR0 = 1 << 20;    // clear GPIO 20
+        for (int c = DELAY; c != 0; c--) ;  // wait
    }
 }
 
