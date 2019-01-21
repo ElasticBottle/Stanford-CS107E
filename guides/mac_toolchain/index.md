@@ -1,29 +1,29 @@
 ---
 title: Mac Installation Guide
+toc: true
 ---
 
-For this class, you will need to install the following software:
+For this class, you will need to install the following:
 
-1.  The `arm-none-eabi` toolchain, which includes a C x86 to ARM cross-compiler
-    which compiles C code on your x86 machine to ARM machine code which can run
-    on the Raspberry Pi.
-2.  The driver for the USB-serial adapter which connects your
-    computer to the Pi. Our rpi-install script that sends programs to the bootloader.
+- The `arm-none-eabi` cross-compile toolchain to build programs for the Raspberry Pi
+- The driver for the USB-serial adapter which connects your
+    computer to the Pi.
+- The python packages need by the `rpi-install.py` script used to communicate with the Pi bootloader.
 
-If you are on a Mac, follow all the instructions on this page.
+Follow all the instructions on this page to install all of the above software on your Mac. 
 
-### `arm-none-eabi` installation
+### Install the toolchain
+The  `arm-none-eabi` package is a complete cross-compile toolchain. A _cross-compiler_ is a compiler than runs on one system (in this case, x86) and generates machine code for a different system (in this case, ARM). The toolchain includes the C compiler and other essential development tools (assembler, linker, debugger, and utilities). 
 
-To ease the installation process for the `arm-none-eabi` tools on OS X, we have
-built and packaged them into a Homebrew formula for you.
+#### Install Homebrew
+
+To ease the installation process, we have
+built and packaged the toolchain into a Homebrew formula.
 [Homebrew](http://brew.sh/) is a popular [package
 manager](https://en.wikipedia.org/wiki/Package_manager) for OS X. It is good
 practice to install software using a package manager.
 
-#### Install Homebrew
-
-If you aren't yet using Homebrew, use these instruction to get Homebrew up and
-running. If you are already using Homebrew, skip to the next section.
+If you are already using Homebrew, skip to the next section. Otherwise, follow these steps to install Homebrew:
 
 1.  Install the Xcode command line tools by running the command below. A dialog
     should pop up on your screen. Click "Install" when it appears.
@@ -32,30 +32,39 @@ running. If you are already using Homebrew, skip to the next section.
     $ xcode-select --install
     ```
 
-2.  Run Homebrew's install script by using the command below. The script will
-    guide you through the rest of the install process.
+2.  Type the command below to run the script to install Homebrew. The script will
+    guide you through installing Homebrew.
 
     ```
     $ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     ```
 
+3. ✔️__Check:__ that Homebrew is installed by running the command `brew -v`. It's ok if your Homebrew reports a more recent version number/date than what is shown below.
+
+    ```
+    $ brew -v
+    Homebrew 1.9.2
+    Homebrew/homebrew-core (git revision 9d10; last commit 2019-01-20)
+    ```
+
 #### Install the `arm-none-eabi` formula
 
-1.  "Tap" into the CS107e Homebrew packages repository using the command below.
-    This allows you to use the Homebrew formulas we have provided.
+Use Homebrew to install our custom package containing the cross-compile toolchain.
+
+1.  Run the command below to "tap" into the CS107e Homebrew package.
 
     ```
     $ brew tap cs107e/cs107e
     ```
 
-2.  Install the `arm-none-eabi` toolchain:
+2.  Install the `arm-none-eabi` formula from our package.
 
     ```
     $ brew install arm-none-eabi
     ```
 
-3.  Ensure it works by running the following command and checking that its
-    output is identical to what is displayed below:
+3.  ✔️__Check:__ the compiler is installed by running the following command and confirming the
+    output exactly matches what is shown below:
 
     ```
     $ arm-none-eabi-gcc --version
@@ -65,50 +74,62 @@ running. If you are already using Homebrew, skip to the next section.
     warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
     ```
 
-### USB-serial adapter and script installation
+### Install the CS2012 driver
 
-To use the USB-serial adapter to send information from and to your Pi, you'll need
-to install a few things. These instructions will guide you through those steps.
+The CP2012 driver is used by the USB-serial adapter to send information between your computer and the Pi.
 
-1.  Install the CP210x USB to UART Drivers
+1. The driver is available from Silicon Labs. Go to their [CP210x Downloads page](https://www.silabs.com/products/mcu/Pages/USBtoUARTBridgeVCPDrivers.aspx)
+and find the version for Macintosh OS (v5). Use the "Download VCP" link to download the zip file `Mac_OSX_VCP_Driver.zip`.  Double-click the zip file to uncompress into the dmg file `SiLabsUSBDriverDisk.dmg`. Open the dmg file to mount the volume named `Silicon Labs VCP Driver Install Disk`.
 
-    [Download Version
-    5](https://www.silabs.com/products/mcu/Pages/USBtoUARTBridgeVCPDrivers.aspx)
-    of the drivers. Clicking on the download link will download the file
-    `Mac_OSX_VCP_Driver.zip`. Opening this file will uncompress and you will
-    see a new file, `SiLabsUSBDriverDisk.dmg`. Opening the dmg file, will mount
-    the volume.
+2. On the mounted volume, find the installer file named
+    `Silicon Labs VCP Driver`. Open this file to launch the
+    installer and follow its instructions. You will need
+    to restart the computer to finish the install.
 
-    You should see a volume named "Silicon Labs VCP Driver Install Disk" in the
-    finder under devices. Going to that folder, you will see an installed named
-    "Silicon Labs VCP Driver." Opening that file will launch the
-    installer. Follow the instructions to complete the installation. You will need
-    to restart the computer after the installation.
+{% include callout.html type='warning'%}
+**NOTE**: Users running the latest MacOS releases (affects both High Sierra and Mojave) may see a message saying "System Extension Blocked" depending on your security settings. If you see this message, you must take additional action to enable the driver. Open `System Preferences` and choose the  `Security & Privacy` option. On the `General` tab, look for the line saying that the developer "Silicon Laboratories Inc" has been blocked from loading and click the `Allow` button to unblock it. After changing the setting, you must restart your computer for it to take effect.
+</div>
 
-    **NOTE**: Users of the latest macOS (known issue on High Sierra Version
-    10.13.1) may see a message saying "System Extension Blocked". Open the
-    `Security & Privacy` menu in `Settings`. Under the `General` tab, click the
-    `Allow` button next to the message indicating the blocked system extension.
+✔️__Check:__ that the driver is found and loadable by running the following command:
 
-2.  If you are in lab and got your kit, plug the USB breakout board
-    into a USB port on your laptop. Check whether the serial port
-    exists by looking for the device file:
+```
+$ kextfind -B -s SiLabs -report -b -loadable
+CFBundleIdentifier  Loadable
+com.silabs.driver.CP210xVCPDriver   yes
+```
+
+If you already have your kit, plug the USB-serial adapter
+    into a USB port on your laptop now. The LED on the the breakout board should light up and the driver should now be active.
+
+✔️__Check:__ that the driver is active by confirming the existence of the device file:
+
+```
+$ ls /dev/tty.SLAB_USBtoUART
+/dev/tty.SLAB_USBtoUART
+```
+
+<img src="../images/usb.breakout.board.JPG" width="300">
+
+### Install python dependencies
+The `rpi-install.py` script will be used to send programs from your computer to the Pi. This python script requires some python support packages to be installed. Using the [Miniconda](https://conda.io/miniconda.html) python package manager allows you to make those changes without disrupting your system's python installation.
+
+1.  If your system already has `wget`, skip to next step. Otherwise, use Homebrew to install `wget`.
 
     ```
-    $ ls /dev/tty.SLAB_USBtoUART
-    /dev/tty.SLAB_USBtoUART
+    $ wget -V
+    -bash: wget: command not found
+    $ brew install wget
+
+    $ wget -V
+    GNU Wget 1.20.1 built on darwin18.2.0.
     ```
-    ![USB breakout board](../images/usb.breakout.board.JPG)
 
-3.  Install Miniconda
-
-    Download and run the current Miniconda distribution on the command line:
+3.  Use the following two commands to download the Miniconda distribution and run its install script: 
 
     ```
     $ wget https://repo.continuum.io/miniconda/Miniconda3-latest-MacOSX-x86_64.sh
     $ bash Miniconda3-latest-MacOSX-x86_64.sh
     ```
-    (If wget doesn't work, type 'brew install wget')
 
     Follow the prompts to install Miniconda and add Python to your PATH:
 
@@ -135,7 +156,7 @@ to install a few things. These instructions will guide you through those steps.
     
     Finally, restart your Terminal application.
 
-4.  Install the following Python libraries:
+4.  Use `pip` (which was installed by Miniconda) to install these two Python packages:
 
     ```
     $ pip install pyserial xmodem
@@ -144,4 +165,22 @@ to install a few things. These instructions will guide you through those steps.
     If `pip install xmodem` complains `OSError: [Errno 1] Operation not
     permitted: '/System/Library/Frameworks/Python.framework/Versions/2.7/doc'`
     or similar, don't worry, the library has still installed correctly.
+
+5. ✔️__Check:__ that `rpi-install.py` runs and reports the correct version (1.0).
+
+    ```
+    $ rpi-install.py -h
+    usage: rpi-install.py [-h] [-v] [-q] [-t T] [-T T] [-p | -s] [port] file
+
+    This script sends a binary file to the Raspberry Pi bootloader. Version 1.0.
+    ```
+
+
+### Troubleshooting Mac install issues
+<a name="troubleshooting"></a>
+
+In the above instructions, we end each task with a ✔️__Check__ operation that confirms your readiness to move to the next step. If you re-do each of the check operations from above, you may be able to identify what part of your install was successful and where it went astray. If you hit a snag, ask on Piazza or come to office hours and we can help you out!
+
+
+
 
