@@ -15,13 +15,13 @@ __Before releasing lab1:__
 - [ ] Followup on any github issue from previous
 
 __To prep for lab1:__
+- [ ] Review tips recorded in private/staff_notes.md and private/answers.md
 - [ ] Confirm installation instructions are up-to-date
 - [ ] Piazza announcement for students to bring adapter if their computer doesn't have USB-A port A (e.g. recent Macs)
 - [ ] Confirm lab cabinet has SD card readers for various computers
 - [ ] Prepare some SD cards with bootloader in case students can't prep their own
 - [ ] Bring blank labels and pens -- students make name tag and decorate kit box
 - [ ] Create Google sheet with class roster to record lab attendance
-- [ ] Review tips recorded in private/staff_notes.md
 
 {% endcomment %}
 
