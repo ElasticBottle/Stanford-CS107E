@@ -2,7 +2,7 @@
 title: Guide to Bare Metal Programming with GCC
 ---
 
-*Written by Pat Hanrahan*
+*Written by Pat Hanrahan and Julie Zelenski*
 
 This guide gives a brief overview of what is unique about compiling C programs to execute in a bare-metal environment.
 
@@ -34,7 +34,7 @@ The other standard header files (`<stdio.h>`, `<string.h>` and so on) are not to
 In hosted mode, the `main` function must adhere to a rigid specification.
  Execution begins at the function named `main` and its signature must typically match:
 
-    int main(int argv, char *argv[], char *env[])
+    int main(int argv, char *argv[], char *env[])   // main in hosted env
 
 The compiler will issue warnings if you define `main` differently for a hosted program.
 
@@ -43,7 +43,7 @@ world, `main` can have any type signature and it is configurable whether it is `
 some other function that starts the program. A typical main signature for 
 a freestanding program is simply:
 
-    void main(void)
+    void main(void)                                // main in bare metal env
 
 The `-ffreestanding` option also directs the compiler to not assume that standard functions 
 have their usual definitions. This will prevent the compiler from making optimizations 

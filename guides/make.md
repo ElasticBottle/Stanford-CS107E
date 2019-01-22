@@ -1,26 +1,24 @@
 ---
 title: Guide to Make for ARM cross-development
+toc: true
 ---
 
-*Written for CS107E by Anna Zeng, edited by Michelle Park*
+*Written for CS107E by Anna Zeng, Michelle Park, and Julie Zelenski*
 
-Make is a tool that automates building executable programs;
-a makefile is a file that tells `make` what to do in order to build
-the programs you want. As you will see soon enough, they make life
-as a computer science student a whole lot smoother!
+### What is a Makefile?
 
-In this guide, we'll learn about using makefiles
-for cross-development on the ARM architecture.
-We will briefly review makefile syntax and usage.
-For additional information about makefiles,
-check out the 
-[CS107 Guide to Makefiles](https://web.stanford.edu/class/archive/cs/cs107/cs107.1186/guide/make.html)
-and other resources on the bottom of the page.
+Make is a tool that automates building programs;
+a Makefile describes the commands and options used in the build
+process. As you will see soon enough, using a Makefile saves you a lot of retyping and makes your life
+as a developer a whole lot smoother!
 
-Below is a simple makefile used
-to build a binary for the ARM processor.
-Many of our labs and assignments will include similar makefiles, 
-so you will soon become familiar with this makefile structure.
+This guide introduces Makefiles using examples of cross-development for the ARM architecture. For further information about Makefiles in general,
+check out the [other resources](#resources) on the bottom of this page.
+
+### An example Makefile
+The example makefile below builds the `blink.bin` program out of the `blink.c` source file.
+Our labs and assignments will include similar Makefiles, 
+so you will soon become familiar with the common structure.
 
 ```
     NAME = blink
@@ -51,110 +49,105 @@ so you will soon become familiar with this makefile structure.
 
 This Makefile may look a bit cryptic at first! Let's try breaking it down step by step.
 
-### Makefile Basics: Rules
+### Rules and recipes
 
-From lecture, we were introduced to Makefiles as an improvement on the `doit` script.
-A very simple Makefile could be written like this:
+In lecture, Pat whipped up a little [doit script](https://github.com/cs107e/cs107e.github.io/blob/master/lectures/ASM/code/blink/doit) to automate retyping the commands to rebuild a program. The `make` tool is just a fancier version of `doit`. A `Makefile` is a text file that describes the steps needed to build a program.
+Here is an example of a very simple hard-coded Makefile containing three targets `all`, `button.bin` and `clean`:
     
     all: button.bin
-    
+
     button.bin: button.c
         arm-none-eabi-gcc -Og -g -Wall -std=c99 -ffreestanding -c button.c -o button.o
-        arm-none-eabi-objcopy button.o -O binary button.bin
+        arm-none-eabi-gcc -nostdlib button.o -o button.elf
+        arm-none-eabi-objcopy button.elf -O binary button.bin
     
     clean: 
-        rm -f  *.bin *.o
+        rm -f *.bin *.o
 
-__Rules__ are written in the following way: "you require __dependencies__ on the right-hand-side
-to make our __target__ on the left-hand-side." Thus, in this makefile, the first line
-indicates: "you require `button.bin` to make `all`." In other words, to make `all`, we need to first make `button.bin`.
+__Rules__ are written in the following way: "the __dependencies__ on the right-hand-side are required
+to make the __target__ on the left-hand-side." Thus the first line
+indicates that `button.bin` is required to make `all`. In other words, to make `all`, we must first make `button.bin`.
     
     all: button.bin
 
-This brings us to the next rule, which tells us how to make `button.bin`. You may interpret this as
-requiring certain ingredients (dependencies on the right-hand-side)
-to create the thing you want (target on the left-hand-side).
+This brings us to the next rule for `button.bin`:
 
     button.bin: button.c
+        arm-none-eabi-gcc -Og -g -Wall -std=c99 -ffreestanding -c button.c -o button.o
+        arm-none-eabi-gcc -nostdlib button.o -o button.elf
+        arm-none-eabi-objcopy button.elf -O binary button.bin
 
-The text that immediately follows the rule, called the __recipe__ for the rule,
-are commands necessary to turn the ingredients (`button.c` in this case)
-into the final product (`button.bin` in this case).
-We also throw in a comment to explain the additional flags included with our call to `arm-none-eabi-gcc`.
+The ingredients (dependencies on the right-hand-side) are needed as the starting point to create the desired output (target on the left-hand-side). The indented lines that follow the rule are the commands that turn the ingredients into the final product. These steps are collectively called the __recipe__. Thus, in order to make `button.bin`, we start with our ingredient (`button.c`) and then step through the commands in the recipe.
 
-(Yes, comments in makefiles are denoted with `#`.)
+We could add a comment to explain the additional flags included when invoking the compiler. Lines starting with `#` are treated as comments.
 
-    # Here, we set compile flags for gcc:
+    # Compiler flags used:
     #  -std=c99        use the c99 standard
     #  -Og             generate optimized code designed for debugging
     #  -g              add debugging information
     #  -Wall           give warnings about *all* issues
     #  -ffreestanding  generate code assuming no operating system
 
-    button.bin: button.c
-        arm-none-eabi-gcc -std=c99 -Og -g -Wall -ffreestanding -c button.c -o button.o
-        arm-none-eabi-objcopy button.o -O binary button.bin
-
-The line below indicates what should happen when we `make clean`; the keyword `clean` tells Make to run the command below.
+The final rule indicates what should happen when we `make clean`; the recipe for the clean target removes any previous build products so the next compile starts fresh.
 
     clean: 
         rm -f *.bin *.o
 
+One particularly nifty thing `make` is that only rebuilds a target when one or more of the components it depends on has changed.  If you attempt to re-build a target which is already up-to-date, `make` will tell you:
 
-### Makefile Magic: Macros & More Rules
+    $ make
+    make: Nothing to be done for `all'.
 
-After copy-pasting and editing every Makefile each time a new program is created,
-we have finally decided that it's time to be even more efficient.
-After all, Makefiles are written for convenience!
+### Macros
+
+After repeatedly copy-pasting the example Makefile to create a version for a new program, you can see the value in structuring it to be more general-purpose. After all, Makefiles are written for convenience! 
 
 ```
     NAME = blink
-    ARM = arm-none-eabi
     CFLAGS  = -std=c99 -Og -g -Wall -ffreestanding
     LDFLAGS = -nostdlib
 
     all: $(NAME).bin
 
     $(NAME).bin: $(NAME).c
-        $(ARM)-gcc $(CFLAGS) -c $(NAME).c -o $(NAME).o
-        $(ARM)-gcc $(LDFLAGS) $(NAME).o -o $(NAME).elf
-        $(ARM)-objcopy $(NAME).elf -O binary $(NAME).bin
+        arm-none-eabi-gcc $(CFLAGS) -c $(NAME).c -o $(NAME).o
+        arm-none-eabi-gcc $(LDFLAGS) $(NAME).o -o $(NAME).elf
+        arm-none-eabi-objcopy $(NAME).elf -O binary $(NAME).bin
     
     clean: 
-        rm -f *.list *.bin *.o
+        rm -f *.bin *.o
 ```
-So we've just added three __macros__ up top. They're similar to variables
+We've added three __macros__ up top. They're similar to variables
 in that they replace instances of the macro throughout the file with their assigned text.
-Be sure to use the `$(<macro_name>)`
-syntax to access the value of the macro and allow string concatenation.
-(Did you see what we did there with the `ARM` macro?)
-Phew, this saves us a lot of visual space!
+The `$(macro_name)` syntax is used to access the value of the macro.
+This makes it easy to change the name for a new program.
 
-Now, let's generalize the rules so that they can be used to build a program from any assembly or C file, without hard-coding the rules to the filename `blink`.
+### Pattern rules
+We can further generalize our Makefile by using _pattern rules_ that can be used to operate on any source file, without hard-coding to a particular name.
 
 ```
-    # This general rule compiles a C program into an object file.
+    # This pattern rule compiles a C program into an object file.
     # filename.o is built from filename.c
     %.o: %.c
-        $(ARM)-gcc $(CFLAGS) -c $< -o $@
+        arm-none-eabi-gcc $(CFLAGS) -c $< -o $@
 
-    # This general rule converts assembly instructions into an object file.
+    # This pattern rule converts assembly instructions into an object file.
     # filename.o is built from filename.s
     %.o: %.s
-        $(ARM)-as $(CFLAGS) $< -o $@
+        arm-none-eabi-as $(CFLAGS) $< -o $@
 
-    # This general rule links an object file into an executable ELF file.
+    # This pattern rule links an object file into an executable ELF file.
     # filename.elf is built from filename.o
     %.elf: %.o
-        $(ARM)-gcc $(LDFLAGS) $< -o $@
+        arm-none-eabi-gcc $(LDFLAGS) $< -o $@
 
-    # This general rule extract binary from an ELF executable
+    # This pattern rule extract binary from an ELF executable
     # filename.bin is built from filename.elf
     %.bin: %.elf
-        $(ARM)-objcopy $< -O binary $@
+        arm-none-eabi-objcopy $< -O binary $@
 ```
 
-The symbols that begin with `$` and `%` are handled by `make` using the following interpretations:
+The symbols that begin with `$` and `%` in a pattern rule are handled by `make` using the following interpretations:
 
 * `%` is a wildcard symbol when used in a rule; `%.o` for example matches any file that ends with `.o`
 * `$@` refers to the left part of the rule, before the `:`
@@ -162,21 +155,25 @@ The symbols that begin with `$` and `%` are handled by `make` using the followin
 
 One more special variable `$^` refers to all elements in the right part of the rule, after the `:`, which is to say all of the dependencies.
 
-So, really, you can think of the makefile as a big cookbook that culminates in the program you ultimately wish to create.
-
-For convenience, we can also throw in another rule so we don't have to type in `rpi-install.py blink.bin`
-every time we want to run our program on the Pi.
+For further convenience, we can add a rule for the `install` target. We use this target to invoke the command `rpi-install.py blink.bin` to load our newly-built program on the Pi.
 
     # The install target uploads a freshly made binary image to rpi bootloader
     install: $(NAME).bin
         rpi-install.py $<
 
-Congratulations! You are now a makefile wizard!✨
+With that finishing touch, you have a general Makefile that can be easily re-purposed for any Raspberry Pi project. Now that you know that a Makefile is just a cookbook that culminates in the tasty program you wish to create, you're ready to add your favorite recipes and bon appetit!
 
-If you'd like to learn more, check out
-[a Makefile tutorial](http://www.opussoftware.com/tutorial/TutMakefile.htm),
-[another Makefile tutorial](http://www.delorie.com/djgpp/doc/ug/larger/makefiles.html),
-the
-[CS107 Guide to Makefiles](https://web.stanford.edu/class/archive/cs/cs107/cs107.1186/guide/make.html),
-and the
-[GNU Documentation about Compiler Options](https://gcc.gnu.org/onlinedocs/gcc-4.2.2/gcc/C-Dialect-Options.html).
+### Going further
+<a name="resources"></a>
+
+Some follow up references on Makefiles:
+- [a Makefile tutorial](http://www.opussoftware.com/tutorial/TutMakefile.htm)
+- [another Makefile tutorial](http://www.delorie.com/djgpp/doc/ug/larger/makefiles.html)
+- [CS107 Guide to Makefiles](https://web.stanford.edu/class/archive/cs/cs107/cs107.1186/guide/make.html)
+- An inexhaustible source of make wisdom is the full manual for [GNU make](https://www.gnu.org/software/make/manual/html_node/index.html) which will tell you more that you could ever want to know. 
+- Reading makefiles from real world projects is a good way to see make in action.  A search on [github.com](https://github.com/search?utf8=✓&q=makefile&type=) will turn up a treasure trove.
+
+
+__Q. Make is failing with a cryptic error about `Makefile: *** missing separator`. What gives?__
+
+A. In what is widely considered one of the dumber decisions in the history of computing, a Makefile distinguishes between tabs and spaces. The recipe lines for a target must begin with a tab and an equivalent number of spaces just won't do. Edit your makefile and replace those errant spaces with a tab to restore Makefile joy.
