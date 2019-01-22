@@ -5,7 +5,7 @@ CFLAGS = -Og -g -Wall -std=c99 -ffreestanding
 LDFLAGS = -nostdlib -e main
 LDLIBS =
 
-all: dice dice.bin
+all: ptrs ptrs.bin
 
 %.bin: %.elf
 	arm-none-eabi-objcopy $*.elf -O binary $@
@@ -19,14 +19,10 @@ all: dice dice.bin
 %.o: %.s
 	arm-none-eabi-as $< -o $@
 
-%.list: %.o dice
-	arm-none-eabi-objdump --no-show-raw-insn -d dice.o > dice.list
-	otool -v -t dice > dice.mac.list
-
 # This recipe is for a native executable on hosted environment
 # (not cross-compiled, not freestanding)
 %: %.c
 	clang -g -Wall $< -o $@
 
 clean: 
-	rm -rf *.list *.bin *.elf *.o dice a.out *.dSYM
+	rm -rf *.list *.bin *.elf *.o ptrs a.out *.dSYM
