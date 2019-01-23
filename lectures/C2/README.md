@@ -8,4 +8,5 @@ readings: |
       and 6 (skip material on the heap and memory management)
       or K&amp;R 5.1-5.4.
       C-strings are primitive compared to Java/C++ strings; take note of the manual effort required to use and pitfalls to avoid.
+    + The [screencast](http://cs107e.stanford.edu/screencast.mov) of Monday's night session. 
 ---
