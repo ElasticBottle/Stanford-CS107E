@@ -1,15 +1,15 @@
 ---
-title: Creating a reset button on your Pi
+title: Reseting Pi through rip-install.py
 ---
 
 *Written by Anna Zeng*
 
-To reboot the Pi without unplugging and replugging in the USB-serial adapter, we can make use of the reset pins on the Pi. In the photo below, look for the red circle around two holes labeled "RUN". Bridging those two holes will trigger a reset of the Pi.
+To reboot the Pi without unplugging and replugging in the USB-serial adapter, we can make use of the reset pins on the Pi. In the photo below, look for the red circle around two holes labeled "RUN". The "Run" hole is connected to the run pin on the processor. When the run pin is pulled low, the processor on the RPI board will reset. 
 
 [<img title="Things you will need" src="../images/reset.pin.ingredients.jpg" width="400">](../images/reset.pin.ingredients.jpg)
 
 
-This guide walks you through soldering a 2-pin header onto the RUN contacts and running jumpers from the header pins to a button (or, really, anything that can act like a hardware or software switch). Pressing the button will connect the pins, which then resets your Pi.
+This guide walks you through soldering a 2-pin header onto the RUN contacts and running jumpers from the header pins to a button or, better, a software switch controlled by rpi-install.py via the DTR pin on the USB-serial adapter. 
 
 Grab a 2-pin header (available in our lab cabinet) and place onto the RUN contacts as shown below:
 
@@ -29,10 +29,4 @@ Once the joint is complete, remove the soldering iron and the solder. Repeat for
 
 If you temporarily connect the two header pins (such as by using a jumper or a pair of metal tweezers), your Pi should restart. This is a good test to verify your solder connections.
 
-To make your reset switch a little more convenient to activate, you can connect the header pins to a button on your breadboard like so:
-
-[<img title="Button connected to reset" src="../images/reset.pin.button.jpg" width="400">](../images/reset.pin.button.jpg)
-
-Pushing the button now restarts the Pi -- cool!
-
-Rather than use a button, you can instead connect one of the header pins to the DTR pin on your USB-serial. If the USB-serial pulls the DTR pin to ground it will trigger your Pi to restart. Our `rpi-install.py` script pulls the DTR to ground before sending a program to the bootloader.
+Now, rather than using a jumper cable, you can instead connect the RUN pin on the Pi to the DTR pin on your USB-serial adapter. If the USB-serial pulls the DTR pin to ground it will trigger your Pi to restart. Our `rpi-install.py` script pulls the DTR to ground before sending a program to the bootloader! 
