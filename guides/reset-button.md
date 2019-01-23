@@ -2,7 +2,7 @@
 title: Reset the Pi through rpi-install.py
 ---
 
-*Written by Anna Zeng, updated by Jennifer Linn*
+*Written by Anna Zeng, updated by Jennifer Lin*
 
 To reboot the Pi without unplugging and replugging in the USB-serial adapter, we can make use of the reset pin on the Pi. In the photo below, look for the red circle around two holes labeled "RUN". The "RUN" hole is connected to the reset pin on the processor. When this pin is pulled low, the Raspberry Pi will reset. 
 
@@ -36,7 +36,7 @@ Once you have installed the header, if you attach two jumpers that connect the p
 #### Software-controlled reset
 To take it to the next level, you can connect the RUN pin on the Pi to the DTR pin on your USB-serial adapter. When the USB-serial pulls the DTR pin to ground, it will trigger your Pi to restart. Find the pin labeled "DTR" on your USB-serial adapter. Use a jumper to connect the DTR pin to the RUN pin on your Pi. (We used a white jumper in the photos below.)
 
-[<img title="DTR pin location" src="../images/reset.dtr.location.jpg" width="50%" style="display:inline">](../images/reset.dtr.locaion.jpg)[<img title="DTR pin to RUN pin connection" src="../images/reset.dtr.run.jpg" width="50%" style="float:right;">](../images/reset.dtr.run.jpg)
+[<img title="DTR pin location" src="../images/reset.dtr.location.jpg" width="50%" style="display:inline">](../images/reset.dtr.location.jpg)[<img title="DTR pin to RUN pin connection" src="../images/reset.dtr.run.jpg" width="50%" style="float:right;">](../images/reset.dtr.run.jpg)
 
 With this connection in place, pulling DTR to ground will now reset the Pi. When sending a program to the bootloader using our `rpi-install.py` script, the first thing the script does is pull DTR to ground. This means it will automatically reset the Pi so it is ready to receive the new program. No more USB plugging and unplugging for you -- super-cool!
 
