@@ -17,7 +17,7 @@ We prepared these guides on various topics relevant to CS107E students. Hope you
 - [Installing the development tools on a Mac](mac_toolchain)
 - [Installing a Ubuntu virtual machine on Windows](vmware)
 - [Using the console cable and bootloader](bootloader)
-- [Installing a reset button](reset-button)
+- [Reseting Pi through rpi-install.py](reset-button)
 
 ## Tools
 
