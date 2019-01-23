@@ -1,5 +1,5 @@
 ---
-title: Reseting Pi through rip-install.py
+title: Reseting Pi through rpi-install.py
 ---
 
 *Written by Anna Zeng*
