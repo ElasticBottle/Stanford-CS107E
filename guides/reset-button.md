@@ -29,4 +29,10 @@ Once the joint is complete, remove the soldering iron and the solder. Repeat for
 
 If you temporarily connect the two header pins (such as by using a jumper or a pair of metal tweezers), your Pi should restart. This is a good test to verify your solder connections.
 
-Now, rather than using a jumper cable, you can instead connect the RUN pin on the Pi to the DTR pin on your USB-serial adapter. If the USB-serial pulls the DTR pin to ground it will trigger your Pi to restart. Our `rpi-install.py` script pulls the DTR to ground before sending a program to the bootloader! 
+Now, rather than using a jumper cable, you can instead connect the RUN pin on the Pi to the DTR pin on your USB-serial adapter. If the USB-serial pulls the DTR pin to ground it will trigger your Pi to restart. You should find the DTR pin on the USB-serial adapter (the green cable in the following image): 
+[<img title="DTR pin location" src="../images/reset.dtr.location.jpg" width="400">](../images/reset.dtr.location.jpg)
+
+Connect the DTR pin with the RUN pin on the Pi (the green cable in the following imaage):
+[<img title="DTR pin to RUN pin connection" src="../images/reset.pin.dtr.jpg" width="400">](../images/reset.pin.dtr.jpg)
+
+Our `rpi-install.py` script pulls the DTR to ground before sending a program to the bootloader! 
