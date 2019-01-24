@@ -111,7 +111,9 @@ The loop will scan back and forth from the GPIO 20 LED to the GPIO 23 LED. Each 
 
 To receive full credit, the scanning pattern should look smooth. In particular, exactly one LED should be on at any given time, so it looks like the light is "moving" between LEDs. Make sure you handle the left and right 
 sides properly (that is, the leftmost and rightmost LED should be each 
-on for the same amount of time that a middle LED would be on). The scanning frequency should be around 1Hz (that is, the light should bounce back and force about once per sercond). 
+on for the same amount of time that a middle LED would be on). The scanning frequency should be around 1Hz (that is, the light should bounce back and force about once per second). 
+
+Click the photo below for a short action movie of our 8-LED Larson Scanner: [<img src="images/larson.png" width="300">](images/larson.mov)
 
 Writing clean, readable assembly code is a challenge. Commenting is essential!  Be sure to choose good label names and add named constants using `.equ` to aid readability. You should write the program without any function calls (because we haven't taught you how to create and call functions in assembly language yet). Although you cannot use functions, you can still strive for simplicity in your design. When you need the same/similar code, please don't resort to duplicating code via copy and paste, instead consider how to structure your code to enable unification and code reuse. A rule of thumb for style is that if your code is well-designed, it should take no additional code to extend it from 4 to 8 LEDs, ideally just changing a constant. If there is a lot of code duplication in your solution, that's a bad sign. We will be grading your code quality and hope to see your best work in what you submit!
 
