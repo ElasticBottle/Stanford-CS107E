@@ -228,6 +228,9 @@ so the clock is running at the right rate.
 
 Note that the clock time is counting elapsed time since the clock program started, which is not quite the same value as the system tick count.  Clock time and the system tick count change at the same rate, but start at different values. Your program will need to implement this logic.
 
+Click the photo below for a short video of our Raspberry Pi clock counting from 51 to 53 seconds:
+[<img src="images/clock.png" width="300">](images/clock.mov)
+
 __Mission accomplished!__ Follow our [submit instructions](#submit) and it's time to celebrate. You have wired up a complex breadboard circuit, written two reusable library modules and a clock application, as well as working up a methodology for thoroughly testing your code. Be sure show off your spiffy new clock to your followers (but probably not such a good idea to try to get on an airplane with it...).
 
 ### Extension: Set time
