@@ -6,17 +6,17 @@ CFLAGS = -g -Wall -Og -std=c99 -ffreestanding
 LDFLAGS = -nostdlib -T memmap
 LDLIBS = 
 
-all : simple.bin framed.bin simple.list framed.list
+all : example.bin framed.bin example.list framed.list
 
 %.bin: %.elf
 	arm-none-eabi-objcopy $< -O binary $@
 
-%.elf: %.o start.o cstart.o abort.o
+%.elf: %.o start.o cstart.o
 	arm-none-eabi-gcc $(LDFLAGS) $^ $(LDLIBS) -o $@
 
 framed.o: CFLAGS += -mapcs-frame -fno-omit-frame-pointer
 
-framed.o: simple.c
+framed.o: example.c
 	arm-none-eabi-gcc $(CFLAGS) -c $< -o $@	
 
 %.o: %.c
