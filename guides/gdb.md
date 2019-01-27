@@ -210,7 +210,11 @@ Another important issue to be aware of is that the default state of registers an
         return result;
     }
 
-`result` is used uninitialized. If the variable is stored on the stack in a region of memory as yet untouched, the initial contents would be a garbage value when testing on the Pi causing the function result to be unpredictable. You move to the gdb simulator and suddenly the function returns the correct answer, because the intended but missing initialization to zero is being supplied by the simulator. In either case, the program is buggy, but the difference in environment changes the observed effect of the bug.
+`result` is used uninitialized. If the stack variable is stored in a region of memory as-yet-untouched, its initial contents are garbage. When running on the Pi, you observe the value returned by the function to be unpredictable due to the missing initialization. 
+
+You now try running the same program under the gdb simulator and the first call to the function returns the correct answer because the intended initialization to zero is being supplied by the simulator. The memory contents in the simulator are retained between runs, so if you run the program again without having left the simulator, this time `result` is "initialized" to its last value and function now returns an incorrect result.
+
+Arg! These conflicting observations can be mystifying and you may start to think you are losing your mind. The difference in environment is changing the observed effect of the bug. In every case, the program is buggy; the fact that it surfaces differently is further evidence of its errant ways. Once you correct the flaw, it should run correctly in all contexts, but it may take some effect to tease out the root cause with all these confounding effects.
 
 Despite these limitations, gdb simulation mode can be a powerful ally when you are dealing with difficult bugs. Learn to make good use of this tool, but do stay mindful of the ways in which it is not an exact match to running on the actual Raspberry Pi.
 
