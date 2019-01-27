@@ -1,10 +1,10 @@
 ---
-title: Reset the Pi through rpi-install.py
+title: Reset the Pi without unplugging
 ---
 
 *Written by Anna Zeng, updated by Jennifer Lin*
 
-To reboot the Pi without unplugging and replugging in the USB-serial adapter, we can make use of the reset pin on the Pi. In the photo below, look for the red circle around two holes labeled "RUN". The "RUN" hole is connected to the reset pin on the processor. When this pin is pulled low, the Raspberry Pi will reset. 
+To reboot the Pi without unplugging and replugging in the USB-serial adapter, we can make use of the reset pin on the Pi. In the photo below, look for the red circle around two holes labeled "RUN". The "RUN" hole is connected to the reset pin on the processor. When this pin is temporarily pulled low, the Raspberry Pi will reset. 
 
 [<img title="Things you will need" src="../images/reset.pin.ingredients.jpg" width="400">](../images/reset.pin.ingredients.jpg)
 
@@ -39,5 +39,7 @@ To take it to the next level, you can connect the RUN pin on the Pi to the DTR p
 [<img title="DTR pin location" src="../images/reset.dtr.location.jpg" width="50%" style="display:inline">](../images/reset.dtr.location.jpg)[<img title="DTR pin to RUN pin connection" src="../images/reset.dtr.run.jpg" width="50%" style="float:right;">](../images/reset.dtr.run.jpg)
 
 With this connection in place, pulling DTR to ground will now reset the Pi. When sending a program to the bootloader using our `rpi-install.py` script, the first thing the script does is pull DTR to ground. This means it will automatically reset the Pi so it is ready to receive the new program. No more USB plugging and unplugging for you -- super-cool!
+
+__Note to users of the Windows VM__: Using your reset header as a hardware switch will work, but the VM does not support software reset via DTR. We are looking into it and will let you know if we come up with a workaround. (January 2019)
 
 

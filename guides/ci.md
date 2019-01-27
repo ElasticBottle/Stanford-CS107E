@@ -32,7 +32,7 @@ solution.
 
 You can also click the icon next to a commit to see the results of a Travis
 build. This icon will show a red "x" for a build failure, a yellow circle for a
-build in progress, and a green checkmark for a succesful build.
+build in progress, and a green checkmark for a successful build.
 <img title="Pull request page." src="/guides/images/travis-github-commit-icon.png" width="800">
 
 The build page shows the result of testing one particular commit you pushed.

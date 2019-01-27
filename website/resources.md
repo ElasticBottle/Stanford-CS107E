@@ -1,46 +1,10 @@
 ---
 permalink: /resources/
-title: Other resources
+title: Informational resources
 toc: true
 ---
 
-Here we have gathered links to various online demos and external articles that CS107E students have found useful in the past. Check them out!
-
-## Demos
-
-* [Raspberry Pi GPIO Pinout](https://pinout.xyz/) website. Nice way to see alternate
-  functions by clicking each pin. Also, click Ground and you see all the
-  other Ground pins.
-
-* An interactive demo of how the
-[ARM assembler's immediate value encoder](https://alisdair.mcdiarmid.org/arm-immediate-value-encoding/#play-with-it) works.
-
-* [VisUAL](http://salmanarif.bitbucket.io/visual/index.html)
-emulates the ARM instruction set and allows you to step through an assembly program.
-Pat used this tool in lecture.
-
-  *Note that VisUAL uses a
-  [slightly different ARM assembly syntax](http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.dui0773a/chr1383143764305.html)
-  from the GNU syntax we use in the course -- for example, you don't
-  put colons after labels in VisUAL.*
-
-* Matt Godbolt's [Compiler Explorer](http://gcc.godbolt.org/) lets you
-  quickly see how C source code maps to compiled assembly. (Be sure to
-  set the compiler "ARM gcc 4.8.2", which is close to what we use
-  for the course.)
-
-* [cdecl.org](http://cdecl.org/) converts "C gibberish" declarations to and from
-English.
-
-* [Repl](https://repl.it/languages/c) can run C code for you.
-This can be handy when you need to quickly execute a small passage of C to see what it does.
-
-* This virtual [Seven Segment Display](http://www.uize.com/examples/seven-segment-display.html)
-will come in handy in a future lab. This demo teaches you to link bits to characters on a seven-segment-display.
-
-* A [demonstration](http://pgbovine.net/rosetta/c-demo.html) of nifty pointer use to reverse a string.
-
-## Informational Resources
+Here are links to various external resources with information about the Raspberry Pi, ARM assembly, C, and more.
 
 ### Raspberry Pi
 
@@ -69,12 +33,12 @@ The following [excerpt](../readings/armisa.pdf)
 describes just the instructions.
 
 
-* ARM System-on-Chip Architecture (2nd Edition), Steve Furber.
+* ARM System-on-Chip Architecture (2nd Edition), Steve Furber. <https://www.amazon.com/dp/0201675196/>
 Steve Furber was the principal design of the first ARM processor.
 The diagrams of the ARM architecture are based on the diagrams
 in Chapter 4: ARM Organization and Implementation.
 
-* ARM System Developer's Guide: Designing and Optimizing System Software (The Morgan Kaufmann Series in Computer Architecture and Design), Andrew Sloss, Dominic Symes, and Chris Wright, 2004. This book is a bit dated, but still provides an excellent overview of low-level ARM programming.
+* ARM System Developer's Guide: Designing and Optimizing System Software, Andrew Sloss, Dominic Symes, and Chris Wright, 2004. <https://www.amazon.com/dp/1558608745/> This book is a bit dated, but still provides an excellent overview of low-level ARM programming. 
 
 * Excellent [slides](http://twins.ee.nctu.edu.tw/courses/ip_core_02/handout_pdf/Chapter_2.pdf) by Prof. Yen at NCTU on the ARM processor core and instruction sets.
 
@@ -84,7 +48,7 @@ in Chapter 4: ARM Organization and Implementation.
   [Introduction to ARM Assembly Language](http://www.toves.org/books/arm/)
   is highly recommended starting point.
 
-  *Like VisUAL above, Burch's introduction uses the
+  *Note: Burch's document uses the
   [older ARM syntax](http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.dui0773a/chr1383143764305.html)
   instead of the GNU syntax we use.*
 

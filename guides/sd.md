@@ -30,7 +30,7 @@ show up in your finder along with other mounted file systems.
 
 Verify that the card is mounted.
 
-    % ls /Volumes
+    $ ls /Volumes
     Macintosh HD    NO NAME
 
 By default, the volume is named `NO NAME`.
@@ -43,7 +43,7 @@ repository](https://github.com/cs107e/cs107e.github.io/tree/master/firmware).
 
 There should be 4 files.
 
-    % ls firmware
+    $ ls firmware
     blink-actled.bin   bootcode.bin     bootloader.bin  start.elf     
 
 `bootcode.bin` is the bootloader for the GPU and `start.elf` is the GPU start up code. Normally, `kernel.img` is
@@ -65,8 +65,6 @@ Copy these files onto your SD Card.
 ### Eject your SD card
 
 On the Mac, go to the finder and click on the Eject icon next to the file name.
-
-On linux, ...
 
 ### Troubleshooting
 

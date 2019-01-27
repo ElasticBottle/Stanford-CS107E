@@ -5,6 +5,9 @@ kramdown:
 permalink: pretty
 exclude:
   - /cs107e/
+  - /firmware/
+  - /hardware/
+  - /stickers/
 include:
   - _assets
 defaults:
@@ -16,4 +19,6 @@ defaults:
       layout: "default"
 plugins:
   - jekyll-sitemap
-
+error_mode: warn
+strict_variables: true
+strict_filters: true

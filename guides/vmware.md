@@ -25,7 +25,7 @@ To get it running, you'll need to do 4 things:
    and scroll down to
    *SOFTWARE FOR ACADEMIC/RESEARCH PURPOSES* and follow the
    Software Licensing Store link. Scroll down to VMware and
-   click on VMware Workstation 14. This is a personal, not a lab
+   click on VMware Workstation 14. This is a personal, not a lab,
    download. Use your own SUNet ID. When you check out, the
    checkout page will give you a download button as well as
    a license key to use. Copy the license number into a text file
