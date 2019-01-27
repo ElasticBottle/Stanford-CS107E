@@ -18,11 +18,11 @@ The Raspberry Pi A+ uses a Broadcom BCM2835 chip.
 Inside the chip is an ARM1176JFZ-S processor 
 which is based on the ARMv6 architecture.
 
-* [Broadcom BCM2835 Peripherals Documentation](../readings/BCM2835-ARM-Peripherals.pdf )
+* The peripherals are documented in [Broadcom BCM2835 ARM Peripherals](../readings/BCM2835-ARM-Peripherals.pdf).
 
-  * [Errata](http://elinux.org/BCM2835_datasheet_errata)
+  * __Important:__ [Errata](http://elinux.org/BCM2835_datasheet_errata) for the above datasheet. Some of the issues are simple typos but there are places where the text is wrong or backwards, so keep the errata at hand to reconcile those.
 
-  * [GPIO Pad Control](http://www.scribd.com/doc/101830961/GPIO-Pads-Control2).
+  * [GPIO Pad Control](http://www.scribd.com/doc/101830961/GPIO-Pads-Control2)
 
 * The ARM1176JFZ-S processor is documented in the 
 [Technical Reference Manual](http://infocenter.arm.com/help/topic/com.arm.doc.ddi0301h/DDI0301H_arm1176jzfs_r0p7_trm.pdf).  
