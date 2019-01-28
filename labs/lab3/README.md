@@ -50,7 +50,7 @@ bin/        etc/       final_proj_ref/   include/    lib/       src/
    If the above commands do not work as shown, re-do the part of Step 0 of [Assignment 0](/assignments/assign0/) that sets up the directory. If you have trouble, please ask a staff member for help. A properly configured `CS107E` directory is necessary for this lab and all subsequent labs and assignments.
 
 ## Lab Exercises
-Get some snack and find a buddy. Share stories of your adventures writing the clock assignment. Pull up the [check in questions](checkin). You're ready to go!
+Start by filling your Creativity Spot on the [CS107 Wall of Fame](https://piazza.com/class/jqfaue5sl31ok?cid=49). Now get some snack and find a buddy. Share stories of your adventures writing the clock assignment. Pull up the [check in questions](checkin). You're ready to go!
 
 ### 1. Debugging with gdb
 
