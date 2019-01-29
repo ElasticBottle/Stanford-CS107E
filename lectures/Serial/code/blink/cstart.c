@@ -5,8 +5,8 @@ extern void main(void);
 
 // The C function _cstart is called from the assembly in start.s
 // _cstart zeroes out the BSS section and then calls main.
-// After main() completes, turns on the green ACT LED as
-// a sign of successful execution.
+// After return from main(), turns on the green ACT LED as
+// a sign of successful completion.
 void _cstart(void) 
 {
     int *bss = &__bss_start__;
@@ -21,6 +21,6 @@ void _cstart(void)
     // Turn on the green ACT LED (GPIO 47)
     volatile unsigned int *GPIO_FSEL4  = (unsigned int *)0x20200010;
     volatile unsigned int *GPIO_SET1   = (unsigned int *)0x20200020;
-    *GPIO_FSEL4 = (1 << ((47%10)*3));
-    *GPIO_SET1 =  (1 << (47%32));
+    *GPIO_FSEL4 = (*GPIO_FSEL4 & ~(7 << 21)) | (1 << 21);
+    *GPIO_SET1 = 1 << 15;
 }
