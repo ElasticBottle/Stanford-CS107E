@@ -166,7 +166,7 @@ When debugging a function, a common workflow is to
   1. Recursively apply rules 2-4 until you find the bug.
 
 #### 1b) Use `gdb` to observe the stack
-If you have not already, please read our supplemental information on the ["Runtime stack"](/stack/).
+If you have not already, please read our supplemental information on the ["Runtime stack"](stack/).
 
 There are gdb commands that allow you to drop down to the assembly instructions and view the current contents of the registers and memory.  Let's try them out!
 
