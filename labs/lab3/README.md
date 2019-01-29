@@ -166,7 +166,7 @@ When debugging a function, a common workflow is to
   1. Recursively apply rules 2-4 until you find the bug.
 
 #### 1b) Use `gdb` to observe the stack
-If you have not already, please read our supplemental information on the ["Runtime stack"](stack/).
+If you have not already, please read our supplemental information on the ["Runtime stack"](/stack/).
 
 There are gdb commands that allow you to drop down to the assembly instructions and view the current contents of the registers and memory.  Let's try them out!
 
@@ -582,6 +582,9 @@ tests pass and you earn your green light merit badge.
 Next up is further practice using gdb in simulation mode using the program from the previous exercise. Start gdb on `cstrings.elf` and use the gdb commands step/next/print to trace through a run
 of your program executing correctly.
 
+#### 4a) Debug strlen
+
+
 Now edit `strlen` to intentionally 
 plant a bug, such as changing it to return `i + 1` instead of `i`. This will cause the asserts in `test_strlen` to fail. Rebuild the program and run 
 under the debugger. The first thing to observe is that there is no flashing red light (remember the simulator is not talking to your Pi nor its peripherals). The program appears to be stuck. Use control-C to interrupt the program and return control to the debugger. Use `backtrace` to see where the program is stopped. What was the program doing before you stopped it?  Learn from this information how to recognize a failed assert in the debugger.  
@@ -590,6 +593,8 @@ Restore `strlen` to its correct implementation, rebuild and run under the debugg
 
 Both `strlen` and `strcpy` have been shown to work correctly for valid calls. We are now going to do a little exploration into what happens 
 for calls that are not so kosher. 
+
+#### 4b) Debug bogus_strlen_calls
 
 Review the code in the aptly-named `bogus_strlen_calls` function. 
 Get together with your tablemates and look at the three "bogus" calls.
@@ -606,6 +611,8 @@ Uncomment the call to `stress_test_strlen` in `main()`. Rebuild the program and 
 bad calls. Is the result what you anticipated?  What have you learned about the
 observed consequences of reading uninitialized or invalid memory?
 
+#### 4c) Debug sketchy_strcpy_call
+
 Next, review the code for the `sketchy_strcpy_call` function, which attempts to copy a string to an improper destination.
 We previously saw that `strlen` was able carry on and silently
 blunder through __reading__ from an improper memory location. What is
@@ -620,6 +627,20 @@ too much data to a too-small stack buffer overwrites adjacent data
 in the stack frame. What is the critical data stored in the stack that has
 been destroyed here? At what point in the execution does the
 overwritten data result in a bad consequence? 
+
+#### 4d) Differences under simulation
+It is important to be aware of the possible discrepancies you may observe when comparing the behavior of a program running on the Pi versus running under the gdb simulator. Read the section titled [Differences due to simulation](/guides/gdb/#differences-due-to-simulation) in our gdb guide to be introduced to some issues you may run into.
+
+Change to the directory `lab3/code/simulator` directory and review the program in the `buggy.c` file  Trace through the operation of the program. What do you predict will be printed as output?
+
+Build the program using `make`. You should get warnings from the compiler about the use of uninitialized variables.
+
+Use `make install` to run the program on the Raspberry Pi. Does the output printed by the program match what you predicted earlier?  Use `make install` to run the program again. Is the output printed the same as the previous run?
+
+Now use gdb on the `buggy.elf` program. This directory has a `.gdbinit` configuration file that will automatically issue the `target` and `load` commands once gdb is started so you don't have to do so manually. Run the program under gdb. When running under the simulator, the program does have the same output that you observed when running on the Pi. Why is it different?
+
+Use control-C to stop the program (remember that after main() finishes, our programs at `hang`). Without exiting gdb, use `run` to run the program for a second time. How does this output compare to the previous run? Run a few more times in gdb until you understand the pattern.
+
 
 ## Check in with TA
 
