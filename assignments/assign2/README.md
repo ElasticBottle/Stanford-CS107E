@@ -180,7 +180,7 @@ Create bit patterns for all the digits 0, 1, 2, 3, 4, 5, 6, 7, 8, 9,
 A, B, C, D, E, F. You won't be displaying A-F for this assignment, but they
 may be useful in the future. 
 
-Test this part by adding code to the `main()` function of `apps/clock.c` to display a single digit. Verify that your bit patterns are correct by displaying each digit value from `0` to `9`. 
+Add code to the `main()` function of `apps/clock.c` to display a single digit. Verify that your bit patterns are correct by displaying each digit value from `0` to `9`.  Use `make install` to build and run your clock application.
 
 #### 4. Implement timer module
 
@@ -201,7 +201,7 @@ For this module, note that we only care about the lower
 not bus addresses (0x7E... for peripherals), so you'll need to
 change the 0x7E... prefix in any peripheral address to 0x20.
 
-Uncomment the call `test_timer()` in `tests/test_gpio_timer.c` and re-run the test program to verify these tests succeed. Consider what additional tests are needed for the timer module (there may not be much; it is a pretty simple module). Once both modules are passing all of your tests, you're ready to tackle the rest of the clock application.
+Uncomment the call `test_timer()` in `tests/test_gpio_timer.c`. Use `make test` to build and re-run the test program. Verify the given tests succeed and then consider what additional tests are needed for the timer module (there may not be much; it is a pretty simple module). Once both the gpio and timer modules are passing all of your tests, you're ready to tackle the rest of the clock application.
 
 #### 5. Write display refresh loop
 
