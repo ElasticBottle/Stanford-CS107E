@@ -92,7 +92,7 @@ Start address 0x8000
 Transfer rate: 3136 bits in <1 sec.
 ```
 
-The commands below set a *breakpoint* at the start of `main` and then start executing the program:
+Use the commands below to set a *breakpoint* on the `main` function and start executing the program:
 
 ```
 (gdb) break main
@@ -131,7 +131,7 @@ you're in, while `step` executes the next line of code,
 which may be in a different function.
 
 Use `run` to restart the program
-and then use `step` to when you hit the breakpoint.
+and then use `step` you hit the breakpoint.
 
 ```
 (gdb) run
@@ -147,13 +147,27 @@ diff (a=a@entry=33, b=b@entry=107) at simple.c:27
 27      return abs(a - b);
 ```
 
-You are now stopped at the first line of `diff`.   If you `step` from here, you will enter in the call to the `abs` function.
+The program is now stopped at the first line of `diff`.   When you `step`, you enter the call to the `abs` function.
 
 ```
 (gdb) step
 abs (v=v@entry=-74) at simple.c:5
 5   }
 ```
+
+Use `continue` to resume executing the program from here.  Wait a moment, and then type `Ctrl-c` to interrupt the running program and return control to gdb. Use the `backtrace` command to see where the program was executing when it was interrupted (ignore the warnings about frame issues):
+
+```^C
+Program received signal SIGINT, Interrupt.
+0x0000800c in hang ()
+(gdb) backtrace
+Python Exception <type 'exceptions.ImportError'> No module named frames: 
+#0  0x0000800c in hang ()
+#1  0x0000800c in _start ()
+Backtrace stopped: previous frame identical to this frame (corrupt stack?)
+```
+
+The above information tells you that the program is stopped in `hang` which is called from `_start`. Review the code in `start.s` and `cstart.c` to remind yourself of what happens in a C program before and after `main()`. If currently in `hang`, the program has finished and is in the final "holding pattern". This is the normal behavior for a C program that has successfully run to completion. Learn to recognize how this situation is presented in the debugger, you hope to be seeing a lot of successful program completion!
 
 When debugging a function, a common workflow is to
 
@@ -461,14 +475,14 @@ at the baud rate of 115200.
 The screen should be cleared and the cursor positioned
 in the upper left hand corner.
 Type in some characters.  What happens?
-What happens if you push return on your keyboard?
+What happens if you type return on your keyboard?
 
-To exit screen, type `Ctrl-A` followed by `k`.
+To exit screen, type `Ctrl-a` followed by `k`.
 You should see the following message.
 
     Really kill this window? [y/n]
 
-Typing `y` should return you to the shell.
+Typing `y` returns to the shell.
 
     [screen is terminating]
 
@@ -482,9 +496,9 @@ Send the program to the Pi with the command `rpi-install.py -s echo.bin`.  (Invo
 sending the program.) Any characters you now type should be echoed back to your
 terminal.
 
-Unplug the jumper from the RX pin on the USB-serial. What changes?
+As you continue typing, have your partner gently unplug the jumper from the RX pin on your USB-serial and then re-connect it. What changes? Why does that happen?
 
-Use `Ctrl-A` `k` to exit `screen`.
+Use `Ctrl-a` `k` to exit `screen`.
 
 #### 2c) UART test
 
@@ -516,7 +530,7 @@ in one go.
     hello, laptop
     hello, laptop
 
-This will print forever until you reset the Pi. Use `Ctrl-A` `k` to exit `screen`.
+This will print forever until you reset the Pi. Use `Ctrl-a` `k` to exit `screen`.
 
 #### 2d) printf
 
@@ -526,7 +540,7 @@ directory.
 This program repeatedly prints "hello, laptop" using `printf`.
 In Assignment 3, you will implement your own version of `printf`.
 
-Once you have a working `printf` (or the solution version we provide in `libpi.a`), you can use it to report your program state and super-charge your debugging. What a big improvement over trying to communicate everything via blinking LEDs!
+Once you have a working `printf`, you can use it to report your program state and super-charge your debugging. What a big improvement over trying to communicate everything via blinking LEDs!
 
 For example, you can call `printf("value: %d\n", 10);` 
 to print the number 10 or `printf("value: %c\n", 'a');` 
@@ -585,16 +599,59 @@ of your program executing correctly.
 #### 4a) Debug strlen
 
 
-Now edit `strlen` to intentionally 
-plant a bug, such as changing it to return `i + 1` instead of `i`. This will cause the asserts in `test_strlen` to fail. Rebuild the program and run 
-under the debugger. The first thing to observe is that there is no flashing red light (remember the simulator is not talking to your Pi nor its peripherals). The program appears to be stuck. Use control-C to interrupt the program and return control to the debugger. Use `backtrace` to see where the program is stopped. What was the program doing before you stopped it?  Learn from this information how to recognize a failed assert in the debugger.  
+Edit `strlen` to intentionally 
+plant a bug, such as changing it to return `i + 1` instead of `i`.  This buggy program is expected to fail the tests in `test_strlen`. Use `make install` to build the program and run on the Pi. You should see the flashing red LED that indicates a failed assert.
 
-Restore `strlen` to its correct implementation, rebuild and run under the debugger. All tests should pass. As expected, there is no green light from the simulator, and once again the program appears stuck. Use control-C and `backtrace` to see what's going on. Learn from this information how to recognize successful program completion in the debugger. 
+Let's learn how a failed assert is presented under the debugger. Get the buggy program under gdb and `run` it. First note that there is no flashing red light. The simulator is not talking to your Pi nor its peripherals. Your Pi doesn't even need to be connected! 
+
+What do you see in gdb? Not much; the program appears to be stuck. Type `Ctrl-c` to interrupt the program and use `backtrace` to see where the program is stopped.
+
+```^C
+Program received signal SIGINT, Interrupt.
+timer_get_ticks () at timer.c:10
+10  timer.c: No such file or directory.
+(gdb) backtrace
+Python Exception <type 'exceptions.ImportError'> No module named frames: 
+#0  timer_get_ticks () at timer.c:10
+#1  0x000084b0 in timer_delay_us (usecs=usecs@entry=200000) at timer.c:17
+#2  0x000084f8 in timer_delay_ms (msecs=msecs@entry=200) at timer.c:22
+#3  0x0000841c in pi_abort () at pi.c:40
+#4  0x00008078 in test_strlen () at cstrings.c:28
+#5  0x0000822c in main () at cstrings.c:78
+```
+
+A-ha! When an assert fails, it calls `pi_abort` to flash the red light. The above backtrace tells you that the program is waiting in the delay loop within `pi_abort`.  Given the simulator does not emulate the timer or GPIO peripherals, `pi_abort` behaves as a no-action infinite loop. By looking further into the backtrace, we learn that the failed assertion occurred on line 28 of the `cstrings.c` file. Use `list` to see that code now:
+
+```
+(gdb) list cstrings.c:28
+23 
+24 void test_strlen(void)
+25 {
+26     char *fruit = "watermelon";
+27 
+28     assert(strlen("green") == 5);
+29     assert(strlen("") ==  0);
+30     assert(strlen(fruit) == 2 + strlen(fruit + 2));
+31 }
+32 
+```
+
+This allows us to pinpoint exactly which assert failed (rather than have to comment-in-and-out tests one by one to find it). Hooray for gdb!
+
+Restore `strlen` to its correct implementation, rebuild and run again under the debugger. All tests should pass. As expected, there is no green light from the simulator, but once again the program appears stuck. Type `Ctrl-c` to interrupt the program and use  `backtrace` to see what's going on. What evidence confirms that the program successfully ran to completion? 
+
+{% include callout.html type="warning" %}
+__Tip__: Any time your program is executing, typing `Ctrl-c` will interrupt the program and return control to the debugger. `backtrace` will show where the program was executing when it was interrupted. 
+
+Learn to recognize these two common situations: 
++ a successful run to completion that is waiting in `hang`
++ a failed assert in `pi_abort` valiantly flashing a non-existent red LED
+</div>
+
+#### 4b) Debug bogus_strlen_calls
 
 Both `strlen` and `strcpy` have been shown to work correctly for valid calls. We are now going to do a little exploration into what happens 
 for calls that are not so kosher. 
-
-#### 4b) Debug bogus_strlen_calls
 
 Review the code in the aptly-named `bogus_strlen_calls` function. 
 Get together with your tablemates and look at the three "bogus" calls.
@@ -608,7 +665,7 @@ to a single character. Furthermore the address might not have a char pointee  at
 
 Uncomment the call to `stress_test_strlen` in `main()`. Rebuild the program and run it under gdb. Single step through the call to
 `bogus_strlen_calls` and print the value returned from each of the
-bad calls. Is the result what you anticipated?  What have you learned about the
+bad calls. Is the result what you anticipated?  What did you learn from this about the
 observed consequences of reading uninitialized or invalid memory?
 
 #### 4c) Debug sketchy_strcpy_call
@@ -629,7 +686,7 @@ been destroyed here? At what point in the execution does the
 overwritten data result in a bad consequence? 
 
 #### 4d) Differences under simulation
-It is important to be aware of the possible discrepancies you may observe when comparing the behavior of a program running on the Pi versus running under the gdb simulator. Read the section titled [Differences due to simulation](/guides/gdb/#differences-due-to-simulation) in our gdb guide to be introduced to some issues you may run into.
+It is important to be aware of the discrepancies you may observe when comparing the behavior of a program running on the Pi versus running under the gdb simulator. Read the section titled [Differences due to simulation](/guides/gdb/#differences-due-to-simulation) in our gdb guide to be introduced to some of the issues you may run into.
 
 Change to the directory `lab3/code/simulator` directory and review the program in the `buggy.c` file  Trace through the operation of the program. What do you predict will be printed as output?
 
@@ -639,8 +696,7 @@ Use `make install` to run the program on the Raspberry Pi. Does the output print
 
 Now use gdb on the `buggy.elf` program. This directory has a `.gdbinit` configuration file that will automatically issue the `target` and `load` commands once gdb is started so you don't have to do so manually. Run the program under gdb. When running under the simulator, the program does have the same output that you observed when running on the Pi. Why is it different?
 
-Use control-C to stop the program (remember that after main() finishes, our programs at `hang`). Without exiting gdb, use `run` to run the program for a second time. How does this output compare to the previous run? Run a few more times in gdb until you understand the pattern.
-
+Type `Ctrl-c` to stop the program. Without exiting gdb, use `run` to run the program for a second time. How does this output compare to the previous run? Run a few more times in gdb until you understand the pattern. What have you learned about how the simulator handles the state of memory between runs? How does this compare to what happens to the state of memory when you reset the actual Pi and re-run the program?
 
 ## Check in with TA
 
