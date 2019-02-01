@@ -110,7 +110,7 @@ If you have your sights set on earning an __A__ course grade, aim to:
     - Basic requirements are complete and fully-functional for all assignments
     - In addition, 3 or more assignment extensions successfully completed
     - Earn the full system bonus for using all your own code on the last assignment
-    - Code quality grades average toward the [+] bucket.  
+    - Code quality (style and tests) at/above the [ok] bucket
 + Outstanding final project, excellent execution
 
 For a __B__ course grade, you need __solid__ work through the quarter:
@@ -118,7 +118,7 @@ For a __B__ course grade, you need __solid__ work through the quarter:
 + Assignments
     - Basic requirements are complete and mostly fully-functional for all assignments
     - At least 1 assignment extension attempted/completed or full system bonus achieved
-    - Code quality grades trending at/above [ok] bucket. 
+    - Code quality (style and tests) trending to/above [ok].
 + Good final project
 
 Work that is not completed satisfactorily will earn grades **C and below**.
