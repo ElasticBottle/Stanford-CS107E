@@ -11,7 +11,7 @@ readings: |
     Some selected projects to browse:
       + <https://github.com/dwelch67/raspberrypi>, David Welch baremetal examples
       + <https://opensource.apple.com>, Apple OpenSource
-      + <https://www.gnu.org/software/libc/sources.html>, Gnu libc
+      + <https://directory.fsf.org/wiki/GNU>, Free Software Foundation (GNU)
       + <https://www.musl-libc.org>, Musl C library
     + The masters share their best practices in the book Beautiful Code: Leading Programmers Explain How They Think <https://www.amazon.com/dp/0596510047>
 
