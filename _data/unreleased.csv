@@ -10,13 +10,11 @@ permalink,title,released
 "/lectures/Arithmetic/","Computer Arithmetic, Signed and Unsigned",false
 "/lectures/Interrupts2/","Interrupts, cont'd",false
 "/lectures/FloatingPoint/","Floating Point",false
-"/lectures/C-mastery/","C Mastery",false
 "/lectures/Sound/","Sound",false
 "/lectures/GitWorkflow/","Git Workflow",false
 "/lectures/Sensors/","Sensors",false
 "/lectures/Framebuffer/","Graphics and the framebuffer",false
 "/lectures/Wrap/","Wrap",false
-"/lectures/Memory/","Memory Management",false
 "/lectures/Keyboard/","Keyboards and the PS/2 Protocol",false
 "/assignments/assign5/","Assignment 5: Keyboard and Simple Shell",false
 "/assignments/assign7/","Assignment 7: System Monitor with Interrupts",false
