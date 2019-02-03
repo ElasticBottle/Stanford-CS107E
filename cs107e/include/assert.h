@@ -7,7 +7,7 @@
 #define assert(EXPR) \
    do { \
         if (!(EXPR)) { \
-            printf("File %s, line %d: Assertion '%s' failed.\04\n", __FILE__, __LINE__, #EXPR); \
+            printf("File %s, line %d: Assertion '%s' failed.\n\04", __FILE__, __LINE__, #EXPR); \
             pi_abort(); \
         } \
    } while (0);
