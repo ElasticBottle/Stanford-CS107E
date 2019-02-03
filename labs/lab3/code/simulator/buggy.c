@@ -31,7 +31,7 @@ int local(int n)
 
 int main(void)
 {
-    printf("1st call stack_array (not uninitialized): ");
+    printf("1st call stack_array (no initialization): ");
     stack_array();
     printf("2nd call stack_array (contents leftover): ");
     stack_array();
