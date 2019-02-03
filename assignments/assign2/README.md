@@ -261,9 +261,7 @@ valid press so that your buttons click easily without having to hold them down
 too long, but do not generate extra button press events for a single physical
 button press.
 
-Have an idea for another cool feature as an extension? Go for it!
-How about a stopwatch, a better interface to set the time, display personal messages, or Larson-scanning
-digits? -- the sky is the limit.
+Want to go beyond the set-time extension to implement an additional advanced feature of your own design? Maybe a stopwatch, a countdown timer, using the display as a scrolling banner, or.... surprise us!
 
 Be sure to clearly document your extension(s) in a `README.md`
 file committed on your `assign2-extension` branch so that your grader can test out your work.
