@@ -3,7 +3,7 @@ permalink: /labs/lab3/checkin/
 title: 'Lab 3: Check-in'
 ---
 
-1. How does the saved `pc` in a function's stack frame relate to the address of the first instruction for the function? If you take the saved `pc` in the stack frame for `main` and subtract it from the saved `lr` in the stack frame for `diff`, what do you get? Express your answer as a number, then explain conceptually what that computation represents. Here is the [stack diagram](../images/stack_abs.html) to use as a reference.
+1. Explain how the `lr` register is used as part of making a function call. Which instruction writes to the `lr` register? Which instruction reads from it? What commands could you use in `gdb` to observe the changes to the `lr` register during execution of a function call?
 
 2. Why will loopback mode only work if you plug in both `TX` and `RX`?
 

@@ -16,7 +16,7 @@ __Before releasing lab3:__
 
 __To prep for lab3:__
 - [ ] Be extra careful when reviewing exercise 1, make sure nothing has changed to invalidate the typescript embedded in writeup
-- [ ] Make copies of gdb reference sheet and stack diagram to hand out in lab
+- [ ] Make copies of gdb reference sheet to hand out in lab
 {% endcomment %}
 
 *Lab written by Pat Hanrahan, updated by Julie Zelenski*
@@ -27,7 +27,7 @@ During this lab you will:
 
 1. Learn how to use `arm-none-eabi-gdb` in simulation mode. 
 Simulation mode is also a good way to learn more about how the ARM processor executes instructions.
-2. Trace through function call/return and examine stack frames.
+2. Use gdb to trace through function call/return and examine registers and memory.
 3. Learn how to use `screen` with the USB-serial adapter. Also understand how the UART peripheral works on the Raspberry Pi.
 4. Implement a few simple C-string operations and use a combination of
 unit testing and gdb simulation to debug your work.
@@ -36,7 +36,6 @@ unit testing and gdb simulation to debug your work.
 To prepare for lab, do the following: 
 
 1. Read our [guide to gdb simulation](/guides/gdb).
-1. Read our [background reading on the stack](stack/).
 1. Pull the latest version of the `cs107e.github.io` course repository. Then clone the lab repository
    `https://github.com/cs107e/lab3`.
 1.  Verify you have a proper `CS107E` directory with these commands: 
@@ -49,7 +48,7 @@ bin/        etc/       final_proj_ref/   include/    lib/       src/
 ```
    If the above commands do not work as shown, re-do the part of Step 0 of [Assignment 0](/assignments/assign0/) that sets up the directory. If you have trouble, please ask a staff member for help. A properly configured `CS107E` directory is necessary for this lab and all subsequent labs and assignments.
 
-## Lab Exercises
+## Lab exercises
 Start by filling your Creativity Spot on the [CS107 Wall of Fame](https://piazza.com/class/jqfaue5sl31ok?cid=49). Now get some snack and find a buddy. Share stories of your adventures writing the clock assignment. Pull up the [check in questions](checkin). You're ready to go!
 
 ### 1. Debugging with gdb
@@ -61,7 +60,7 @@ The debugger allows you to observe and manipulate a running program. Using this 
 #### 1a) Use `gdb` in simulation mode
 
 We will demonstrate `gdb` on a simple example program. 
-Change to the directory `lab3/code/simple` directory and review the program in  `simple.c`. Build the program
+Change to the directory `lab3/code/simple` directory and review the program in `simple.c`. Build the program
 using `make`.
 
 Run `arm-none-eabi-gdb simple.elf`.  Note that is the ELF 
@@ -124,7 +123,7 @@ it's stopped  _before_ that line has executed. At the end of the sequence shown 
 before executing its declaration statement, the debugger
 will report that the variable is not (yet) accessible.
 
-Sometimes you want to step into the function being called.
+Sometimes you want to step __into__ the code of the function being called.
 To do this, use `step` instead of `next`. Put another
 way, `next` executes the entire next line in the function
 you're in, while `step` executes the next line of code, 
@@ -147,7 +146,7 @@ diff (a=a@entry=33, b=b@entry=107) at simple.c:27
 27      return abs(a - b);
 ```
 
-The program is now stopped at the first line of `diff`.   When you `step`, you enter the call to the `abs` function.
+Execution has stepped into `diff`  and is stopped at the first line of the function.  Another `step` from here will step into the call to the `abs` function.
 
 ```
 (gdb) step
@@ -155,7 +154,22 @@ abs (v=v@entry=-74) at simple.c:5
 5   }
 ```
 
-Use `continue` to resume executing the program from here.  Wait a moment, and then type `Ctrl-c` to interrupt the running program and return control to gdb. Use the `backtrace` command to see where the program was executing when it was interrupted (ignore the warnings about frame issues):
+When using stepping through code, gdb displays the single next line of code to be executed. To see more context, use the `list` command
+```
+(gdb) list
+1 int abs(int v)
+2 {
+3     int result = v < 0 ? -v : v;
+4     return result;
+5 }
+6 
+7 int factorial(int n)
+8 {
+9     if (n <= 1)
+10          return 1;
+```
+
+Use `continue` to resume executing the program. While the program is executing, type `Ctrl-c` to interrupt the running program and return control to gdb. Use the `backtrace` command to see where the program was executing when it was interrupted (ignore the warnings about frame issues):
 
 ```^C
 Program received signal SIGINT, Interrupt.
@@ -167,22 +181,21 @@ Python Exception <type 'exceptions.ImportError'> No module named frames:
 Backtrace stopped: previous frame identical to this frame (corrupt stack?)
 ```
 
-The above information tells you that the program is stopped in `hang` which is called from `_start`. Review the code in `start.s` and `cstart.c` to remind yourself of what happens in a C program before and after `main()`. If currently in `hang`, the program has finished and is in the final "holding pattern". This is the normal behavior for a C program that has successfully run to completion. Learn to recognize how this situation is presented in the debugger, you hope to be seeing a lot of successful program completion!
+The above information tells you that the program is stopped in `hang` which is called from `_start`. Review the code in `start.s` and `cstart.c` to remind yourself of what happens in a C program before and after `main()`. If currently in `hang`, the program has finished and is in the final "holding pattern". This is the normal behavior for a C program that has successfully run to completion. Learn to recognize how this situation is presented in the debugger. You hope to be seeing a lot of successful program completion!
 
 When debugging a function, a common workflow is to
 
-  1. `break` on the function.
+  1. `break` on the function in question. `run` until you hit the breakpoint.
   1. Use `next` to step through each line of its code, inspecting variables to see where
      the problem occurs.
-  1. If the buggy line of code was a function call, to see what went wrong you'll need to run it
-     again, so call `run` again: this will break on the function as in step 1. 
-  1. Use `next` to reach the buggy function call, use `step` to drop down into it.
-  1. Recursively apply rules 2-4 until you find the bug.
+  1. If the next line of code is a call to a subroutine and you suspect the problem could be inside that call, use `step` to drop down into it.  If you `next` through a call and realize that you wish you had used `step` instead, use `run` to start over from the beginning and get another chance.
+  1. Recursively apply rules 2-3 until you find the bug.
 
-#### 1b) Use `gdb` to observe the stack
-If you have not already, please read our supplemental information on the ["Runtime stack"](stack/).
+<a name="1b"></a>
+#### 1b) Use `gdb` to trace function calls
+Start by reviewing this [background reading on the stack](stack/).
 
-There are gdb commands that allow you to drop down to the assembly instructions and view the current contents of the registers and memory.  Let's try them out!
+There are gdb commands that allow you to drop down to the assembly instructions and view the contents of registers and memory.  Let's try them out!
 
 Use `delete` to delete any existing breakpoints and set a breakpoint at the `diff` function:
 
@@ -193,8 +206,8 @@ Use `delete` to delete any existing breakpoints and set a breakpoint at the `dif
     (gdb) run
     Breakpoint 2, diff (a=a@entry=33, b=b@entry=107) at simple.c:26
 
-We asked for a breakpoint on the function `diff` and gdb converted our request to 0x80c4 which corresponds to the address of the first instruction of `diff`. A breakpoint set at 0xAddr will stop the program just before executing the
-instruction at 0xAddr. 
+We asked for a breakpoint on the function `diff` and gdb converted our request to `0x80c4` which corresponds to the address of the first instruction of `diff`. A breakpoint set at _0xAddr_ will stop the program just before executing the
+instruction at _0xAddr_. 
 
 The gdb command `disassemble` shows the ARM instructions for a function. Try disassembling the function `diff`:
     
@@ -240,56 +253,42 @@ You can access a single
 register by using the syntax $regname, e.g. `$r0`.
 
 ```
-(gdb) print $sp
-$2 = (void *) 0x7ffffd8
-(gdb) stepi
-(gdb) stepi
-(gdb) print $sp
-$3 = (void *) 0x7ffffc8
+(gdb) print $r0
+$2 = 33
 ```
 
-The `stepi` command executes one assembly language instruction.
-Note that the value of `sp` has decreased by 16
-after executing the first few instructions in `diff`.
-
-When control transfers to the function `diff`, `$sp =
-0x7ffffd8`, and then the `sp` is decreased by 16 by the `push`
-instruction which stores the four registers that form the APCS frame. 
-(Recall that the stack grows downward; the stack pointer
-decreases as more values are pushed.)
+Print the `$lr` register to see the value currently stored.  What is that value? Disassemble that address, what code does it show you? 
+```
+(gdb) print/x $lr
+$5 = 0x80fc
+(gdb) disass $lr
+```
 
 `gdb` has a very useful feature to auto-display the current value of an expression every time you single-step.
 This is done with the `display` command.
 The command below will auto-display a sequence of 4 words (w) in hex (x) beginning at the memory location pointed by the current `sp`:
 
-    (gdb) display /4xw $sp
+    (gdb) display /i $sp
     1: x/4xw $sp
     0x7ffffc8:   0x07ffffec    0x07ffffd8    0x000080fc    0x000080d0
 
-The values printed are the four values topmost on the stack. At the start of `diff`, a `push` instruction placed these four values onto the stack. Examine the disassembly and figure out which four registers
-were pushed. These registers correspond to the APCS "full frame".
+The values printed are the four values topmost on the stack. At the start of `diff`, a `push` instruction placed these four values onto the stack. Examine the disassembly for `diff` to see which four registers
+are pushed. These registers correspond to the APCS "full frame".
 
 Because you used the `display` command, gdb will reevaluate and print that
 same expression after each gdb command. In this way, you can monitor the
 top of the stack as you step through the program. This is quite handy and
-much faster than typing `print` after each `next`, `step` or `stepi.`
+much faster than typing `print` after each `next` or `step`
 
-Here is [a diagram of the state of memory at line 5 in simple.c](images/stack_abs.html). This is at the point right before the `abs` function returns.
-The diagram shows the address space of the `simple`
-program, including the memory where the instructions are stored, as
-well as the contents of the stack.  Studying this diagram will be helpful to confirm your understanding of how the stack operates and what is stored where  in the program address
-space. The diagram contains a lot of details, so
-finding the exact thing you're looking for can be tricky. Ask questions of your partner and labmates until you all understand how to relate the stack contents to the runtime execution state.
+Use `step` to move forward from here and review the auto-display'ed stack contents to see what is happening to the values on the stop of the stack as you go in and out of the various function calls:
 
-Use `stepi` to move forward from here and review the auto-display'ed stack contents to see what is happening to the values on the stop of the stack:
-
-    (gdb) stepi
+    (gdb) step
     (gdb) [RETURN]
     (gdb) [RETURN]
     (gdb) [RETURN]
 
 Hitting just [RETURN], causes `gdb` to repeat the last command (in this
-case `stepi`).
+case `step`).
 
 Note how the stack changes as you step through the function.
 Which instructions change the value of the register `sp`? Which instructions change the contents of the memory pointed to by `sp`?
@@ -297,7 +296,7 @@ Which instructions change the value of the register `sp`? Which instructions cha
 Use `delete` to delete all breakpoints. Set a breakpoint on
 the `abs` function and re-run the program until you hit this
 breakpoint.  Use the gdb `backtrace` to show the sequence of function
-calls leading to here (as before pay no mind to the python exception).
+calls leading to here (as before, pay no mind to the python exception).
 
 ```
 (gdb) backtrace
@@ -367,48 +366,31 @@ Dump of assembler code for function abs:
 End of assembler dump.
 ```
 
-The first three instructions are the function _prolog_ which set up the
-stack frame. Which four registers are pushed to the stack to set up the
-APCS frame?  Where/how in the prolog is the frame pointer `fp` anchored?
-What location in the stack does the `fp` point to?
-
-The fourth instruction is the body of the `abs` function that does the
-comparison operation to determine if `v` is negative. Where does `abs`
-read the value of `v` from?  Where does `abs` write the return value of
-the function?
-
-The sixth and seventh instructions are the function epilog. The epilog
-is responsible for undoing the stack frame and restoring the
-saved values for all caller-owned registers that were overwritten.
-The `ldm` instruction ("load multiple") is the general-purpose 
-instruction of which `pop` is a specific case.
+The `abs` function contains eight instructions in total. The first three instructions are the function _prolog_ which set up the
+stack frame and the last three instructions are the _epilog_ to tear down the frame and return at function exit. That two middle instructions are function body. Identify those instructions in the above sequence. Work out how they do the job of the `abs` function. Where does it
+read the value of `v` from?  Where does it write the return value?
 
 The final instruction of `abs` is branch exchange that returns control
 to the caller. Who is the caller of `abs`? What is the address of the 
-instruction in the caller that will be executed when `abs` returns?
+instruction in the caller that will be executed when `abs` returns? 
 
-Once you understand the instruction sequence in `abs`, 
-examine the disassembly for `diff` and `main`. 
-Identify what portions of the prolog and
-epilog are common to all three functions and what portions differ.
+The goal of all this mucking about in gdb is to solidify your understanding the mechanics of function calls and the runtime stack. If you haver further questions, ask your partner, table mates, or the staff to get them resolved now.
 
-The `simple` program contains a few other functions that you can observe to see their use of the stack. 
+The `simple.c` program contains a few other functions that you can use to further your understanding of the stack.
 
 The `factorial` function operates recursively. Set a breakpoint on the
 base case `break 10` and run until the breakpoint is hit. Use the
 `backtrace` command to get the lay of the land. Try moving `up` and
 `down` and use `info frame` and `info args` to explore the stack
-frames. Consider what you expect the stack contents to be at the point where factorial(7) reaches its base case and compare to our [stack diagram for factorial](images/stack_factorial.html).
+frames. 
 
-The remaining function of `simple` demonstrates how the stack is used
-for storage of local variables. Simple variables,
-e.g. integers, are likely to be stored directly in registers, without writing to stack memory. Larger data
+The function `make_array` demonstrates how the stack is used
+for storage of local variables. Word-size variables,such as integers, are likely to be stored directly in registers, without writing to stack memory. Larger data
 structures, such as arrays and structs, that do not fit in registers must be stored on the
 stack. Set a breakpoint on the `make_array` function. Use `info locals` to see the array contents at the start of the function. Are
 the array elements initialized to any particular value?  Step through
 the loop a few times and use `info locals` to see how the array is
-updated. Use this [stack diagram for make_array](images/stack_makearray.html) as a road
-map.
+updated. 
 
 Continue to play around with `gdb`.
 It is a great way to learn ARM assembly language,
