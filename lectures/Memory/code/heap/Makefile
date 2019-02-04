@@ -1,8 +1,7 @@
-APPLICATION = heap
+APPLICATION = names
 MY_MODULES = malloc.o
 
-CS107E ?= ../cs107e.github.io/cs107e
-CFLAGS = -Og -I$(CS107E)/include -Wall -std=c99 -ffreestanding
+CFLAGS = -Og -I$(CS107E)/include -Wall -std=c99 -ffreestanding -Wpointer-arith
 LDFLAGS = -nostdlib -T memmap -L$(CS107E)/lib
 LDLIBS = -lpi -lgcc
 
@@ -23,8 +22,11 @@ all : $(APPLICATION).bin
 install: $(APPLICATION).bin
 	rpi-install.py -s $<
 
+debug: $(APPLICATION).elf
+	arm-none-eabi-gdb -q $<
+
 clean:
-	rm -f *.o *.i *.bin *.elf *.list *~ clock.s gpio.s timer.s data.s
+	rm -f *.o *.i *.bin *.elf *.list *~
 
 .PHONY: all clean install
 
