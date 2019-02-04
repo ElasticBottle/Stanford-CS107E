@@ -397,7 +397,9 @@ You _could_ use your bit-masking superpowers to pick apart an encoded instructio
 
 Your extension should be capable of decoding the most common variants of the data processing and branch instructions. The ARM instruction set has a remarkably regular encoding, so you can catch a good chunk of all instructions with just a few cases. If you want to get fancier, try decoding load/store and load/store multiple (i.e. push and pop).
 
-Refer to the [ARM ISA documentation](http://cs107e.github.io/readings/armisa.pdf) for details on the instruction encodings. Don't worry about making special cases for oddballs. For any instructions you don't decode, print the encoded value and skip to the next. 
+Refer to the [ARM ISA documentation](http://cs107e.github.io/readings/armisa.pdf) for details on the instruction encodings. Another useful resource is this [ARM guide from USCD](https://cseweb.ucsd.edu/~ricko/CSE30/ARM_Translation_Guide.pdf) which breaks down the bits in the encoding. 
+
+Don't worry about making special cases for oddballs. For any instructions you don't decode, print the encoded value and skip to the next. 
 
 Print the sequence of disassembled instructions starting from address `0x8000` and continuing for 100 instructions or so.  Some of the data you encounter may not be instructions at all (e.g. data values can be intermixed into the instructions). Don't worry about those, just decode the first 100 4-byte values as though each was an instruction. 
 
