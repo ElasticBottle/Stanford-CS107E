@@ -32,7 +32,7 @@ static int get_and_echo(void)
 static char *read_line(void)
 {
     size_t buflen = 128;
-    char *buf = buf[buflen];
+    char buf[buflen];
     int n;
 
     for (n = 0; n < buflen - 1; n++) {
