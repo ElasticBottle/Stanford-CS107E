@@ -7,13 +7,13 @@
 #include "uart.h"
 
 enum { 
-   	SOH = 0x01,
-   	ACK = 0x06,
-   	NAK = 0x15,
-   	EOT = 0x04,
-   	PAYLOAD_SIZE = 128,
+    SOH = 0x01,
+    ACK = 0x06,
+    NAK = 0x15,
+    EOT = 0x04,
+    PAYLOAD_SIZE = 128,
     TIMEOUT = -1,
-	ARMBASE = 0x8000
+    ARMBASE = 0x8000
 };
 
 void BRANCHTO ( unsigned int );
