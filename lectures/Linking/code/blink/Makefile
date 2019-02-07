@@ -2,7 +2,7 @@ APPLICATION = blink
 MODULES = timer.o gpio.o
 
 CFLAGS = -Og -Wall -std=c99 -ffreestanding
-#CFLAGS += --save-temps
+CFLAGS += --save-temps
 
 ASFLAGS = --warn --fatal-warnings
 
