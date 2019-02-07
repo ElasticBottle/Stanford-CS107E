@@ -1,6 +1,6 @@
 #include "uart.h"
 
-int main ( void )
+void main ( void )
 {
     uart_init();
 
@@ -9,6 +9,4 @@ int main ( void )
         if(ra==0x0D) ra = 0x0A;
         uart_putchar(ra);
     }
-
-    return(0);
 }
