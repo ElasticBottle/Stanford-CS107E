@@ -65,7 +65,7 @@ weeks:
     assign: /assignments/assign7/
     fri: /lectures/Sensors/
   -
-    mon: Project topic TBA
+    mon: /lectures/Arithmetic/
     lab: /labs/projectlab1/
     assign: /assignments/project/
     fri: /lectures/Performance/
