@@ -15,7 +15,7 @@ extern int __bss_end__;
 static void *heap_end = &__bss_end__;
 
 struct header {
-    unsigned int nwords;
+    unsigned int size;
     unsigned int status;
 };
 
@@ -23,7 +23,7 @@ enum { FREE = 0, INUSE = 1 };
 
 void *malloc(size_t nbytes) 
 {
-    unsigned int = roundup(nbytes, 8);
+    nbytes = roundup(nbytes, 8);
     struct header *hdr = heap_end;
     heap_end = (char *)heap_end + nbytes + sizeof(struct header);
     hdr->size = nbytes;
