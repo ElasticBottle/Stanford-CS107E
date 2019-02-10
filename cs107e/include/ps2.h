@@ -7,12 +7,12 @@
  * characters.
  *
  * Each entry in the array corresponds to one key on the keyboard.
- * Each key generates a unique PS/2 scan code. The array is organized
- * in order of scan code. A scan code can be used as an index to
+ * Pressing a key generates a unique PS/2 scancode. The array is organized
+ * in order of scancode. A scancode can be used as an index to
  * access the ASCII character associated with that key. The `other_ch`
  * is the shifted char or 0 if this key has no shifted char. For a key 
- * that is not associated with a printable character, its char will
- * be represented by a code from the ps2_codes enumeration below.
+ * that is not associated with a printable character, its associated
+ * char will  be represented by a code from the ps2_codes enumeration below.
  *
  * You will use this interface in assignment 5 to implement a keyboard
  * driver.
@@ -34,7 +34,7 @@ extern ps2_key_t const ps2_keys[];
 enum ps2_codes {
     PS2_KEY_NONE = 0,
     PS2_CODE_RELEASE = 0xF0,
-    PS2_CODE_EXTEND = 0xE0,
+    PS2_CODE_EXTENDED = 0xE0,
     PS2_KEY_SHIFT = 0x90,   
     PS2_KEY_ALT,    // values assigned in increasing sequence from here
     PS2_KEY_CTRL,
@@ -54,20 +54,6 @@ enum ps2_codes {
     PS2_KEY_F11,
     PS2_KEY_F12,
     PS2_KEY_NUM_LOCK,
-    PS2_KEY_NUMPAD_0,
-    PS2_KEY_NUMPAD_1,
-    PS2_KEY_NUMPAD_2,
-    PS2_KEY_NUMPAD_3,
-    PS2_KEY_NUMPAD_4,
-    PS2_KEY_NUMPAD_5,
-    PS2_KEY_NUMPAD_6,
-    PS2_KEY_NUMPAD_7,
-    PS2_KEY_NUMPAD_8,
-    PS2_KEY_NUMPAD_9,
-    PS2_KEY_NUMPAD_PERIOD,
-    PS2_KEY_NUMPAD_PLUS,
-    PS2_KEY_NUMPAD_MINUS,
-    PS2_KEY_NUMPAD_TIMES,
     PS2_KEY_HOME,
     PS2_KEY_PAGE_UP,
     PS2_KEY_PAGE_DOWN,
