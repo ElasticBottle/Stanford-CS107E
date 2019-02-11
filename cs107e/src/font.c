@@ -365,19 +365,19 @@ const font_t *font_get_font(void)
     return g_font;
 }
 
-int font_get_height(void) 
+size_t font_get_height(void) 
 {
     return g_font->char_height;
 }
 
-int font_get_width(void) 
+size_t font_get_width(void) 
 {
     return g_font->char_width;
 }
 
 /* The total number of bytes needed to store a character
    image. This is equal to height * width. */
-int font_get_size(void) 
+size_t font_get_size(void) 
 {
     return font_get_width() * font_get_height();
 }
@@ -390,7 +390,7 @@ int font_get_size(void)
    If this function returns true, buf is filled with a width*height
    image of the pixel, i.e., a char[height][width] array. */
 
-bool font_get_char(char ch, unsigned char buf[], int buflen) 
+bool font_get_char(char ch, unsigned char buf[], size_t buflen) 
 {
     if ((ch != ' ' && (ch < g_font->first_char || ch > g_font->last_char)) || (buflen != font_get_size()))
         return false;

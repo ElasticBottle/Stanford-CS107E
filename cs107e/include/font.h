@@ -2,6 +2,7 @@
 #define FONT_H
 
 #include <stdbool.h>
+#include <stddef.h>
 
 /*
  * Functions that provide bitmaps of ASCII characters.
@@ -21,7 +22,7 @@
 
 typedef struct  {
     unsigned char first_char, last_char;
-    unsigned int  char_width, char_height;
+    size_t char_width, char_height;
     unsigned char pixel_data[];
 } font_t;
 
@@ -34,21 +35,21 @@ const font_t *font_get_font(void);
 /*          
  * Set the current font.
  */  
-void font_set_font(font_t * f);
+void font_set_font(font_t *f);
 
 /*          
  * Get the height in pixels of a character.
  *              
  * @return    the character height in pixels
  */  
-int font_get_height(void);
+size_t font_get_height(void);
 
 /*          
  * Get the width in pixels of a character.
  *              
  * @return    the character width in pixels
  */  
-int font_get_width(void);
+size_t font_get_width(void);
 
 /*          
  * Get the total number of bytes needed to store a character
@@ -56,7 +57,7 @@ int font_get_width(void);
  *              
  * @return    the size in bytes
  */  
-int font_get_size(void);
+size_t font_get_size(void);
 
 /*          
  * Fill in the image of character `ch` into the buffer `buf`.
@@ -70,6 +71,6 @@ int font_get_size(void);
  *              Failure is when `ch` is not available in this font or `buflen` 
  *              does not equal the value returned by font_get_size()
  */  
-bool font_get_char(char ch, unsigned char buf[], int buflen);
+bool font_get_char(char ch, unsigned char buf[], size_t buflen);
 
 #endif
