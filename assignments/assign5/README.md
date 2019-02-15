@@ -173,25 +173,24 @@ using the test application from lab.
 Your keyboard driver can be used in a simple shell application program that allows you to type in commands and control the Pi without needing to plug another computer into it. A shell, such as `bash` or `zsh`, is a program that serves as a command-line interpreter. The program sits in a loop, reading a command from the user and then executing it. 
 
 
-#### 1) Review shell interface
+#### 1) Review shell interface and starter code
 
 Review the interface to the `shell` module in the header file
 [shell.h](https://github.com/cs107e/cs107e.github.io/blob/master/cs107e/include/shell.h).
  
+One noteworthy detail of the shell's interface is how it provides flexibility in the output device. The `shell_init` function takes a _function pointer_ argument that controls where the shell directs its output. The shell can be reconfigured for different outputs by supplying a different print function.
 
-`shell_init` takes a _function pointer_ argument that is used to configure where the shell directs its output. Rather than directly call `printf` when it needs to output something, the shell will call the print function it was initialized to use. This allows the shell to be reconfigured for different outputs by supplying a different print function.
+The `apps/uart_shell.c` application program calls `shell_init(printf)`.  This configures the shell to call your `printf` function to send output to the serial uart interface.
+In assignment 6, you'll write a `console_printf` function that draws to a HDMI monitor. If you configure the shell using `shell_init(console_printf)`, it will display its output on the graphical console.
 
-The `apps/uart_shell.c` application program calls `shell_init(printf)`.  This configures the shell to call your `printf` function to send its output to the serial uart interface.
-In assignment 6, when you write code to draw to an HDMI monitor,
-you'll instead configure the shell using `shell_init(console_printf)` to route the shell's output to your graphical display via your console function.
+Whenever your shell needs to display output, it must call the print function passed to `shell_init`.  This applies to all output from the shell, whether it be the shell prompt, displaying the result from a command, or responding with an error message to an invalid request.  Your shell should NOT make any direct calls to `printf` or `uart_putchar`. (The one exception is in the given `shell_bell` that generates a beep over the uart.)
 
-The given code for the `shell_run` function demonstrates the standard read-eval-print loop that is at the heart of an interpreter. Here is that loop expressed in pseudocode:
+The given starter code for the `shell_run` function demonstrates the standard read-eval-print loop that is at the heart of an interpreter. Here is that loop expressed in pseudocode:
 
     loop forever
         display prompt
         read line of input from user
         evaluate command (parse and execute)
-
 
 #### 2)  Read line
 
@@ -236,88 +235,88 @@ The
 
 Here are the commands you are to implement:
 
-**help**
++ **help**
 
-Without any arguments, `help` should print a list of all available commands
-along with their description in the following format:
+    Without any arguments, `help` should print a list of all available commands
+    along with their description in the following format:
 
-    Pi> help
-    cmd1: description
-    cmd2: description
+        Pi> help
+        cmd1: description
+        cmd2: description
 
-If an argument is given, `help` should print the description for that command,
-or an error message if the command doesn't exist:
+    If an argument is given, `help` should print the description for that command,
+    or an error message if the command doesn't exist:
 
-    Pi> help reboot
-    reboot:  reboot the Raspberry Pi back to the bootloader
-    Pi> help please
-    error: no such command `please`.
+        Pi> help reboot
+        reboot:  reboot the Raspberry Pi back to the bootloader
+        Pi> help please
+        error: no such command `please`.
 
-**reboot**
++ **reboot**
 
-This command should reboot your Pi by calling the `pi_reboot` function from the `pi` module of `libpi`. See ya back at the bootloader!
+    This command should reboot your Pi by calling the `pi_reboot` function from the `pi` module of `libpi`. See ya back at the bootloader!
 
-**peek**
++ **peek**
 
-This command takes one argument: `[address]`.  It prints the 4-byte value stored at memory address `address`. 
+    This command takes one argument: `[address]`.  It prints the 4-byte value stored at memory address `address`. 
 
-Example (assume address 0xFFFC contains the number 0x12345678):
+    Example (assume address 0xFFFC contains the number 0x12345678):
 
-    Pi> peek 0xFFFC
-    0x0000fffc:  12345678
+        Pi> peek 0xFFFC
+        0x0000fffc:  12345678
 
-Remember that the strings modules you wrote early contains the handy function `strtonum` to convert strings to numbers. If the address argument is missing or cannot be converted, `peek` should print an error message:
+    Remember that the strings modules you wrote early contains the handy function `strtonum` to convert strings to numbers. If the address argument is missing or cannot be converted, `peek` should print an error message:
 
-    Pi> peek
-    error: peek expects 1 argument [address]
-    Pi> peek bob
-    error: peek cannot convert 'bob'
+        Pi> peek
+        error: peek expects 1 argument [address]
+        Pi> peek bob
+        error: peek cannot convert 'bob'
 
-Remember that the ARM architecture is not keen to load/store on an unaligned address. A 4-byte value can only be read starting from an address that is a multiple of 4. If the user asks to peek (or poke) at an unaligned address, respond with an error message:
+    Remember that the ARM architecture is not keen to load/store on an unaligned address. A 4-byte value can only be read starting from an address that is a multiple of 4. If the user asks to peek (or poke) at an unaligned address, respond with an error message:
 
-    Pi> peek 7
-    error: peek address must be 4-byte aligned
+        Pi> peek 7
+        error: peek address must be 4-byte aligned
 
-**poke**
++ **poke**
 
-This command takes two arguments: `[address] [value]`.  The poke function stores `value` into the memory at `address`.
+    This command takes two arguments: `[address] [value]`.  The poke function stores `value` into the memory at `address`.
 
-Example (assume 0xFFFC currently contains the number 0x12345678):
+    Example (assume 0xFFFC currently contains the number 0x12345678):
 
-    Pi> peek 0xFFFC
-    0x0000fffc:  123456789
-    Pi> poke 0xFFFC 1
-    Pi> peek 0xFFFC
-    0x0000fffc:  00000001
-    Pi> poke 0xFFFC 0
-    Pi> peek 0xFFFC
-    0x0000fffc:  00000000
+        Pi> peek 0xFFFC
+        0x0000fffc:  123456789
+        Pi> poke 0xFFFC 1
+        Pi> peek 0xFFFC
+        0x0000fffc:  00000001
+        Pi> poke 0xFFFC 0
+        Pi> peek 0xFFFC
+        0x0000fffc:  00000000
 
-You should use `strtonum` to implement this command as well.  If either argument is missing or cannot be converted, `poke` should print an error message:
+    You should use `strtonum` to implement this command as well.  If either argument is missing or cannot be converted, `poke` should print an error message:
 
-    Pi> poke 0xFFFC
-    error: poke expects 2 arguments [address] [value]
-    Pi> poke fred 5
-    error: poke cannot convert 'fred'
-    Pi> poke 0xFFFC wilma
-    error: poke cannot convert 'wilma'
+        Pi> poke 0xFFFC
+        error: poke expects 2 arguments [address] [value]
+        Pi> poke fred 5
+        error: poke cannot convert 'fred'
+        Pi> poke 0xFFFC wilma
+        error: poke cannot convert 'wilma'
 
-Once you've implemented `poke`, you should be able to turn a GPIO
-pin on and off just by entering commands!
+    Once you've implemented `poke`, you should be able to turn a GPIO
+    pin on and off just by entering commands!
 
-    Pi> poke 0x20200010 0x200000
-    Pi> poke 0x20200020 0x8000
-    Pi> poke 0x2020002C 0x8000
+        Pi> poke 0x20200010 0x200000
+        Pi> poke 0x20200020 0x8000
+        Pi> poke 0x2020002C 0x8000
 
-Recall the
-[BCM2835 manual](http://cs107e.github.io/readings/BCM2835-ARM-Peripherals.pdf#page=90)
-and what is stored at the above three addresses. What should these
-commands do? Hint: the ACT LED on the Pi
-is GPIO pin 47. Another hint: see what the second value (the
-32-bit constant we want to store) looks like in binary in each case.
+    Recall the
+    [BCM2835 manual](http://cs107e.github.io/readings/BCM2835-ARM-Peripherals.pdf#page=90)
+    and what is stored at the above three addresses. What should these
+    commands do? Hint: the ACT LED on the Pi
+    is GPIO pin 47. Another hint: see what the second value (the
+    32-bit constant we want to store) looks like in binary in each case.
 
-Check out the
-[Wikipedia article on peek and poke](https://en.wikipedia.org/wiki/PEEK_and_POKE) if you're curious.
+    Check out the
+    [Wikipedia article on peek and poke](https://en.wikipedia.org/wiki/PEEK_and_POKE) if you're curious.
 
 ## Testing and debugging
 As usual, the effort you put into writing good tests will be evaluated along with your code submission. An interactive program such as this one adds new challenges for testing. Your inventive solutions to overcoming these challenges are welcome!
@@ -329,7 +328,6 @@ The `test_keyboard_assert` function demonstrates a possible approach for assert-
 The `shell` module is intended to be run interactively and does not lend itself well to assert-based testing. This doesn't mean you should eschew testing it, but you will have to be more creative in how you proceed. A former student set up an array of commands to be used as a test script and then fed each line to `shell_evaluate()` in sequence and verified that the output was as expected, which I thought was pretty clever.
 
 The `shell_readline` function is a particularly sticky one. Given that the simulator does not emulate the peripherals, debugging code that requires keyboard input under gdb is a no-go. Extending from the student's command script idea mentioned above, you could have a string of characters to force feed into `shell_readline` and instead of calling `keyboard_read_next`, you take the next char from your test string.
-
 
 ## Extension: editing and history
 
