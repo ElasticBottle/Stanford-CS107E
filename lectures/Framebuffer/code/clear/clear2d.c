@@ -1,9 +1,9 @@
-#include "printf.h"
-#include "timer.h"
+#include "gpio.h"
+#include "uart.h"
 #include "mailbox.h"
+#include "printf.h"
 
 #define GPU_NOCACHE 0x40000000
-
 
 typedef struct {
     unsigned int width;       // width of the display
@@ -41,10 +41,17 @@ int fb_init(void) {
 }
 
 void main(void) {
+    gpio_init();
+    uart_init();
+
     (void) fb_init();
-    printf ("pitch (bytes): %d\n", (int)fb.pitch);
+
+    printf ("width (pixels): %d\n", (int)fb.width);
     printf ("height (pixels): %d\n", (int)fb.height);
     printf ("depth (bits): %d\n", (int)fb.depth);
+    printf ("size (bytes): %d\n", (int)fb.size);
+    printf ("pitch (bytes): %d\n", (int)fb.pitch);
+
     unsigned pitch = fb.pitch / 4; // bytes to words
     unsigned(*im)[pitch] = (unsigned(*)[pitch])fb.framebuffer;
     for (int y = 0; y < HEIGHT; y++) {

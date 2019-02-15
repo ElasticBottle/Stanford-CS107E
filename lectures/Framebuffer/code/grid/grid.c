@@ -8,25 +8,11 @@ const unsigned DEPTH = 4;
 // 2D
 void draw_pixel(int x, int y, color_t c)
 {
-    //unsigned int width = fb_get_pitch()/4;
-    //unsigned int (*im)[width] = (unsigned int (*)[WIDTH])fb_get_draw_buffer();
-
-    unsigned int (*im)[WIDTH] = (unsigned int (*)[WIDTH])fb_get_draw_buffer();
+    unsigned int width = fb_get_pitch()/4;
+    unsigned int (*im)[width] = (unsigned int (*)[WIDTH])fb_get_draw_buffer();
 
     im[y][x] = c;
 }
-
-/*
-// 1D
-void draw_pixel(int x, int y, color_t c)
-{
-    //unsigned int width = fb_get_pitch()/4;
-    //*(im + y * width + x) = c; 
-
-    unsigned int *im = (unsigned int *)fb_get_draw_buffer();
-    *(im + y * WIDTH + x) = c; 
-}
-*/
 
 void draw_hline(int y, color_t c)
 {

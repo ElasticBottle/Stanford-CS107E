@@ -1,6 +1,5 @@
 #include "gpio.h"
 #include "uart.h"
-#include "timer.h"
 #include "mailbox.h"
 #include "printf.h"
 
@@ -51,8 +50,11 @@ void main(void) {
     // DANGER - ignoring error
     (void) fb_init();
 
-    printf("fb.height: %d\n",fb.height);
-    printf("fb.pitch: %d\n",fb.pitch);
+    printf ("width (pixels): %d\n", (int)fb.width);
+    printf ("height (pixels): %d\n", (int)fb.height);
+    printf ("depth (bits): %d\n", (int)fb.depth);
+    printf ("size (bytes): %d\n", (int)fb.size);
+    printf ("pitch (bytes): %d\n", (int)fb.pitch);
 
     unsigned int *im = (unsigned int *)fb.framebuffer;
     // compute total number of unsigned ints in the framebuffer
