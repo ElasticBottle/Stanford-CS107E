@@ -197,7 +197,7 @@ The given starter code for the `shell_run` function demonstrates the standard re
 `shell_readline` reads a single line of input from the user. It reads the characters typed on the keyboard and stores them into a buffer. The user indicates the end of the line by typing Return (`\n`).
 
 When the user types Backspace (`\b`), the shell should remove the last
-character on the current line.  Outputting a backspace character, e.g. `uart_putchar('\b')` , will move the cursor backwards one position. If you back up, output a space, and then back up again, you will have effectively "erased" a character. (Wacky, but it works!) 
+character on the current line.  Outputting a backspace character, e.g. `shell_printf("%c", '\b')` , will move the cursor backwards one position. If you back up, output a space, and then back up again, you will have effectively "erased" a character. (Wacky, but it works!) 
 
 If the line is empty and the user types Backspace, use the provided `shell_bell` function to beep instead of attempting to remove a non-existent character.
 
