@@ -46,7 +46,7 @@ int fb_init(void) {
 void main(void) {
     printf("requested physical size = (%d, %d)\n", WIDTH, HEIGHT);
     printf("requested virtual size = (%d, %d)\n", WIDTH, HEIGHT);
-    printf("requested depth (bits) = %d\n", fb.depth);
+    printf("requested depth (bits) = %d\n", DEPTH);
 
     int err = fb_init();
 
