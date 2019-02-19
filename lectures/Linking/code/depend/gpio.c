@@ -19,7 +19,7 @@ void gpio_set_output(unsigned int pin) {
     // TODO: your code goes here.
 }
 
-void gpio_write(unsigned int pin, unsigned int value) {
+void gpio_write(unsigned int pin, unsigned char value) {
     // TODO: Your code goes here.
 }
 

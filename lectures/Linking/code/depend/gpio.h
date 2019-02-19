@@ -152,7 +152,7 @@ void gpio_set_output(unsigned int pin);
  * If `pin` is invalid, does nothing.
  *
  */
-void gpio_write(unsigned int pin, unsigned int val);
+void gpio_write(unsigned int pin, unsigned char val);
 
 /*
  * Get current value (1 for high, 0 for low) for GPIO pin number `pin`.

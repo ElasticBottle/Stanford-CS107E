@@ -14,7 +14,7 @@ void main(void)
     printf("\nNow reading single scancodes. Type ESC to finish this test.\n");
     while (1) {
         unsigned char scancode = keyboard_read_scancode();
-        printf("[%02x]", scancode);
+        printf("[%02x]\n", scancode);
         if (scancode == ESC_SCANCODE) break;
     }
     printf("\nDone with scancode test.\n");
