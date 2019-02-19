@@ -1,6 +1,7 @@
 #ifndef MOUSE_H
 #define MOUSE_H
 
+#include "gpio.h"
 #include <stdbool.h>
 
 
@@ -19,14 +20,18 @@ typedef struct {
     bool left, middle, right;
 } mouse_event_t;
 
+#define MOUSE_CLOCK GPIO_PIN5
+#define MOUSE_DATA GPIO_PIN6
+
 /*
  * `mouse_init`: Required initialization for mouse
  *
  * The mouse must first be initialized before any mouse events can be read.
- * The mouse clock line should be connected to GPIO_PIN25 and data line to GPIO_PIN26.
+ * The first and second arguments identify which GPIO pins to use for the
+ * PS/2 clock and data lines, respectively. 
  * Returns true if able to initialize mouse, false otherwise.
  */
-bool mouse_init(void);
+bool mouse_init(unsigned int clock_gpio, unsigned int data_gpio);
 
 /*
  * `mouse_read_event`
@@ -35,7 +40,7 @@ bool mouse_init(void);
  * Returns a `mouse_event_t` struct that represents the mouse event.  The
  * struct includes the relative change in x and y (dx, dy fields). A delta
  * value will be in range +/- 255, the x_overflow/y_overflow fields are true 
- * if actual valueof dx/dy exceeded +/- 255.  The left/middle/right fields 
+ * if actual value of dx/dy exceeded +/- 255.  The left/middle/right fields 
  * give the state of the mouse buttons. Each field is true if the corresponding 
  * mouse button is down, false otherwise.
  */
