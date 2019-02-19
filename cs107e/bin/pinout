@@ -2,19 +2,19 @@
 # Pat's script to display ASCII art version of Raspberry Pi pinout
 
 cat << EOF
----------------------------------\ 
-| oooooooooooooooooooo J8     +====
-| 1ooooooooooooooooooo        | USB
-|                             +====
-|      Pi Model 3B V1.1          |
-|      +----+                 +====
-| |D|  |SoC |                 | USB
-| |S|  |    |                 +====
-| |I|  +----+                    |
-|                   |C|     +======
-|                   |S|     |   Net
-| pwr        |HDMI| |I||A|  +======
---| |--------|    |----|V|--------/
+O-------------------------------O
+| oooooooooooooooooooo J8       |
+| 1ooooooooooooooooooo          |
+|                               |
+|[RUN]   Pi Model A+ V1.1   +=====
+|         +-----+           | USB
+| |D|     | SoC |           | 
+| |S|     |     |           +=====
+| |I|     +-----+               |
+|                   |C|         |
+|                   |S|         |
+|           |HDMI|  |I|  |A|    |
+O-|pwr|-----|    |-------|V|----O
 
 J8:
    3V3  (1) (2)  5V
