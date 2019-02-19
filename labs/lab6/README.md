@@ -88,31 +88,28 @@ Modify the `grid.c` file in the following three ways:
 
 Recall from [lecture](/lectures/Framebuffer/slides.pdf) that the
 CPU and GPU communicate by sending messages through a *mailbox*.
-The CPU stores a memory address in the mailbox to send a message.
-When a message is placed in the mailbox, it is considered *full*.
-When the message is read by the GPU, it becomes *empty*.
+When the sender places a message in the mailbox, it is considered *full*.
+When the message is read by the receiver, it becomes *empty*. What is actually read/written to the mailbox is a pointer to the message data.
 
 Overall, the communication pattern we'll be using is:
 * The CPU starts the exchange by creating a message 
-  and putting a pointer to that message in the mailbox.
-* The hardware alerts the GPU to read the message.
+  and putting a pointer to that message in the mailbox. The mailbox is now full.
+* The hardware alerts the GPU to read the message, which empties the mailbox.
 * After processing the message,
   the GPU responds by putting a return message in the mailbox 
   (filling it again) for the CPU to read.
-* Meanwhile, the CPU is waiting until the mailbox becomes full with a message;
-  once it is full the CPU reads the return message from the GPU.
+* Meanwhile, the CPU is waiting at the mailbox for the GPU's response.
+  When the mailbox status changes to full, the CPU reads the return message from the GPU.
 
 #### The configuration message
 
 To configure the framebuffer,
 the CPU prepares a _framebuffer configuration message_  and puts it into the mailbox. The CPU's message specifies the desired characteristics for the framebuffer. The reply from the GPU confirms the configured parameters.
 
-In its message, the CPU sets the fields for the physical
-and virtual sizes of the framebuffer and pixel depth.
-The physical size describes the size of the screen.
-The virtual size describes the area of the image to display,
-which can be different than the physical size of the screen.
-The fields (`size`, `pitch`, and `framebuffer`) must be set to 0
+In its message, the CPU sets the width, height, and pixel depth of the framebuffer. There are two different sizes to configure: the physical width/height and the virtual width/height.
+The physical size describes the size and shape of the screen.
+The virtual size describes the size and shape of the pixel data used for the framebuffer. The virtual size can differ from the physical size, and if so, the virtual image will be scaled when displayed on the physical screen.
+The fields `size`, `pitch`, and `framebuffer` must be set to 0
 in the configuration message.  The proper values for those fields will be returned by the GPU
 in its reply message.
 
@@ -148,8 +145,7 @@ the display will be updated automatically.
 
 The other fields in the GPU's reply message are the total size in bytes allocated to the framebuffer and the length of each scanline or row of the framebuffer
 (this is called *pitch*).
-The pitch is at least equal to
-`width` multiplied by the size of a pixel in bytes and will be larger when the GPU has added padding at
+The pitch is at least equal to the width multiplied by the pixel depth in bytes and will be larger when the GPU has added padding at
 the end of each row in order to align them. The `pitch` can be used to divide the framebuffer data into rows.
 
 
@@ -177,7 +173,7 @@ with your lab neighbors. Discuss the questions below as a group and ask the TA t
       Could we also `|` them together?
       Which bit positions are used for the `addr` and which are used for the `channel`?
 
-   3.  Draw a memory map diagram of where `fb`, `mailbox`, and the framebuffer live.
+   3.  Sketch a memory map diagram of where `fb`, `mailbox`, and the framebuffer live.
       Clearly mark where the CPU's memory and GPU's memory are, as well as
       non-RAM device registers.  Recall that your Pi is configured to give the 
       bottom 256MB of memory (0x00000000 - 0x0ffffffff) to the CPU and the top 256MB 
@@ -231,19 +227,7 @@ In order to do this, you need a *font*.
 
 ![Font](images/Apple2e.bmp)
 
-This is a very famous font: do you recognize what computer it came from?
-
-In our provided font library, the characters are stored in a single
-image that's a little different from the image above.
-The characters are stored in a single line (not 3).
-The first character stored on the left is '`!`', whose ASCII value is 33 (0x21).
-The last character is ASCII value 127 (0x7e), delete, which is displayed as the little checkerboard.
-The font contains 95 characters in total.
-The characters are all the same size,
-14 pixels wide and 16 pixels tall.
-This is termed a *fixed-width* font.
-The character `' '` (space) is ASCII value 32 (0x20) 
-and is handled as a special case (since it draws nothing).
+This is a very famous font: do you recognize what computer it came from? Our library font module uses this font to provide that extra-special retro touch for your graphical console.
 
 Take a look at the files [font.h](https://github.com/cs107e/cs107e.github.io/blob/master/cs107e/include/font.h) and [font.c](https://github.com/cs107e/cs107e.github.io/blob/master/cs107e/src/font.c). The file `font.h` declares a `font_t` struct for representing a font and the `font.c` defines a variable of `font_t` type.
 
@@ -268,24 +252,33 @@ static const font_t font_default = {
 };
 ```
 
-The font image data is stored as a bitmap. 
+The character data for the font is stored as a bitmap. 
 In a bitmap, each pixel is either on or off and is represented by a single bit.
 'On' means the pixel is drawn in the foreground color,
 'off' means the pixel is set to the background color.
-We use a bitmap  rather than RGBA because it takes much less (32 times less) memory.
+We use a bitmap rather than RGBA because it takes much less (32 times less) memory.
 This makes a program that uses fonts much smaller,
 and hence faster to upload to your Raspberry Pi.
 
+Below is an image bmp file generated from `font_default` using green to display each 'on' pixel in the bitmap. (click the image to see larger version):
+
+[<img title="Font" src="images/apple2e-line.bmp">](images/apple2e-line.bmp)
+
+The characters are stored in a single line.
+The leftmost character is '`!`', whose ASCII value is 33 (0x21).
+The rightmost character is ASCII value 127 (0x7e) Delete, which is displayed as a little checkerboard.
+The font contains 95 characters in total.
+
+Each character is the same size: 14 pixels wide and 16 pixels tall.
+This is termed a *fixed-width* font.
+
 Each line of the image is 1330 pixels long (95 characters * 14 pixels wide),
-and can be represented as 1330 bits in bitmap form.
+and requires 1330 bits to store in bitmap form.
 The bitmap is represented 
-as an array of `unsigned char` with values written in hexadecimal.
+as an array of `unsigned char` with values assigned in hexadecimal.
 For example, the first two bytes in the array are `0x0c, 0x00`.
 Group the 8 bits from the first byte and 6 bits from the second to form the 14-bit sequence `0b 00001100 000000`.  These 14 bits correspond to the top row of the first character in the font, which is an exclamation point. The vertical line for the exclamation point is 2 pixels wide and positioned slightly off-center to the left.
 
-Below is the bmp file generated from `font_default` using green to display each 'on' pixel in the bitmap. (click the image to see larger version):
-
-[<img title="Font" src="images/apple2e-line.bmp">](images/apple2e-line.bmp)
 
 * Talk with your neighbor: why does pixel_data have size `95 * 14 * 16 / 8`?
 
