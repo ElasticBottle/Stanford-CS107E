@@ -144,7 +144,7 @@ void gl_draw_char(int x, int y, int ch, color_t c);
  * @param str  the null-terminated string to be drawn
  * @param c    the color of the string
  */
-void gl_draw_string(int x, int y, char* str, color_t c);
+void gl_draw_string(int x, int y, const char* str, color_t c);
 
 /*
  * Get the height in pixels of a single character glyph.
