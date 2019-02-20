@@ -77,8 +77,6 @@ Modify the `grid.c` file in the following three ways:
 2. Change the grid code to draw horizontal lines in red and vertical lines in yellow.
   *Remember from lecture that the B (blue) in BGRA is the lowest byte.*
 
-*Remember from lecture that the B (blue) in BGRA is the lowest byte.*
-
 3. Change the grid code to draw a checkerboard pattern 
    (alternating filled black and white squares).
 
