@@ -6,9 +6,7 @@ permalink,title,released
 "/lectures/Performance/","Performance",false
 "/lectures/Arithmetic/","Computer Arithmetic, Signed and Unsigned",false
 "/lectures/Interrupts2/","Interrupts, cont'd",false
-"/lectures/FloatingPoint/","Floating Point",false
 "/lectures/Sound/","Sound",false
-"/lectures/GitWorkflow/","Git Workflow",false
 "/lectures/Sensors/","Sensors",false
 "/lectures/Wrap/","Wrap",false
 "/assignments/assign7/","Assignment 7: System Monitor with Interrupts",false
