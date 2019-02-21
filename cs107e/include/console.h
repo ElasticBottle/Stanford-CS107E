@@ -34,11 +34,12 @@ void console_clear(void);
  *
  * '\n' :  newline (move cursor down to the beginning of next line)
  * '\b' :  backspace (move cursor backwards one position)
+ * '\r' :  carriage return (move cursor to first position in the same line)
  * '\f' :  form feed (clear contents and move cursor to home position)
  *
  * @return the number of characters written to the console
  */
-int console_printf(const char *format, ...);
+int console_printf(const char *format, ...) __attribute__ ((format (printf, 1, 2)));
 
 
 #endif
