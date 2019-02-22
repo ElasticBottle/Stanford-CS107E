@@ -1,122 +1,74 @@
-// Assembly code for interrupt vector table and safely setting up
-// execution in interrupt context on the Rapsberry Pi in CS107E. 
-//
-// Author:      Philip Levis
-// Date:        6/20/17
+@ Assembly code for interrupt vector table and safely setting up
+@ execution in interrupt context on the Rapsberry Pi in CS107E.
+@
+@ Author:      Philip Levis
+@ Author:      Julie Zelenski
+@ Last update: 2/20/19
 
-/*
- * Enable/disable interrupts.
- *
- * CPSR = current program status register
- *        upper bits are differen carry flags.
- *        lower 8:
- *          7 6 5 4 3 2 1 0
- *          +-+-+-+---------+
- *          |I|F|T|   Mode  |
- *          +-+-+-+---------+
- *
- *  I : disables IRQ when = 1.
- *  F : disables FIQ when = 1.
- *  T : = 0 indicates ARM execution, = 1 is thumb execution.
- *      Mode = current mode.
- */
+@ Enable/disable interrupts.
+@
+@ CPSR = current program status register
+@        lower 8 bits are:
+@           7 6 5 4 3 2 1 0
+@          +-+-+-+---------+
+@          |I|F|T|   Mode  |
+@          +-+-+-+---------+
+@
+@    I     : = 0 IRQ enabled, = 1 IRQ disabled
+@    F     : = 0 FIQ enabled, = 1 FIQ disabled
+@    T     : = 0 indicates ARM execution, = 1 is thumb execution
+@    Mode  : current mode
 
 .global interrupts_global_enable
 interrupts_global_enable:
-    mrs r0,cpsr
-    bic r0,r0,#0x80 // I=0 enables interrupts
-    msr cpsr_c,r0
+    mrs r0, cpsr
+    bic r0, r0, #0x80   @ clear I=0 enables IRQ interrupts
+    msr cpsr_c, r0
     bx lr
 
 .global interrupts_global_disable
 interrupts_global_disable:
-    mrs r0,cpsr
-    orr r0,r0,#0x80 // I=1 disables interrupts
-    msr cpsr_c,r0
+    mrs r0, cpsr
+    orr r0, r0, #0x80   @ set I=1 disables IRQ interrupts
+    msr cpsr_c, r0
     bx lr
 
         
 .global _vectors
 .global _vectors_end
-.global _interrupt_asm
-        
+
+@ Vector table has entries for each of the eight exceptions
+@ Bounces to destination address identified by label
 _vectors:
     ldr pc, _reset_asm
     ldr pc, _undefined_instruction_asm
     ldr pc, _software_interrupt_asm
     ldr pc, _prefetch_abort_asm
     ldr pc, _data_abort_asm
-    ldr pc, _reset_asm
+    ldr pc, _unused
     ldr pc, _interrupt_asm
+    ldr pc, _fast_asm
     
-fast_interrupt_asm:
-    sub   lr, lr, #4            @ First instr of FIQ handler
-    push  {lr}
-    push  {r0-r12}
-    mov   r0, lr                @ Pass old pc
-    bl    fast_interrupt_vector @ C function
-    pop   {r0-r12}
-    ldm   sp!, {pc}^
-
-_reset_asm:                   .word reset_asm
-_undefined_instruction_asm:   .word undefined_instruction_asm
-_software_interrupt_asm:      .word software_interrupt_asm
-_prefetch_abort_asm:          .word prefetch_abort_asm
-_data_abort_asm:              .word data_abort_asm
-_interrupt_asm:               .word interrupt_asm
+    _reset_asm:                   .word _abort
+    _undefined_instruction_asm:   .word _abort
+    _software_interrupt_asm:      .word _abort
+    _prefetch_abort_asm:          .word _abort
+    _data_abort_asm:              .word _abort
+    _unused:                      .word _abort
+    _interrupt_asm:               .word interrupt_asm
+    _fast_asm:                    .word _abort
 
 _vectors_end:
 
+_abort:
+    bl pi_abort
+
 interrupt_asm:
-    sub   lr, lr, #4
-    push  {lr}
-    push  {r0-r12}
-    mov   r0, lr              @ Pass old pc
-    bl    interrupt_vector    @ C function
-    pop   {r0-r12}
-    ldm   sp!, {pc}^
+    sub   lr, lr, #4                @ compute return address
+    push  {r0-r3, r12, lr}          @ save registers
+    mov   r0, lr                    @ pass old pc as argument
+    bl    interrupt_vector          @ call C function
+    ldm   sp!, {r0-r3, r12, pc}^    @ return, ^ to change mode + restore cpsr
 
-reset_asm:
-    sub   lr, lr, #4
-    push  {lr}
-    push  {r0-r12}
-    mov   r0, lr              @ Pass old pc
-    bl    reset_vector        @ C function
-    pop   {r0-r12}
-    ldm   sp!, {pc}^
-
-undefined_instruction_asm:
-    sub   lr, lr, #4
-    push  {lr}
-    push  {r0-r12}
-    mov   r0, lr                          @ Pass old pc
-    bl    undefined_instruction_vector    @ C function
-    pop   {r0-r12}
-    ldm   sp!, {pc}^
-
-software_interrupt_asm:
-    sub   lr, lr, #4
-    push  {lr}
-    push  {r0-r12}
-    mov   r0, lr                       @ Pass old pc
-    bl    software_interrupt_vector    @ C function
-    pop   {r0-r12}
-    ldm   sp!, {pc}^
-
-prefetch_abort_asm:
-    sub   lr, lr, #4
-    push  {lr}
-    push  {r0-r12}
-    mov   r0, lr                   @ Pass old pc
-    bl    prefetch_abort_vector    @ C function
-    pop   {r0-r12}
-    ldm   sp!, {pc}^
-
-data_abort_asm:
-    sub   lr, lr, #4
-    push  {lr}
-    push  {r0-r12}
-    mov   r0, lr                 @ Pass old pc
-    bl    data_abort_vector      @ C function
-    pop   {r0-r12}
-    ldm   sp!, {pc}^
+.global _RPI_INTERRUPT_VECTOR_BASE
+    _RPI_INTERRUPT_VECTOR_BASE:     .word   0

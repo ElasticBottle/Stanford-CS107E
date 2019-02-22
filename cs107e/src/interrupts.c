@@ -56,19 +56,19 @@ void interrupts_disable_source(unsigned int n)
 // way to call out)
 static bool vector_is_installed(void)
 {
-    extern int _vectors;
-    static unsigned int * const RPI_INTERRUPT_VECTOR_BASE = 0x0;
-    return RPI_INTERRUPT_VECTOR_BASE[7] == (&_vectors)[7];
+    const int IRQ_INDEX = 7;
+    extern int _vectors, *_RPI_INTERRUPT_VECTOR_BASE;
+    return _RPI_INTERRUPT_VECTOR_BASE[IRQ_INDEX] == (&_vectors)[IRQ_INDEX];
 }
 
 #define MAX_HANDLERS 32
 
 static struct isr_t {
-    void (*fn[MAX_HANDLERS])(unsigned int);
+    bool (*fn[MAX_HANDLERS])(unsigned int);
     int count;
 } handlers;
 
-bool interrupts_attach_handler(void (*isr)(unsigned int))
+bool interrupts_attach_handler(bool (*isr)(unsigned int))
 {
     if (!vector_is_installed()) return false;
     if (handlers.count >= MAX_HANDLERS) return false;
@@ -79,18 +79,6 @@ bool interrupts_attach_handler(void (*isr)(unsigned int))
 void interrupt_vector(unsigned int pc)
 {
     for (int i = 0; i < handlers.count; i++)
-        handlers.fn[i](pc);
+        if (handlers.fn[i](pc))     // stop at first handler that claims to handle event
+            break;
 }
-
-
-// All of the other vectors are empty functions and declared as weak
-// symbols ihere n libpi. Because they are weak, a strong symbol defined 
-// by client will take precedence. This allows the client to supply their 
-// own version of the vector if desired.
-
-__attribute__ ((weak)) void reset_vector (unsigned int pc) {}
-__attribute__ ((weak)) void undefined_instruction_vector (unsigned int pc) {}
-__attribute__ ((weak)) void software_interrupt_vector (unsigned int pc) {}
-__attribute__ ((weak)) void prefetch_abort_vector (unsigned int pc) {}
-__attribute__ ((weak)) void data_abort_vector (unsigned int pc) {}
-__attribute__ ((weak)) void fast_interrupt_vector (unsigned int pc) {}

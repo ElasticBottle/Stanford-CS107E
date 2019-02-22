@@ -10,7 +10,7 @@
  * Author: Pat Hanrahan <hanrahan@cs.stanford.edu>
  * Author: Julie Zelenski <zelenski@cs.stanford.edu>
  *
- * Date:   Februrary 2018
+ * Last update:   February 2019
  */
 
 
@@ -72,17 +72,26 @@ void interrupts_disable_basic(unsigned int n);
  * `interrupts_attach_handler`
  *
  * Attach a handler function to be called when an interrupt is generated.
- * Supports attaching mutliple handlers. It is the responsibility of each 
- * handler function when called to check whether this particular 
- * interrupt is intended for this handler. If so, the handler should 
- * process and clear the interrupt. If not, the handler should do
- * nothing.
- *
  * Returns true if the handler was successfully attached, false otherwise.
  * A handler cannot be attached if the interrupt vectors were not
- * configured at program start by a proper cstart()
+ * properly installed at program start by cstart().
+ *
+ * You can attach more than one handler. When an interrupt
+ * is received, each of the attached handlers gets a chance to process
+ * the interrupt. It is the responsibility of each handler function
+ * to check whether the current interrupt is intended for this handler.
+ * If so, the handler should process and clear the interrupt
+ * and return true to indicate the interrupt has been handled and no
+ * more processing is needed. If the handler does not process this
+ * interrupt, it should do nothing and return false. If not handled, the
+ * interrupt will be passed along to the other handlers.
+ *
+ * The attached handlers are called in sequence, according to the order in
+ * which they were attached. Processing stops at the first handler that
+ * handles the interrupt. If it is necessary that your handler gets first
+ * dibs on processing interrupts, be sure to attach it before any others.
  */
-bool interrupts_attach_handler(void (*handler)(unsigned int pc));
+bool interrupts_attach_handler(bool (*handler)(unsigned int pc));
 
 
 enum interrupt_source {
@@ -101,7 +110,8 @@ enum interrupt_source {
    INTERRUPTS_VC_I2SPCM       = 55,
    INTERRUPTS_VC_UART         = 57,
 };
-/* Interrupt source numbers taken from table in BCM2835 Sec 7.5
+
+/* Above interrupt source numbers taken from table in BCM2835 Sec 7.5
  * I quote: "The table has many empty entries.
  * These should not be enabled as they will interfere with the GPU operation."
  */
@@ -118,11 +128,5 @@ enum interrupt_basic {
 };
 
 void interrupt_vector(unsigned int pc);
-void reset_vector(unsigned int pc);
-void undefined_instruction_vector(unsigned int pc);
-void software_interrupt_vector(unsigned int pc);
-void prefetch_abort_vector(unsigned int pc);
-void data_abort_vector(unsigned int pc);
-void fast_interrupt_vector(unsigned int pc);
 
 #endif
