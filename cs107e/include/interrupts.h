@@ -72,9 +72,7 @@ void interrupts_disable_basic(unsigned int n);
  * `interrupts_attach_handler`
  *
  * Attach a handler function to be called when an interrupt is generated.
- * Returns true if the handler was successfully attached, false otherwise.
- * A handler cannot be attached if the interrupt vectors were not
- * properly installed at program start by cstart().
+ * Raises an assert if unable to install the handler.
  *
  * You can attach more than one handler. When an interrupt
  * is received, each of the attached handlers gets a chance to process
@@ -86,12 +84,12 @@ void interrupts_disable_basic(unsigned int n);
  * interrupt, it should do nothing and return false. If not handled, the
  * interrupt will be passed along to the other handlers.
  *
- * The attached handlers are called in sequence, according to the order in
+ * The handlers are called in sequence, according to the order in
  * which they were attached. Processing stops at the first handler that
  * handles the interrupt. If it is necessary that your handler gets first
  * dibs on processing interrupts, be sure to attach it before any others.
  */
-bool interrupts_attach_handler(bool (*handler)(unsigned int pc));
+void interrupts_attach_handler(bool (*handler)(unsigned int pc));
 
 
 enum interrupt_source {

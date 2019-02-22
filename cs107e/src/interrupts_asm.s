@@ -40,27 +40,22 @@ interrupts_global_disable:
 @ Vector table has entries for each of the eight exceptions
 @ Bounces to destination address identified by label
 _vectors:
-    ldr pc, _reset_asm
-    ldr pc, _undefined_instruction_asm
-    ldr pc, _software_interrupt_asm
-    ldr pc, _prefetch_abort_asm
-    ldr pc, _data_abort_asm
-    ldr pc, _unused
+    ldr pc, _abort_asm
+    ldr pc, _abort_asm
+    ldr pc, _abort_asm
+    ldr pc, _abort_asm
+    ldr pc, _abort_asm
+    ldr pc, _abort_asm
     ldr pc, _interrupt_asm
-    ldr pc, _fast_asm
+    ldr pc, _abort_asm
     
-    _reset_asm:                   .word _abort
-    _undefined_instruction_asm:   .word _abort
-    _software_interrupt_asm:      .word _abort
-    _prefetch_abort_asm:          .word _abort
-    _data_abort_asm:              .word _abort
-    _unused:                      .word _abort
+    _abort_asm:                   .word abort_asm
     _interrupt_asm:               .word interrupt_asm
-    _fast_asm:                    .word _abort
 
 _vectors_end:
 
-_abort:
+abort_asm:
+    mov sp, #0x4000                  @ set up stack on the fly
     bl pi_abort
 
 interrupt_asm:

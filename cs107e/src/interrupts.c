@@ -1,3 +1,4 @@
+#include "assert.h"
 #include "interrupts.h"
 #include <stdint.h>
 
@@ -68,12 +69,11 @@ static struct isr_t {
     int count;
 } handlers;
 
-bool interrupts_attach_handler(bool (*isr)(unsigned int))
+void interrupts_attach_handler(bool (*isr)(unsigned int))
 {
-    if (!vector_is_installed()) return false;
-    if (handlers.count >= MAX_HANDLERS) return false;
+    assert(vector_is_installed());
+    assert(handlers.count < MAX_HANDLERS);
     handlers.fn[handlers.count++] = isr;
-    return true;    
 }
 
 void interrupt_vector(unsigned int pc)
