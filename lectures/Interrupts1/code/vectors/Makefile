@@ -30,6 +30,9 @@ all : $(NAME).elf $(NAME)_buggy.elf $(NAME).list $(NAME)_buggy.list
 install: $(NAME).bin
 	rpi-install.py $<
 
+debug: $(NAME).elf
+	arm-none-eabi-gdb -q $^
+
 clean:
 	rm -f *.o *.bin *.elf *.list *~
 

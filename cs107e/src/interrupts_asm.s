@@ -38,7 +38,7 @@ interrupts_global_disable:
 .global _vectors_end
 
 @ Vector table has entries for each of the eight exceptions
-@ Bounces to destination address identified by label
+@ Bounces to absolute destination address accessed via pc-relative label
 _vectors:
     ldr pc, _abort_asm
     ldr pc, _abort_asm
