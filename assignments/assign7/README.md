@@ -44,7 +44,7 @@ The amount of new code needed for this assignment is much less than in previous 
 
 ## Looking ahead: final project
 
-It's also time to start planning for your final project. Please refer to the [ project instructions](/assignments/project) for full information about the project schedule. The important step to attend to now is the team formation due Monday March 4.
+It's also time to start planning for your final project. Please refer to the [ project instructions](/assignments/project) for full information about the project schedule. The important step to attend to now is the team formation due Monday March 4. Fill in this [Google form](https://goo.gl/forms/UIuzeX0hZPrxWpdw1) with your team members.
 
 ## Get started
 
