@@ -79,7 +79,7 @@ to set up your Pi so it will generate interrupts on the falling edge of the
 clock line and attach a handler that responds to the event. Don't forget
 to clear the event when you handle it, or the event will trigger forever.
 
-As a starting point, the version of the interrupt handler could simply increment a global counter of interrupts received.  Write a test `main` function that watches the global counter and prints the updated value when it changes.
+As a starting point, the version of the interrupt handler could simply increment a global counter of interrupts received.  Modify the `tests/test_keyboard_interrupts.c` program to add your own test `main` function that watches the global counter and prints the updated value when it changes.
 
 Each scancode should generate 11 interrupts: one for the start bit,
 8 for the data bits, one for the parity bit, and one for the stop bit.
