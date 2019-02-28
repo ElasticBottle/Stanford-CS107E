@@ -1,5 +1,5 @@
 ---
-permalink: /project_gallery
+permalink: /project_gallery/
 title: 'Project gallery'
 ---
 
