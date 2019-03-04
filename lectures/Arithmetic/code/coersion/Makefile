@@ -2,7 +2,7 @@ NAME = types
 MODULES = 
 
 CS107E= ../../../../cs107e
-CFLAGS = -I$(CS107E)/include -g -Wall -Og -std=c99 -ffreestanding
+CFLAGS = -I$(CS107E)/include -g -Wall -O0 -std=c99 -ffreestanding
 LDFLAGS = -nostdlib -T memmap -L$(CS107E)/lib
 LDLIBS = -lpiextra -lpi -lgcc
 
