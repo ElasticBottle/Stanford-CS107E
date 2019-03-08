@@ -1,10 +1,9 @@
 NAME =  main
 MODULES = arducam.o omni.o spi.o i2c.o
 
-CS107E= ../../../cs107e/staff/cs107e
 CFLAGS = -I$(CS107E)/include -g -Wall -Og -std=c99 -ffreestanding
 LDFLAGS = -nostdlib -T memmap -L$(CS107E)/lib
-LDLIBS = -lc_pi -lpiextra -lpi -lgcc
+LDLIBS = -lpiextra -lpi -lgcc
 
 
 all : $(NAME).bin
