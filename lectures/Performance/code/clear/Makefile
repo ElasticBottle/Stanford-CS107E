@@ -12,9 +12,9 @@ OBJECTS = helpers.o
 LIBPI_STUDENT_MODULES =
 
 #CS107E=../../../..
-CFLAGS = -I$(CS107E)/include -g -Wall -O0 -std=c99 -ffreestanding
+CFLAGS = -I$(CS107E)/include -g -Wall -O1 -std=c99 -ffreestanding -finline-functions
 LDFLAGS = -nostdlib -T memmap -L$(CS107E)/lib
-LDLIBS = -lpi -lgcc
+LDLIBS = -lpi -lpiextra -lgcc
 
 
 all : $(NAME).bin $(LIBPI_STUDENT_MODULES)
