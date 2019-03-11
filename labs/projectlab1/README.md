@@ -2,18 +2,12 @@
 released: true
 permalink: /labs/projectlab1/
 title: 'Project Lab 1: What is Your Project?'
+readings: |
+  + Plan to attend the same lab as your teammates
 ---
 {% comment %}
-Task list to copy/paste when creating PR for this lab:
-
-__Before releasing lab:__
-- [ ] Review writeup/checkin questions (instructor)
-- [ ] Walk through (SL)
-- [ ] Followup on any github issue from previous
-
 __To prep for lab:__
-- [ ] Remind students to arrange to attend lab together with their teammates
-
+- [ ] Tell students to attend lab together with their teammates
 {% endcomment %}
 
 ### Goals
