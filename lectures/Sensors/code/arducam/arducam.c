@@ -1,7 +1,7 @@
-/* 
+/*
  * This code brought to you by the rag tag duo of Arjun and Eric! Visit us at
  * our github accounts: https://github.com/arjunvb, https://github.com/efritz09
- * 
+ *
  * Completed on: March 14, 2016
  */
 
@@ -125,7 +125,7 @@ void print_image(void)
 
 // stores the current image
 void store_image(void) {
-	color (*im)[cam.width] = (unsigned (*)[cam.width])cam.start;
+	color_t (*im)[cam.width] = (unsigned (*)[cam.width])cam.start;
 	unsigned char rgb[3];
 	for(int i = cam.y; i < cam.h; i++) {
 		for (int j=cam.w-1; j >= cam.x; j--) {
@@ -138,7 +138,7 @@ void store_image(void) {
 
 // draws the current image to the display
 void draw_image(void) {
-	color (*im)[cam.width] = (unsigned (*)[cam.width])cam.start;
+	color_t (*im)[cam.width] = (unsigned (*)[cam.width])cam.start;
 	for(int i = cam.y; i < cam.h; i++) {
 		for(int j = cam.x; j < cam.w; j++) {
 			gl_draw_pixel(j,i,im[j][i]);
