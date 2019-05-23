@@ -1,10 +1,3 @@
-[![Build Status](https://travis-ci.com/cs107e/staff.svg?token=BftLM4kSr1QfgPspi6aF&branch=master)](https://travis-ci.com/cs107e/staff)
+Tackling the Stanford CS 107E class online!!
 
-This site is hosted at [http://cs107e.github.io/](http://cs107e.github.io/).
-
-To test locally:
-
-1. `sudo gem install bundler`
-2. `bundle install`
-3. `bundle exec jekyll serve`
-4. Go to http://localhost:4000
+Super thankful to the people over at Stanford for open sourcing all their material!!
