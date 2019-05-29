@@ -1,20 +1,33 @@
-.equ DELAY, 0x3F0000
+.equ DELAY, 0x9F0000
+.equ MOVE_RIGHT, 0
+.equ MOVE_LEFT, 1
+.equ RIGHT_MOST_BULB, 0x800000
+.equ LEFT_MOST_BULB, 0x100000
 
-// configure GPIO 20,21,22,23 for output
+// Registers needed to create output numbers for GPIO Pins
+mov r1, #1
+mov r2, #1
 
-mov r1, #1 // Initialising r1 to hold value 1
+// configure GPIO 20 - 23 for output
 setOutput$:
-    ldr r0, FSEL2
-    str r1, [r0]
-    lsl r1, #3
-    cmp r1, GPIOOUTPUT23
-    bne setOutput$
+lsl r1, r1, #3
+add r2, r2, r1
+cmp r2, #0x100
+blt setOutput$
 
+// Storing output settings into FSEL2 to configure GPIO pin 20 - 23
+ldr r0, FSEL2
+str r2, [r0]
+
+// set bit 20. LED attached to GPIO pin 20 blinks first 
 mov r1, #(1<<20)
 
-loop: 
+// Indicates flash going right
+mov r3, #MOVE_RIGHT
 
-// set GPIO 20 high
+loop:
+
+// set GPIO PIN high
 ldr r0, SET0
 str r1, [r0] 
 
@@ -24,23 +37,36 @@ wait1:
     subs r2, #1
     bne wait1
 
-// set GPIO 20 low
+// set GPIO PIN low
 ldr r0, CLR0
 str r1, [r0] 
 
-// delay
-mov r2, #DELAY
-wait2:
-    subs r2, #1
-    bne wait2
+// Iterate to on the next pin if not at the right most
+cmp r3, #MOVE_RIGHT
+beq goRight$
 
-b loop
+// Right shifts the bit to blink bulb on left of current bulb on next loop
+goLeft$:
+    lsr r1, r1, #1
+    cmp r1, #LEFT_MOST_BULB
+    bne loop
+    mov r3, #MOVE_RIGHT
+    b loop
+
+// left shifts the bit to blink bulb on the right of current bul on next loop
+goRight$:
+    lsl r1, r1, #1
+    cmp r1, #RIGHT_MOST_BULB
+    bne loop
+    mov r3, #MOVE_LEFT
+    b loop
 
 FSEL0: .word 0x20200000
 FSEL1: .word 0x20200004
 FSEL2: .word 0x20200008
-GPIOOUTPUT23: .word 0b1000000000
 SET0:  .word 0x2020001C
 SET1:  .word 0x20200020
 CLR0:  .word 0x20200028
 CLR1:  .word 0x2020002C
+GPIO23: .word 0x200
+
