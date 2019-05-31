@@ -1,8 +1,9 @@
-.equ DELAY, 0x9F0000
+.equ DELAY, 0x1F0000
 .equ MOVE_RIGHT, 0
 .equ MOVE_LEFT, 1
 .equ RIGHT_MOST_BULB, 0x800000
 .equ LEFT_MOST_BULB, 0x100000
+.equ GPIO23, 0x200
 
 // Registers needed to create output numbers for GPIO Pins
 mov r1, #1
@@ -12,7 +13,7 @@ mov r2, #1
 setOutput$:
 lsl r1, r1, #3
 add r2, r2, r1
-cmp r2, #0x100
+cmp r2, #GPIO23
 blt setOutput$
 
 // Storing output settings into FSEL2 to configure GPIO pin 20 - 23
@@ -68,5 +69,4 @@ SET0:  .word 0x2020001C
 SET1:  .word 0x20200020
 CLR0:  .word 0x20200028
 CLR1:  .word 0x2020002C
-GPIO23: .word 0x200
 
