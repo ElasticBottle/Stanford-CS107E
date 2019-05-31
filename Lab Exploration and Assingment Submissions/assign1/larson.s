@@ -13,7 +13,7 @@ mov r2, #1
 setOutput$:
 lsl r1, r1, #3
 add r2, r2, r1
-cmp r2, #GPIO23
+cmp r1, #GPIO23
 blt setOutput$
 
 // Storing output settings into FSEL2 to configure GPIO pin 20 - 23
