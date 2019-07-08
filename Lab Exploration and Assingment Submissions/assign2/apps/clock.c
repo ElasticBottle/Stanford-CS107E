@@ -107,8 +107,12 @@ void refresh_loop(int* display) {
       for (int i = 0; i < 4; i ++) {
             gpio_write(i + DIGIT_OFFSET, 1);
             display_digit(display[i]);
+            if (i == 1 && display[1] != 0) {
+                gpio_write(GPIO_PIN27, 1); // Adds decimal point to make it easier to differentiate the minutes from seconds
+            }
             timer_delay_us(REFRESH_DELAY);
             gpio_write(i + DIGIT_OFFSET, 0);
+            gpio_write (GPIO_PIN27, 0); // turns decimal point off.
         }
     }
 }
