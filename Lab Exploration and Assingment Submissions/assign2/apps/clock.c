@@ -30,7 +30,7 @@ unsigned char digits[16] = { 0x3f, 0x06, 0x5b, 0x4f, 0x66, 0x6d, 0x7d, 0x07, 0x7
  * GPIO pins 10 - 13 determine where the various segments are displayed. 
  * 10 correspond to the left most, 13 to the right most)
  * GPIO pins 20 to 27 determines which segment gets displayed.
- * 20 correspond to segment A while 17 correpsond to dp.
+ * 20 correspond to segment A while 27 correpsond to dp.
  * GPIO PINS 4, 9, 5, 6, 7, 8, 24, 25, and 8 doesn't seem to work. 
  * GPIO 24 has been swapped 18
  * GPIO 25 has been swapped for 16
@@ -45,9 +45,6 @@ void configure_input_output_pins() {
         gpio_set_output(pin);
         assert(gpio_get_function(pin) == GPIO_FUNC_OUTPUT);
     }
-    gpio_set_output(GPIO_PIN6); // segment f
-    gpio_set_output(GPIO_PIN8); // segment E
-    gpio_set_output(GPIO_PIN0); // No clue, but nothing lights up without this.
 
     //Setting input for push buttons
     gpio_set_input(GPIO_PIN2); 
